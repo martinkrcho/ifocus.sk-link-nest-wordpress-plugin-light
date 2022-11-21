@@ -1,0 +1,55 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "65d3fcbc21175f92ee6c1ce3394d998f",
+    "packages": [
+        {
+            "name": "wpwhitesecurity/select2-wpwhitesecurity",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity.git",
+                "reference": "d56f367bcd22ba0836cd2ee6e88a1a3902f01ad3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wpwhitesecurity/select2-wpwhitesecurity/zipball/d56f367bcd22ba0836cd2ee6e88a1a3902f01ad3",
+                "reference": "d56f367bcd22ba0836cd2ee6e88a1a3902f01ad3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "load.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "WP White Security",
+                    "email": "info@wpwhitesecurity.com"
+                }
+            ],
+            "description": "Select2 integration library for WordPress",
+            "support": {
+                "source": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity/tree/v1.0.2",
+                "issues": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity/issues"
+            },
+            "time": "2022-03-16T08:53:12+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

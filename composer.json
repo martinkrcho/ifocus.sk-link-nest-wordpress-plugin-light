@@ -1,0 +1,11 @@
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity"
+        }
+    ],
+    "require": {
+        "wpwhitesecurity/select2-wpwhitesecurity": "^1.0"
+    }
+}

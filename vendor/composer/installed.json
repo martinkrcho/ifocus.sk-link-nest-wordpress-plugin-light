@@ -1,0 +1,45 @@
+{
+    "packages": [
+        {
+            "name": "wpwhitesecurity/select2-wpwhitesecurity",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity.git",
+                "reference": "d56f367bcd22ba0836cd2ee6e88a1a3902f01ad3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wpwhitesecurity/select2-wpwhitesecurity/zipball/d56f367bcd22ba0836cd2ee6e88a1a3902f01ad3",
+                "reference": "d56f367bcd22ba0836cd2ee6e88a1a3902f01ad3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "time": "2022-03-16T08:53:12+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "load.php"
+                ]
+            },
+            "authors": [
+                {
+                    "name": "WP White Security",
+                    "email": "info@wpwhitesecurity.com"
+                }
+            ],
+            "description": "Select2 integration library for WordPress",
+            "support": {
+                "source": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity/tree/v1.0.2",
+                "issues": "https://github.com/wpwhitesecurity/select2-wpwhitesecurity/issues"
+            },
+            "install-path": "../wpwhitesecurity/select2-wpwhitesecurity"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

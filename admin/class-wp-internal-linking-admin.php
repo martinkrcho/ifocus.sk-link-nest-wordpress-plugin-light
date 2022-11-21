@@ -10,6 +10,9 @@
  * @subpackage Wp_Internal_Linking/admin
  */
 
+use \Carbon_Fields\Field\Field;
+use \Carbon_Fields\Container\Container;
+
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -22,7 +25,12 @@
  */
 class Wp_Internal_Linking_Admin {
 
-	/**
+    /**
+     * @var \Wp_Internal_Linking_Settings $settings
+     */
+    public $settings;
+
+    /**
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
@@ -52,6 +60,7 @@ class Wp_Internal_Linking_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+        $this->settings = new Wp_Internal_Linking_Settings();
 	}
 
 	/**
