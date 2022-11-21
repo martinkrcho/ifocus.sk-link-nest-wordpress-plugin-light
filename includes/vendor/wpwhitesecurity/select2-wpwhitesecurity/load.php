@@ -215,7 +215,7 @@ if ( ! class_exists( '\S24WP' ) ) {
 				return;
 			}
 
-			if ( ! array_key_exists( 'data-type', $args ) && ! array_key_exists( 'data', $args ) ) {
+			if ( ! array_key_exists( 'data-type', $args ) && ! array_key_exists( 'data', $args ) && ! array_key_exists( 'tags', $args ) ) {
 				// No data source defined.
 				return;
 			}
@@ -258,6 +258,11 @@ if ( ! class_exists( '\S24WP' ) ) {
 
 			if ( array_key_exists( 'multiple', $args ) && true === $args['multiple'] ) {
 				echo 'multiple: true,';
+			}
+
+			if ( array_key_exists( 'tags', $args ) ) {
+				echo 'tags: true, tokenSeparators: [\',\'],';
+				echo 'allowClear: false,';
 			}
 
 			if ( array_key_exists( 'width', $args ) ) {
@@ -329,8 +334,8 @@ if ( ! class_exists( '\S24WP' ) ) {
 
 			if ( array_key_exists( 'selected', $args ) && is_array( $args['selected'] ) ) {
 				if ( $has_remote_source ) {
+					$data_type = $args['data-type'];
 					foreach ( $args['selected'] as $selected_value ) {
-						$data_type = $args['data-type'];
 						if ( 'user' === $data_type ) {
 							$object = get_user_by( 'ID', intval( $selected_value ) );
 						} elseif ( 'post' === $data_type ) {
@@ -343,6 +348,11 @@ if ( ! class_exists( '\S24WP' ) ) {
 								echo 's2.append(new Option("' . $data_item['text'] . '", ' . $data_item['id'] . ', true, true)).trigger("change");';
 							}
 						}
+					}
+				} else if (array_key_exists( 'tags', $args )) {
+
+					foreach ( $args['selected'] as $selected_value ) {
+						echo 's2.append(new Option("' . $selected_value . '", "' . $selected_value . '", true, true)).trigger("change");';
 					}
 				}
 

@@ -200,16 +200,20 @@ class Wp_Internal_Linking_Settings {
 								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'sample-domain' ),
 							],
 							self::IGNORED_POSTS    => [
-								'title'   => esc_html__( 'Ignore post/pages', 'sample-domain' ),
-								'type'    => 'select',
-								'choices' => [ 'a', 'b', 'c' ],
-								'text'    => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'sample-domain' ),
+								'title'    => esc_html__( 'Ignore post/pages', 'sample-domain' ),
+								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'sample-domain' ),
+								'custom'   => true,
+								'type'     => 'select2',
+								'sanitize' => false,
+								'callback' => [ $this, 'render_post_select_field' ],
 							],
 							self::IGNORED_WORDS    => [
-								'title'   => esc_html__( 'Ignore words', 'sample-domain' ),
-								'type'    => 'select',
-								'choices' => [ 'a', 'b', 'c' ],
-								'text'    => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'sample-domain' ),
+								'title'    => esc_html__( 'Ignore words', 'sample-domain' ),
+								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'sample-domain' ),
+								'custom'   => true,
+								'type'     => 'select2',
+								'sanitize' => false,
+								'callback' => [ $this, 'render_word_select_field' ],
 							],
 						],
 
@@ -238,5 +242,63 @@ class Wp_Internal_Linking_Settings {
 		echo '<p>';
 		esc_html_e( 'Setup what and how it can be excluded from internal linking.', 'wp-internal-linking' );
 		echo '</p>';
+	}
+
+	/**
+	 * Renders custom post selection field(s).
+	 *
+	 * @param array $field Field data.
+	 * @param string $page_key Settings page key.
+	 * @param string $section_key Settings section key.
+	 * @param string $field_key Field key.
+	 * @param \RationalOptionPages $option_pages Rational option pages object.
+	 */
+	public function render_post_select_field( $field, $page_key, $section_key, $field_key, $option_pages ) {
+		if ( ! class_exists( '\S24WP' ) ) {
+			return;
+		}
+
+		echo '<fieldset><legend class="screen-reader-text">' . $field['title'] . '</legend>';
+
+		$options = $option_pages->get_options();
+		\S24WP::insert( [
+			'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'admin-notices-manager' ),
+			'name'        => $page_key . '[' . $field['id'] . '][]',
+			'width'       => 500,
+			'data-type'   => 'post',
+			'multiple'    => true,
+			'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
+		] );
+
+		echo '</fieldset>';
+	}
+
+	/**
+	 * Renders custom post selection field(s).
+	 *
+	 * @param array $field Field data.
+	 * @param string $page_key Settings page key.
+	 * @param string $section_key Settings section key.
+	 * @param string $field_key Field key.
+	 * @param \RationalOptionPages $option_pages Rational option pages object.
+	 */
+	public function render_word_select_field( $field, $page_key, $section_key, $field_key, $option_pages ) {
+		if ( ! class_exists( '\S24WP' ) ) {
+			return;
+		}
+
+		echo '<fieldset><legend class="screen-reader-text">' . $field['title'] . '</legend>';
+
+		$options = $option_pages->get_options();
+		\S24WP::insert( [
+			'placeholder' => esc_html__( 'type word(s)', 'admin-notices-manager' ),
+			'name'        => $page_key . '[' . $field['id'] . '][]',
+			'width'       => 500,
+			'tags'        => true,
+			'multiple'    => true,
+			'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
+		] );
+
+		echo '</fieldset>';
 	}
 }

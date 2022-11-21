@@ -6,10 +6,6 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit03d6fdba148c40b092402b6138a12ce3
 {
-    public static $files = array (
-        'ed8f7d07f343dc9e7c5d31cc6cd4019b' => __DIR__ . '/..' . '/wpwhitesecurity/select2-wpwhitesecurity/load.php',
-    );
-
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
