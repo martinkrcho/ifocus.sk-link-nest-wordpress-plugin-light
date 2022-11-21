@@ -70,7 +70,7 @@ class Wp_Internal_Linking_Settings {
 
 		$this->init_settings();
 
-		add_action( "update_option_" . self::$option_name, [ $this, 'on_settings_updated' ], 10, 3 );
+		add_action( 'update_option_' . self::$option_name, [ $this, 'on_settings_updated' ], 10, 3 );
 	}
 
 	/**
@@ -78,12 +78,12 @@ class Wp_Internal_Linking_Settings {
 	 *
 	 * It stores the timestamp of the last update in a separate option.
 	 *
-	 * @param mixed $old_value The old option value.
-	 * @param mixed $value The new option value.
+	 * @param mixed  $old_value The old option value.
+	 * @param mixed  $value The new option value.
 	 * @param string $option Option name.
 	 */
 	public function on_settings_updated( $old_value, $value, $option ) {
-		update_option( $option . '_last_updated', current_time( 'U', true ) );
+		update_option( $option . '_last_updated', time() );
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Wp_Internal_Linking_Settings {
 	}
 
 	private function init_settings() {
-		$intro_html = '<p>';
+		$intro_html  = '<p>';
 		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'admin-notices-manager' );
 		$intro_html .= '</p>';
 		$intro_html .= '<p>';
@@ -145,7 +145,6 @@ class Wp_Internal_Linking_Settings {
 								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'sample-domain' ),
 							],
 						],
-
 
 					],
 					'targeting'       => [
@@ -247,10 +246,10 @@ class Wp_Internal_Linking_Settings {
 	/**
 	 * Renders custom post selection field(s).
 	 *
-	 * @param array $field Field data.
-	 * @param string $page_key Settings page key.
-	 * @param string $section_key Settings section key.
-	 * @param string $field_key Field key.
+	 * @param array                $field Field data.
+	 * @param string               $page_key Settings page key.
+	 * @param string               $section_key Settings section key.
+	 * @param string               $field_key Field key.
 	 * @param \RationalOptionPages $option_pages Rational option pages object.
 	 */
 	public function render_post_select_field( $field, $page_key, $section_key, $field_key, $option_pages ) {
@@ -261,14 +260,16 @@ class Wp_Internal_Linking_Settings {
 		echo '<fieldset><legend class="screen-reader-text">' . $field['title'] . '</legend>';
 
 		$options = $option_pages->get_options();
-		\S24WP::insert( [
-			'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'admin-notices-manager' ),
-			'name'        => $page_key . '[' . $field['id'] . '][]',
-			'width'       => 500,
-			'data-type'   => 'post',
-			'multiple'    => true,
-			'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
-		] );
+		\S24WP::insert(
+			[
+				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'admin-notices-manager' ),
+				'name'        => $page_key . '[' . $field['id'] . '][]',
+				'width'       => 500,
+				'data-type'   => 'post',
+				'multiple'    => true,
+				'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
+			]
+		);
 
 		echo '</fieldset>';
 	}
@@ -276,10 +277,10 @@ class Wp_Internal_Linking_Settings {
 	/**
 	 * Renders custom post selection field(s).
 	 *
-	 * @param array $field Field data.
-	 * @param string $page_key Settings page key.
-	 * @param string $section_key Settings section key.
-	 * @param string $field_key Field key.
+	 * @param array                $field Field data.
+	 * @param string               $page_key Settings page key.
+	 * @param string               $section_key Settings section key.
+	 * @param string               $field_key Field key.
 	 * @param \RationalOptionPages $option_pages Rational option pages object.
 	 */
 	public function render_word_select_field( $field, $page_key, $section_key, $field_key, $option_pages ) {
@@ -290,14 +291,16 @@ class Wp_Internal_Linking_Settings {
 		echo '<fieldset><legend class="screen-reader-text">' . $field['title'] . '</legend>';
 
 		$options = $option_pages->get_options();
-		\S24WP::insert( [
-			'placeholder' => esc_html__( 'type word(s)', 'admin-notices-manager' ),
-			'name'        => $page_key . '[' . $field['id'] . '][]',
-			'width'       => 500,
-			'tags'        => true,
-			'multiple'    => true,
-			'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
-		] );
+		\S24WP::insert(
+			[
+				'placeholder' => esc_html__( 'type word(s)', 'admin-notices-manager' ),
+				'name'        => $page_key . '[' . $field['id'] . '][]',
+				'width'       => 500,
+				'tags'        => true,
+				'multiple'    => true,
+				'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
+			]
+		);
 
 		echo '</fieldset>';
 	}

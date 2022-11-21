@@ -66,12 +66,12 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wp-internal-linking.php';
 
 // Require Composer autoloader if it exists.
 if ( file_exists( plugin_dir_path( __FILE__ ) . '/vendor/autoload.php' ) ) {
-    require_once plugin_dir_path( __FILE__ ) . '/vendor/autoload.php';
+	require_once plugin_dir_path( __FILE__ ) . '/vendor/autoload.php';
 }
 
 require_once plugin_dir_path( __FILE__ ) . '/includes/vendor/wpwhitesecurity/select2-wpwhitesecurity/load.php';
 if ( class_exists( '\S24WP' ) ) {
-    \S24WP::init( plugin_dir_url( __FILE__ ) . '/includes/vendor/wpwhitesecurity/select2-wpwhitesecurity' );
+	\S24WP::init( plugin_dir_url( __FILE__ ) . '/includes/vendor/wpwhitesecurity/select2-wpwhitesecurity' );
 }
 
 /**
