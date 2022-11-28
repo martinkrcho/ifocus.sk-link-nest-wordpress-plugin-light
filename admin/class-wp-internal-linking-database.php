@@ -20,9 +20,19 @@
  */
 class Wp_Internal_Linking_Database {
 
-	const DB_VERSION             = '1';
+	/**
+	 * Database version.
+	 *
+	 * @var int
+	 */
+	const DB_VERSION = 1;
+
+	/**
+	 * Option name staring the current database version.
+	 *
+	 * @var string
+	 */
 	const DB_VERSION_OPTION_NAME = 'wp_intlink_db_version';
-	const DB_TABLE_KEYWORDS      = 'intlink_keywords';
 
 	/**
 	 * Hook into WordPress lifecycle to be able to create and update the custom database tables.
@@ -45,7 +55,7 @@ class Wp_Internal_Linking_Database {
 		}
 	}
 
-	private function get_table_name( $table ) {
+	public static function get_table_name( $table ) {
 		global $wpdb;
 
 		return $wpdb->prefix . $table;
@@ -69,7 +79,7 @@ class Wp_Internal_Linking_Database {
 
 			$installed_ver = intval( $installed_ver );
 			if ( 0 === $installed_ver ) {
-				$tableName = $this->get_table_name( self::DB_TABLE_KEYWORDS );
+				$tableName = self::get_table_name( Wp_Internal_Linking_Keyword_Model::TABLE_NAME );
 				$sql       = "CREATE TABLE {$tableName} ("
 							 . ' keyword_id INT(11) NOT NULL AUTO_INCREMENT, '
 							 . ' keyword VARCHAR(127) NULL DEFAULT NULL, '
