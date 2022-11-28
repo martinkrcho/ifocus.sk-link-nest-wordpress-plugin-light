@@ -115,6 +115,7 @@ class Wp_Internal_Linking {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-admin.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-database.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings.php';
 
 		/**

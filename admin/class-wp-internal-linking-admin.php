@@ -23,9 +23,14 @@
 class Wp_Internal_Linking_Admin {
 
 	/**
-	 * @var \Wp_Internal_Linking_Settings $settings
+	 * @var Wp_Internal_Linking_Settings $settings
 	 */
 	public $settings;
+
+	/**
+	 * @var Wp_Internal_Linking_Database $database
+	 */
+	public $database;
 
 	/**
 	 * The ID of this plugin.
@@ -58,6 +63,7 @@ class Wp_Internal_Linking_Admin {
 		$this->version     = $version;
 
 		$this->settings = new Wp_Internal_Linking_Settings();
+		$this->database = new Wp_Internal_Linking_Database();
 	}
 
 	/**
