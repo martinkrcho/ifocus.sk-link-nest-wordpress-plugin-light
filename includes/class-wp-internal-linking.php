@@ -98,6 +98,8 @@ class Wp_Internal_Linking {
 	 */
 	private function load_dependencies() {
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-csv-import.php';
+
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-keyword-model.php';
 
 		/**

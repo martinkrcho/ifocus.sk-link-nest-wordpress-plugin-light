@@ -20,7 +20,7 @@
  */
 class Wp_Internal_Linking_Settings {
 
-	const SHEET_URL = 'sheet_url';
+	const CSV_FILE = 'csv_file';
 
 	const PREVENT_DUPLICATES = 'prevent_duplicates';
 
@@ -44,7 +44,6 @@ class Wp_Internal_Linking_Settings {
 
 	const IGNORED_WORDS = 'ignored_words';
 
-
 	/**
 	 * Name of the option storing the plugin settings.
 	 *
@@ -66,7 +65,37 @@ class Wp_Internal_Linking_Settings {
 
 		$this->init_settings();
 
+		add_filter( 'pre_update_option_' . self::$option_name, [ $this, 'handle_file_upload' ], 10, 3 );
 		add_action( 'update_option_' . self::$option_name, [ $this, 'on_settings_updated' ], 10, 3 );
+	}
+
+	/**
+	 * Handles file upload and data import before the settings are updated.
+	 *
+	 * @param mixed  $value The new, unserialized option value.
+	 * @param string $option Name of the option.
+	 * @param mixed  $old_value The old option value.
+	 */
+	public function handle_file_upload( $value, $option, $old_value ) {
+
+		if ( ! is_array( $value ) || ! array_key_exists( self::CSV_FILE, $value ) ) {
+			return $value;
+		}
+
+		if ( empty( $_FILES ) || ! array_key_exists( self::$option_name, $_FILES ) ) {
+			return $value;
+		}
+
+		if ( ! array_key_exists( self::CSV_FILE, $_FILES[ self::$option_name ]['error'] ) || $_FILES[ self::$option_name ]['error'][ self::CSV_FILE ] > 0 ) {
+			return $value;
+		}
+
+		// Parse and import CSV file.
+		Wp_Internal_Linking_Csv_Import::import( $_FILES[ self::$option_name ]['tmp_name'][ self::CSV_FILE ] );
+
+		$value[ self::CSV_FILE ] = time();
+
+		return $value;
 	}
 
 	/**
@@ -91,7 +120,7 @@ class Wp_Internal_Linking_Settings {
 		return wp_parse_args(
 			get_option( self::$option_name, [] ),
 			[
-				self::SHEET_URL          => '',
+				self::CSV_FILE           => '',
 				self::PREVENT_DUPLICATES => 'yes',
 				self::PROCESS_POSTS      => 'yes',
 				self::PROCESS_PAGES      => 'yes',
@@ -129,11 +158,12 @@ class Wp_Internal_Linking_Settings {
 						'title'    => esc_html__( 'Custom Keywords', 'admin-notices-manager' ),
 						'callback' => [ $this, 'custom_keyword_intro' ],
 						'fields'   => [
-							self::SHEET_URL          => [
-								'title'       => esc_html__( 'Load from URL', 'sample-domain' ),
-								'type'        => 'url',
-								'placeholder' => esc_html__( 'insert Google Sheet URL', 'sample-domain' ),
-								'text'        => esc_html__( 'Load custom keywords and urls from a Google Sheet. Sample Google Sheet Link', 'sample-domain' ),
+							self::CSV_FILE           => [
+								'id'          => self::CSV_FILE,
+								'title'       => esc_html__( 'Import from CSV', 'sample-domain' ),
+								'type'        => 'file',
+								'placeholder' => esc_html__( 'select CSV file', 'sample-domain' ),
+								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'sample-domain' ),
 							],
 							self::PREVENT_DUPLICATES => [
 								'title' => esc_html__( 'Grouped keywords', 'sample-domain' ),

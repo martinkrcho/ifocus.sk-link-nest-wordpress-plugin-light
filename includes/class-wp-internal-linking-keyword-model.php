@@ -77,6 +77,21 @@ class Wp_Internal_Linking_Keyword_Model {
 	}
 
 	/**
+	 * @param array $data Generic array.
+	 *
+	 * @return Wp_Internal_Linking_Keyword_Model
+	 */
+	public static function build_from_generic_array( $data ) {
+		$result          = new Wp_Internal_Linking_Keyword_Model();
+		$result->keyword = $data[0];
+		$result->title   = $data[1];
+		$result->rel     = $data[2];
+		$result->href    = $data[3];
+
+		return $result;
+	}
+
+	/**
 	 * @param Wp_Internal_Linking_Keyword_Model $model
 	 *
 	 * @return int|false The number of rows inserted, or false on error.
@@ -87,13 +102,24 @@ class Wp_Internal_Linking_Keyword_Model {
 
 		return $wpdb->insert(
 			$table_name,
-			array(
+			[
 				'keyword' => $model->keyword,
 				'title'   => $model->title,
 				'rel'     => $model->rel,
 				'href'    => $model->href,
-			)
+			]
 		);
+	}
+
+	/**
+	 * @return bool True if deleted. Boolean false on error.
+	 */
+	public static function delete_all() {
+		global $wpdb;
+
+		$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+
+		return $wpdb->query( "TRUNCATE $table_name;" );
 	}
 
 }
