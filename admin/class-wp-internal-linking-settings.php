@@ -255,33 +255,27 @@ class Wp_Internal_Linking_Settings {
 		echo '<p>';
 		esc_html_e( 'Here you can manually enter the extra keywords you want to automatically link. Use comma to separate keywords and add target url at the end. Use a new line for new url and set of keywords. You can link to any url, not only your site.' );
 		echo '</p>';
-		echo '<table id="keywords-editor">';
-		echo '<thead>';
-		echo '<tr>';
-		echo '<th>' . __( 'ID', 'sample-domain' ) . '</th>';
-		echo '<th>' . __( 'Keyword', 'sample-domain' ) . '</th>';
-		echo '<th>' . __( 'Attribute title', 'sample-domain' ) . '</th>';
-		echo '<th>' . __( 'Attribute rel', 'sample-domain' ) . '</th>';
-		echo '<th>' . __( 'Link (href)', 'sample-domain' ) . '</th>';
-		echo '</tr>';
-		echo '</thead>';
-		echo '<tbody>';
-		$keywords = Wp_Internal_Linking_Keyword_Model::get_all();
-		foreach ( $keywords as $keyword ) {
-			echo '<tr>';
-			echo '<td>' . $keyword->id . '</td>';
-			echo '<td>' . $keyword->keyword . '</td>';
-			echo '<td>' . $keyword->title . '</td>';
-			echo '<td>' . $keyword->rel . '</td>';
-			echo '<td>' . $keyword->href . '</td>';
-			echo '</tr>';
-		}
-		echo '</tbody>';
-		echo '</table>';
+		echo '<div id="keywords-editor">';
+		echo '</div>';
 		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'sample-domain' ) . '</a>';
+
+		$keywords = Wp_Internal_Linking_Keyword_Model::get_all();
+
 		echo '<script type="application/javascript">';
 		// @formatter:off
 		?>
+		var tableData = [
+		<?php foreach ( $keywords as $keyword ) : ?>
+			{
+				id: <?php echo $keyword->id; ?>,
+				keyword: "<?php echo $keyword->keyword; ?>",
+				title: "<?php echo $keyword->title; ?>",
+				href: "<?php echo $keyword->href; ?>",
+				rel: "<?php echo $keyword->rel; ?>",
+			},
+		<?php endforeach; ?>
+		];
+
 		var triggerModelChange = function( data, action, callback ) {
 			data.action = 'wp-internal-linking-' + action;
 
@@ -320,6 +314,7 @@ class Wp_Internal_Linking_Settings {
 		jQuery(window).load(function () {
 			var table = new Tabulator("#keywords-editor", {
 				layout: "fitColumns",
+				data: tableData,
 				index: "id",
 				columns:[
 					{ title:"id", field:"id", visible:false, download:true, headerSort: false },
@@ -422,5 +417,9 @@ class Wp_Internal_Linking_Settings {
 		);
 
 		echo '</fieldset>';
+	}
+
+	public static function is_settings_screen() {
+		return is_admin() && array_key_exists( 'page', $_GET ) && 'wp-internal-linking' === $_GET['page'];
 	}
 }

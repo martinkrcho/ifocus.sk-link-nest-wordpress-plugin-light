@@ -81,20 +81,9 @@ class Wp_Internal_Linking_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wp_Internal_Linking_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wp_Internal_Linking_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'css/tabulator_simple.min.css', [], '5.4.3', 'all' );
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-internal-linking-admin.css', [], $this->version, 'all' );
+		if ( Wp_Internal_Linking_Settings::is_settings_screen() ) {
+			wp_enqueue_style( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'css/tabulator_semanticui.min.css', [], '5.4.3', 'all' );
+		}
 
 	}
 
@@ -105,29 +94,9 @@ class Wp_Internal_Linking_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Wp_Internal_Linking_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Wp_Internal_Linking_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'js/tabulator.min.js', [], '5.4.3', true );
-		wp_enqueue_script(
-			$this->plugin_name,
-			plugin_dir_url( __FILE__ ) . 'js/wp-internal-linking-admin.js',
-			[
-				'jquery',
-				$this->plugin_name . '-tabulator',
-			],
-			$this->version . '1813',
-			true
-		);
+		if ( Wp_Internal_Linking_Settings::is_settings_screen() ) {
+			wp_enqueue_script( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'js/tabulator.min.js', [], '5.4.3', true );
+		}
 
 	}
 
