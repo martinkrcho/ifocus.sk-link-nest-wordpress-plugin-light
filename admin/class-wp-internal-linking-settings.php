@@ -138,103 +138,103 @@ class Wp_Internal_Linking_Settings {
 
 	private function init_settings() {
 		$intro_html  = '<p>';
-		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'admin-notices-manager' );
+		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'wp-internal-linking' );
 		$intro_html .= '</p>';
 		$intro_html .= '<p>';
-		$intro_html .= esc_html__( 'If you find any bugs or you have ideas for the plugin, let us know at:', 'admin-notices-manager' );
+		$intro_html .= esc_html__( 'If you find any bugs or you have ideas for the plugin, let us know at:', 'wp-internal-linking' );
 		$intro_html .= '<br />';
 		$intro_html .= '<a href="http://wordpress.org/support/plugin/ifocus-link-nest" target="_blank">http://wordpress.org/support/plugin/ifocus-link-nest</a>';
 		$intro_html .= '</p>';
 
 		$pages = [
 			self::$option_name => [
-				'menu_title'  => esc_html__( 'Internal linking', 'admin-notices-manager' ),
+				'menu_title'  => esc_html__( 'Internal linking', 'wp-internal-linking' ),
 				'menu_slug'   => 'wp-internal-linking',
 				'parent_slug' => 'options-general.php',
-				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'admin-notices-manager' ),
+				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'wp-internal-linking' ),
 				'text'        => $intro_html,
 				'sections'    => [
 					'custom-keywords' => [
-						'title'    => esc_html__( 'Custom Keywords', 'admin-notices-manager' ),
+						'title'    => esc_html__( 'Custom Keywords', 'wp-internal-linking' ),
 						'callback' => [ $this, 'custom_keyword_intro' ],
 						'fields'   => [
 							self::CSV_FILE           => [
 								'id'          => self::CSV_FILE,
-								'title'       => esc_html__( 'Import from CSV', 'sample-domain' ),
+								'title'       => esc_html__( 'Import from CSV', 'wp-internal-linking' ),
 								'type'        => 'file',
-								'placeholder' => esc_html__( 'select CSV file', 'sample-domain' ),
-								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'sample-domain' ),
+								'placeholder' => esc_html__( 'select CSV file', 'wp-internal-linking' ),
+								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'wp-internal-linking' ),
 							],
 							self::PREVENT_DUPLICATES => [
-								'title' => esc_html__( 'Grouped keywords', 'sample-domain' ),
+								'title' => esc_html__( 'Grouped keywords', 'wp-internal-linking' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'sample-domain' ),
+								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'wp-internal-linking' ),
 							],
 						],
 
 					],
 					'targeting'       => [
-						'title'    => esc_html__( 'Internal links / Targeting', 'admin-notices-manager' ),
+						'title'    => esc_html__( 'Internal links / Targeting', 'wp-internal-linking' ),
 						'callback' => [ $this, 'targeting_intro' ],
 						'fields'   => [
 							self::PROCESS_POSTS      => [
-								'title' => esc_html__( 'Posts', 'sample-domain' ),
+								'title' => esc_html__( 'Posts', 'wp-internal-linking' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Search and process posts', 'sample-domain' ),
+								'text'  => esc_html__( 'Enable. Search and process posts', 'wp-internal-linking' ),
 							],
 							self::PROCESS_PAGES      => [
-								'title' => esc_html__( 'Pages', 'sample-domain' ),
+								'title' => esc_html__( 'Pages', 'wp-internal-linking' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Search and process pages', 'sample-domain' ),
+								'text'  => esc_html__( 'Enable. Search and process pages', 'wp-internal-linking' ),
 							],
 							self::MAX_LINKS          => [
-								'title' => esc_html__( 'Max links', 'sample-domain' ),
+								'title' => esc_html__( 'Max links', 'wp-internal-linking' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'sample-domain' ),
+								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'wp-internal-linking' ),
 							],
 							self::MAX_KEYWORDS_LINKS => [
-								'title' => esc_html__( 'Max keywords links', 'sample-domain' ),
+								'title' => esc_html__( 'Max keywords links', 'wp-internal-linking' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'You can limit the maximum number of links created with the same keyword. Set to 0 for no limit.', 'sample-domain' ),
+								'text'  => esc_html__( 'You can limit the maximum number of links created with the same keyword. Set to 0 for no limit.', 'wp-internal-linking' ),
 							],
 							self::MAX_SAME_URL       => [
-								'title' => esc_html__( 'Max same URLs', 'sample-domain' ),
+								'title' => esc_html__( 'Max same URLs', 'wp-internal-linking' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'Limit number of same URLs the plugin will link to. Works only when Max Keyword Links above is set to 1. Set to 0 for no limit.', 'sample-domain' ),
+								'text'  => esc_html__( 'Limit number of same URLs the plugin will link to. Works only when Max Keyword Links above is set to 1. Set to 0 for no limit.', 'wp-internal-linking' ),
 							],
 							self::CASE_SENSITIVE     => [
-								'title' => esc_html__( 'Case sensitive', 'sample-domain' ),
+								'title' => esc_html__( 'Case sensitive', 'wp-internal-linking' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable', 'sample-domain' ),
+								'text'  => esc_html__( 'Enable', 'wp-internal-linking' ),
 							],
 							self::OPEN_IN_NEW_WINDOW => [
-								'title' => esc_html__( 'Open in new window', 'sample-domain' ),
+								'title' => esc_html__( 'Open in new window', 'wp-internal-linking' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'sample-domain' ),
+								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'wp-internal-linking' ),
 							],
 						],
 
 					],
 					'excluding'       => [
-						'title'    => esc_html__( 'Excluding', 'admin-notices-manager' ),
+						'title'    => esc_html__( 'Excluding', 'wp-internal-linking' ),
 						'callback' => [ $this, 'excluding_intro' ],
 						'fields'   => [
 							self::EXCLUDE_HEADINGS => [
-								'title' => esc_html__( 'Headings', 'sample-domain' ),
+								'title' => esc_html__( 'Headings', 'wp-internal-linking' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'sample-domain' ),
+								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'wp-internal-linking' ),
 							],
 							self::IGNORED_POSTS    => [
-								'title'    => esc_html__( 'Ignore post/pages', 'sample-domain' ),
-								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'sample-domain' ),
+								'title'    => esc_html__( 'Ignore post/pages', 'wp-internal-linking' ),
+								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'wp-internal-linking' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
 								'callback' => [ $this, 'render_post_select_field' ],
 							],
 							self::IGNORED_WORDS    => [
-								'title'    => esc_html__( 'Ignore words', 'sample-domain' ),
-								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'sample-domain' ),
+								'title'    => esc_html__( 'Ignore words', 'wp-internal-linking' ),
+								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'wp-internal-linking' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
@@ -257,7 +257,7 @@ class Wp_Internal_Linking_Settings {
 		echo '</p>';
 		echo '<div id="keywords-editor">';
 		echo '</div>';
-		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'sample-domain' ) . '</a>';
+		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'wp-internal-linking' ) . '</a>';
 
 		$keywords = Wp_Internal_Linking_Keyword_Model::get_all();
 
@@ -376,7 +376,7 @@ class Wp_Internal_Linking_Settings {
 		$options = $option_pages->get_options();
 		\S24WP::insert(
 			[
-				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'admin-notices-manager' ),
+				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'wp-internal-linking' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'data-type'   => 'post',
@@ -407,7 +407,7 @@ class Wp_Internal_Linking_Settings {
 		$options = $option_pages->get_options();
 		\S24WP::insert(
 			[
-				'placeholder' => esc_html__( 'type word(s)', 'admin-notices-manager' ),
+				'placeholder' => esc_html__( 'type word(s)', 'wp-internal-linking' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'tags'        => true,
