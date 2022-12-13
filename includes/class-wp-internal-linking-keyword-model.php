@@ -25,6 +25,11 @@ class Wp_Internal_Linking_Keyword_Model {
 	public const TABLE_NAME = 'intlink_keywords';
 
 	/**
+	 * @var int
+	 */
+	public $id;
+
+	/**
 	 * @var string
 	 */
 	public $keyword;
@@ -68,6 +73,7 @@ class Wp_Internal_Linking_Keyword_Model {
 	 */
 	private static function build_from_db_entry( $entry ) {
 		$result          = new Wp_Internal_Linking_Keyword_Model();
+		$result->id      = $entry->keyword_id;
 		$result->keyword = $entry->keyword;
 		$result->title   = $entry->title;
 		$result->rel     = $entry->rel;
@@ -94,13 +100,13 @@ class Wp_Internal_Linking_Keyword_Model {
 	/**
 	 * @param Wp_Internal_Linking_Keyword_Model $model
 	 *
-	 * @return int|false The number of rows inserted, or false on error.
+	 * @return int|false The ID of the inserted row, or false on error.
 	 */
 	public static function insert( $model ) {
 		global $wpdb;
 		$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
 
-		return $wpdb->insert(
+		$wpdb->insert(
 			$table_name,
 			[
 				'keyword' => $model->keyword,
@@ -109,6 +115,8 @@ class Wp_Internal_Linking_Keyword_Model {
 				'href'    => $model->href,
 			]
 		);
+
+		return $wpdb->insert_id;
 	}
 
 	/**
@@ -122,4 +130,41 @@ class Wp_Internal_Linking_Keyword_Model {
 		return $wpdb->query( "TRUNCATE $table_name;" );
 	}
 
+	public function save() {
+		if ( $this->id > 0 ) {
+			global $wpdb;
+			$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+
+			$wpdb->update(
+				$table_name,
+				[
+					'keyword' => $this->keyword,
+					'title'   => $this->title,
+					'rel'     => $this->rel,
+					'href'    => $this->href,
+				],
+				[
+					'keyword_id' => $this->id,
+				]
+			);
+
+			return $this->id;
+		} else {
+			return self::insert( $this );
+		}
+	}
+
+	public function delete() {
+		if ( $this->id > 0 ) {
+			global $wpdb;
+			$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+
+			return $wpdb->delete(
+				$table_name,
+				[
+					'keyword_id' => $this->id,
+				]
+			);
+		}
+	}
 }

@@ -255,6 +255,99 @@ class Wp_Internal_Linking_Settings {
 		echo '<p>';
 		esc_html_e( 'Here you can manually enter the extra keywords you want to automatically link. Use comma to separate keywords and add target url at the end. Use a new line for new url and set of keywords. You can link to any url, not only your site.' );
 		echo '</p>';
+		echo '<table id="keywords-editor">';
+		echo '<thead>';
+		echo '<tr>';
+		echo '<th>' . __( 'ID', 'sample-domain' ) . '</th>';
+		echo '<th>' . __( 'Keyword', 'sample-domain' ) . '</th>';
+		echo '<th>' . __( 'Attribute title', 'sample-domain' ) . '</th>';
+		echo '<th>' . __( 'Attribute rel', 'sample-domain' ) . '</th>';
+		echo '<th>' . __( 'Link (href)', 'sample-domain' ) . '</th>';
+		echo '</tr>';
+		echo '</thead>';
+		echo '<tbody>';
+		$keywords = Wp_Internal_Linking_Keyword_Model::get_all();
+		foreach ( $keywords as $keyword ) {
+			echo '<tr>';
+			echo '<td>' . $keyword->id . '</td>';
+			echo '<td>' . $keyword->keyword . '</td>';
+			echo '<td>' . $keyword->title . '</td>';
+			echo '<td>' . $keyword->rel . '</td>';
+			echo '<td>' . $keyword->href . '</td>';
+			echo '</tr>';
+		}
+		echo '</tbody>';
+		echo '</table>';
+		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'sample-domain' ) . '</a>';
+		echo '<script type="application/javascript">';
+		// @formatter:off
+		?>
+		var triggerModelChange = function( data, action, callback ) {
+			data.action = 'wp-internal-linking-' + action;
+
+			jQuery.post( ajaxurl, data, function( response ) {
+				if ( callback ) {
+					callback( response );
+				}
+			});
+		}
+
+		var handleCellChange = function( cell ) {
+			var data = cell.getData();
+			if ( data.id ) {
+				triggerModelChange( data, 'update' );
+			} else {
+				triggerModelChange( data, 'update', function( responseData ){
+					cell.getRow().update({id: responseData.data.id});
+				} );
+			}
+		}
+
+		var handleRowDeletion = function( row ) {
+			triggerModelChange( row.getData(), 'delete' );
+		}
+
+		var buildFieldDefinition = function( title, id ) {
+			return {
+				title: title,
+				field: id,
+				headerSort: false,
+				editor: "input",
+				cellEdited: handleCellChange
+			};
+		}
+
+		jQuery(window).load(function () {
+			var table = new Tabulator("#keywords-editor", {
+				layout: "fitColumns",
+				index: "id",
+				columns:[
+					{ title:"id", field:"id", visible:false, download:true, headerSort: false },
+					buildFieldDefinition( "Keyword", "keyword" ),
+					buildFieldDefinition( "Attribute title", "title" ),
+					buildFieldDefinition( "Attribute rel", "rel" ),
+					buildFieldDefinition( "Link (href)", "href", ),
+					{ formatter:"buttonCross", headerSort: false, width:40, align:"center", cellClick:function(e, cell){
+						cell.getRow().delete();
+					}},
+				],
+			});
+
+			table.on( "rowDeleted", handleRowDeletion );
+
+			//Add row on "Add Row" button click
+			document.getElementById("add-row").addEventListener("click", function(){
+				table.addRow({});
+			});
+
+			//Delete row on "Delete Row" button click
+			jQuery.on( 'click', '.delete-row' ).addEventListener("click", function(){
+				table.deleteRow( jQuery(this).data('id') );
+			});
+		});
+		<?php
+		// @formatter:on
+		echo '</script>';
 	}
 
 	public function targeting_intro( $section ) {
