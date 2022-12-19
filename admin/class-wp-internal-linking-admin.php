@@ -103,6 +103,10 @@ class Wp_Internal_Linking_Admin {
 	public function update_keyword_entry() {
 		$data = $_POST;
 
+		if ( !array_key_exists('nonce', $data) || !wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_UPDATE ) ) {
+			wp_send_json_error();
+		}
+
 		$model          = new Wp_Internal_Linking_Keyword_Model();
 		$model->id      = $data['id'];
 		$model->keyword = $data['keyword'];
@@ -119,6 +123,10 @@ class Wp_Internal_Linking_Admin {
 
 	public function delete_keyword_entry() {
 		$data = $_POST;
+
+		if ( !array_key_exists('nonce', $data) || !wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_DELETE ) ) {
+			wp_send_json_error();
+		}
 
 		$model     = new Wp_Internal_Linking_Keyword_Model();
 		$model->id = $data['id'];

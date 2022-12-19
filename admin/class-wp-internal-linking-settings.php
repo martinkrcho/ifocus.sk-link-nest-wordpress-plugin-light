@@ -264,6 +264,11 @@ class Wp_Internal_Linking_Settings {
 		echo '<script type="application/javascript">';
 		// @formatter:off
 		?>
+        var nonces = {
+            update: '<?php echo wp_create_nonce( Wp_Internal_Linking_Admin::AJAX_ACTION_UPDATE ); ?>',
+            delete: '<?php echo wp_create_nonce( Wp_Internal_Linking_Admin::AJAX_ACTION_DELETE ); ?>'
+        };
+
 		var tableData = [
 		<?php foreach ( $keywords as $keyword ) : ?>
 			{
@@ -278,6 +283,7 @@ class Wp_Internal_Linking_Settings {
 
 		var triggerModelChange = function( data, action, callback ) {
 			data.action = 'wp-internal-linking-' + action;
+            data.nonce = nonces[action];
 
 			jQuery.post( ajaxurl, data, function( response ) {
 				if ( callback ) {
