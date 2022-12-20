@@ -48,10 +48,8 @@ class Wp_Internal_Linking_Public {
 	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -74,7 +72,6 @@ class Wp_Internal_Linking_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-internal-linking-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -97,7 +94,6 @@ class Wp_Internal_Linking_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-internal-linking-public.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 }

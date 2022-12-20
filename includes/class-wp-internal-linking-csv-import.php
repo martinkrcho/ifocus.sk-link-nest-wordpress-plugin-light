@@ -20,7 +20,6 @@
 class Wp_Internal_Linking_Csv_Import {
 
 	public static function import( $file_path ) {
-
 		$file_contents = file_get_contents( $file_path );
 		if ( false === $file_contents ) {
 			return;
@@ -35,7 +34,7 @@ class Wp_Internal_Linking_Csv_Import {
 		// Skip header.
 		array_shift( $raw_data );
 
-		$csv_parsed = [];
+		$csv_parsed = array();
 		foreach ( $raw_data as $row ) {
 			$row_data     = str_getcsv( $row );
 			$csv_parsed[] = $row_data;

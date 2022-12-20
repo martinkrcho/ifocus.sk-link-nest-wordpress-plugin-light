@@ -30,7 +30,6 @@ class Wp_Internal_Linking_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
 	}
 
 }

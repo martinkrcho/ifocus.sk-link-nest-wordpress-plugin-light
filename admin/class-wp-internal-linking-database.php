@@ -42,10 +42,10 @@ class Wp_Internal_Linking_Database {
 	public function __construct() {
 		add_action(
 			'plugins_loaded',
-			[
+			array(
 				$this,
 				'update_db_check',
-			]
+			)
 		);
 	}
 
@@ -71,7 +71,6 @@ class Wp_Internal_Linking_Database {
 		$installed_ver = get_site_option( self::DB_VERSION_OPTION_NAME );
 
 		if ( $installed_ver != self::DB_VERSION ) {
-
 			global $wpdb;
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 

@@ -97,7 +97,6 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-csv-import.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-keyword-model.php';
@@ -120,7 +119,7 @@ class Wp_Internal_Linking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-admin.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-database.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings-manager.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -129,7 +128,6 @@ class Wp_Internal_Linking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-internal-linking-public.php';
 
 		$this->loader = new Wp_Internal_Linking_Loader();
-
 	}
 
 	/**
@@ -142,11 +140,9 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Wp_Internal_Linking_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -157,12 +153,10 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Wp_Internal_Linking_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
 	}
 
 	/**
@@ -173,12 +167,10 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-
 		$plugin_public = new Wp_Internal_Linking_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 	}
 
 	/**

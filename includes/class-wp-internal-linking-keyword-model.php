@@ -58,7 +58,7 @@ class Wp_Internal_Linking_Keyword_Model {
 		$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
 		$data       = $wpdb->get_results( "SELECT * FROM $table_name;" );
 
-		$result = [];
+		$result = array();
 		foreach ( $data as $entry ) {
 			$result[] = self::build_from_db_entry( $entry );
 		}
@@ -108,12 +108,12 @@ class Wp_Internal_Linking_Keyword_Model {
 
 		$wpdb->insert(
 			$table_name,
-			[
+			array(
 				'keyword' => $model->keyword,
 				'title'   => $model->title,
 				'rel'     => $model->rel,
 				'href'    => $model->href,
-			]
+			)
 		);
 
 		return $wpdb->insert_id;
@@ -137,15 +137,15 @@ class Wp_Internal_Linking_Keyword_Model {
 
 			$wpdb->update(
 				$table_name,
-				[
+				array(
 					'keyword' => $this->keyword,
 					'title'   => $this->title,
 					'rel'     => $this->rel,
 					'href'    => $this->href,
-				],
-				[
+				),
+				array(
 					'keyword_id' => $this->id,
-				]
+				)
 			);
 
 			return $this->id;
@@ -161,9 +161,9 @@ class Wp_Internal_Linking_Keyword_Model {
 
 			return $wpdb->delete(
 				$table_name,
-				[
+				array(
 					'keyword_id' => $this->id,
-				]
+				)
 			);
 		}
 	}

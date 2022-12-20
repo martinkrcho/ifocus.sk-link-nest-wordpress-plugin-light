@@ -84,9 +84,7 @@ if ( class_exists( '\S24WP' ) ) {
  * @since    1.0.0
  */
 function run_wp_internal_linking() {
-
 	$plugin = new Wp_Internal_Linking();
 	$plugin->run();
-
 }
 run_wp_internal_linking();

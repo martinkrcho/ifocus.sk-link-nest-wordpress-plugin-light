@@ -27,7 +27,7 @@ class Wp_Internal_Linking_Admin {
 	const AJAX_ACTION_DELETE = 'wp-internal-linking-delete';
 
 	/**
-	 * @var Wp_Internal_Linking_Settings $settings
+	 * @var Wp_Internal_Linking_Settings_Manager $settings
 	 */
 	public $settings;
 
@@ -63,15 +63,14 @@ class Wp_Internal_Linking_Admin {
 	 * @param string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->settings = new Wp_Internal_Linking_Settings();
+		$this->settings = new Wp_Internal_Linking_Settings_Manager();
 		$this->database = new Wp_Internal_Linking_Database();
 
-		add_action( 'wp_ajax_' . self::AJAX_ACTION_UPDATE, [ $this, 'update_keyword_entry' ] );
-		add_action( 'wp_ajax_' . self::AJAX_ACTION_DELETE, [ $this, 'delete_keyword_entry' ] );
+		add_action( 'wp_ajax_' . self::AJAX_ACTION_UPDATE, array( $this, 'update_keyword_entry' ) );
+		add_action( 'wp_ajax_' . self::AJAX_ACTION_DELETE, array( $this, 'delete_keyword_entry' ) );
 	}
 
 	/**
@@ -80,11 +79,9 @@ class Wp_Internal_Linking_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		if ( Wp_Internal_Linking_Settings::is_settings_screen() ) {
-			wp_enqueue_style( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'css/tabulator_semanticui.min.css', [], '5.4.3', 'all' );
+		if ( Wp_Internal_Linking_Settings_Manager::is_settings_screen() ) {
+			wp_enqueue_style( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'css/tabulator_semanticui.min.css', array(), '5.4.3', 'all' );
 		}
-
 	}
 
 	/**
@@ -93,17 +90,15 @@ class Wp_Internal_Linking_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		if ( Wp_Internal_Linking_Settings::is_settings_screen() ) {
-			wp_enqueue_script( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'js/tabulator.min.js', [], '5.4.3', true );
+		if ( Wp_Internal_Linking_Settings_Manager::is_settings_screen() ) {
+			wp_enqueue_script( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'js/tabulator.min.js', array(), '5.4.3', true );
 		}
-
 	}
 
 	public function update_keyword_entry() {
 		$data = $_POST;
 
-		if ( !array_key_exists('nonce', $data) || !wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_UPDATE ) ) {
+		if ( ! array_key_exists( 'nonce', $data ) || ! wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_UPDATE ) ) {
 			wp_send_json_error();
 		}
 
@@ -115,16 +110,16 @@ class Wp_Internal_Linking_Admin {
 		$model->href    = $data['href'];
 
 		wp_send_json_success(
-			[
+			array(
 				'id' => $model->save(),
-			]
+			)
 		);
 	}
 
 	public function delete_keyword_entry() {
 		$data = $_POST;
 
-		if ( !array_key_exists('nonce', $data) || !wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_DELETE ) ) {
+		if ( ! array_key_exists( 'nonce', $data ) || ! wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_DELETE ) ) {
 			wp_send_json_error();
 		}
 
