@@ -23,6 +23,11 @@
 class Wp_Internal_Linking_Text_Processor {
 
 	/**
+	 * @var string Text being processed.
+	 */
+	private $text;
+
+	/**
 	 * @var Wp_Internal_Linking_Settings Plugin settings.
 	 */
 	private $settings;
@@ -46,7 +51,33 @@ class Wp_Internal_Linking_Text_Processor {
 	}
 
 	public function process( $text ) {
+		$this->text = $text;
+
 		// TODO run the actual processing and replacements
-		return $text;
+		foreach ( $this->keywords as $keyword ) {
+			$this->apply_keyword( $keyword );
+		}
+
+		return $this->text;
+	}
+
+	/**
+	 * @param Wp_Internal_Linking_Keyword_Model $keyword
+	 */
+	private function apply_keyword( $keyword ) {
+		$hyperlink_markup = sprintf(
+			'<a href="%1$s" title="%2$s" rel="%3$s">%4$s</a>',
+			esc_attr( $keyword->href ),
+			esc_attr( $keyword->title ),
+			esc_attr( $keyword->rel ),
+			esc_html( $keyword->keyword )
+		);
+
+		$allow_titles = '';
+		$lookaround = '(?=[^>]*(<|$))';
+		$pattern    = '/\b' . $keyword->keyword . '\b' . $lookaround . '/';
+		$this->text = preg_replace( $pattern, $hyperlink_markup, $this->text );
+
+		return $this->text;
 	}
 }

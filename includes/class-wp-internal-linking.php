@@ -98,8 +98,8 @@ class Wp_Internal_Linking {
 	 */
 	private function load_dependencies() {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-csv-import.php';
-
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-keyword-model.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-text-processor.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -119,6 +119,7 @@ class Wp_Internal_Linking {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-admin.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-database.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings-manager.php';
 
 		/**
