@@ -1,2 +1,2 @@
-# ifocus.sk-link-nest-wordpress-plugin-light
-ifocus.sk-link-nest-wordpress-plugin-light
+# ifocus-link-nest-lite
+ifocus-link-nest-lite

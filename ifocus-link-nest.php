@@ -10,7 +10,7 @@
  *
  * @link              https://www.linkedin.com/in/martinkrcho/
  * @since             1.0.0
- * @package           Wp_Internal_Linking
+ * @package           iFocus_Link_Nest
  *
  * @wordpress-plugin
  * Plugin Name:       iFOCUS.sk Link Nest Lite
@@ -21,7 +21,7 @@
  * Author URI:        https://www.linkedin.com/in/martinkrcho/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       wp-internal-linking
+ * Text Domain:       ifocus-link-nest
  * Domain Path:       /languages
  */
 
@@ -39,20 +39,20 @@ define( 'WP_INTERNAL_LINKING_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-wp-internal-linking-activator.php
+ * This action is documented in includes/class-ifocus-link-nest-activator.php
  */
 function activate_wp_internal_linking() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-internal-linking-activator.php';
-	Wp_Internal_Linking_Activator::activate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ifocus-link-nest-activator.php';
+	iFocus_Link_Nest_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-wp-internal-linking-deactivator.php
+ * This action is documented in includes/class-ifocus-link-nest-deactivator.php
  */
 function deactivate_wp_internal_linking() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-internal-linking-deactivator.php';
-	Wp_Internal_Linking_Deactivator::deactivate();
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ifocus-link-nest-deactivator.php';
+	iFocus_Link_Nest_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_wp_internal_linking' );
@@ -62,7 +62,7 @@ register_deactivation_hook( __FILE__, 'deactivate_wp_internal_linking' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-wp-internal-linking.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-ifocus-link-nest.php';
 
 // Require Composer autoloader if it exists.
 if ( file_exists( plugin_dir_path( __FILE__ ) . '/vendor/autoload.php' ) ) {
@@ -84,7 +84,7 @@ if ( class_exists( '\S24WP' ) ) {
  * @since    1.0.0
  */
 function run_wp_internal_linking() {
-	$plugin = new Wp_Internal_Linking();
+	$plugin = new iFocus_Link_Nest();
 	$plugin->run();
 }
 run_wp_internal_linking();

@@ -6,8 +6,8 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  */
 
 /**
@@ -16,13 +16,13 @@
  * Defines the data structure related to a keyword entry from the database. Also provides static methods for accessing
  * the data in the database.
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Keyword_Model {
+class iFocus_Link_Nest_Keyword_Model {
 
-	public const TABLE_NAME = 'intlink_keywords';
+	public const TABLE_NAME = 'ifocus_keywords';
 
 	/**
 	 * @var int
@@ -50,12 +50,12 @@ class Wp_Internal_Linking_Keyword_Model {
 	public $href;
 
 	/**
-	 * @return Wp_Internal_Linking_Keyword_Model[]
+	 * @return iFocus_Link_Nest_Keyword_Model[]
 	 */
 	public static function get_all() {
 		global $wpdb;
 
-		$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+		$table_name = iFocus_Link_Nest_Database::get_table_name( self::TABLE_NAME );
 		$data       = $wpdb->get_results( "SELECT * FROM $table_name;" );
 
 		$result = array();
@@ -69,10 +69,10 @@ class Wp_Internal_Linking_Keyword_Model {
 	/**
 	 * @param object $entry Raw database entry.
 	 *
-	 * @return Wp_Internal_Linking_Keyword_Model
+	 * @return iFocus_Link_Nest_Keyword_Model
 	 */
 	private static function build_from_db_entry( $entry ) {
-		$result          = new Wp_Internal_Linking_Keyword_Model();
+		$result          = new iFocus_Link_Nest_Keyword_Model();
 		$result->id      = $entry->keyword_id;
 		$result->keyword = $entry->keyword;
 		$result->title   = $entry->title;
@@ -85,10 +85,10 @@ class Wp_Internal_Linking_Keyword_Model {
 	/**
 	 * @param array $data Generic array.
 	 *
-	 * @return Wp_Internal_Linking_Keyword_Model
+	 * @return iFocus_Link_Nest_Keyword_Model
 	 */
 	public static function build_from_generic_array( $data ) {
-		$result          = new Wp_Internal_Linking_Keyword_Model();
+		$result          = new iFocus_Link_Nest_Keyword_Model();
 		$result->keyword = $data[0];
 		$result->title   = $data[1];
 		$result->rel     = $data[2];
@@ -98,13 +98,13 @@ class Wp_Internal_Linking_Keyword_Model {
 	}
 
 	/**
-	 * @param Wp_Internal_Linking_Keyword_Model $model
+	 * @param iFocus_Link_Nest_Keyword_Model $model
 	 *
 	 * @return int|false The ID of the inserted row, or false on error.
 	 */
 	public static function insert( $model ) {
 		global $wpdb;
-		$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+		$table_name = iFocus_Link_Nest_Database::get_table_name( self::TABLE_NAME );
 
 		$wpdb->insert(
 			$table_name,
@@ -125,7 +125,7 @@ class Wp_Internal_Linking_Keyword_Model {
 	public static function delete_all() {
 		global $wpdb;
 
-		$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+		$table_name = iFocus_Link_Nest_Database::get_table_name( self::TABLE_NAME );
 
 		return $wpdb->query( "TRUNCATE $table_name;" );
 	}
@@ -133,7 +133,7 @@ class Wp_Internal_Linking_Keyword_Model {
 	public function save() {
 		if ( $this->id > 0 ) {
 			global $wpdb;
-			$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+			$table_name = iFocus_Link_Nest_Database::get_table_name( self::TABLE_NAME );
 
 			$wpdb->update(
 				$table_name,
@@ -157,7 +157,7 @@ class Wp_Internal_Linking_Keyword_Model {
 	public function delete() {
 		if ( $this->id > 0 ) {
 			global $wpdb;
-			$table_name = Wp_Internal_Linking_Database::get_table_name( self::TABLE_NAME );
+			$table_name = iFocus_Link_Nest_Database::get_table_name( self::TABLE_NAME );
 
 			return $wpdb->delete(
 				$table_name,

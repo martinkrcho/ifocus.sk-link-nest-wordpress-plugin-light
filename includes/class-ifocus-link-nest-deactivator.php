@@ -6,8 +6,8 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's deactivation.
  *
  * @since      1.0.0
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Deactivator {
+class iFocus_Link_Nest_Deactivator {
 
 	/**
 	 * Short Description. (use period)

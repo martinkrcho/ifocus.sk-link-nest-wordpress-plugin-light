@@ -6,8 +6,8 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * The replacements are based on given set of settings and a list of keywords.
  *
  * @since      1.0.0
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Text_Processor {
+class iFocus_Link_Nest_Text_Processor {
 
 	/**
 	 * @var string Text being processed.
@@ -28,12 +28,12 @@ class Wp_Internal_Linking_Text_Processor {
 	private $text;
 
 	/**
-	 * @var Wp_Internal_Linking_Settings Plugin settings.
+	 * @var iFocus_Link_Nest_Settings Plugin settings.
 	 */
 	private $settings;
 
 	/**
-	 * @var \Wp_Internal_Linking_Keyword_Model[] List of keywords.
+	 * @var iFocus_Link_Nest_Keyword_Model[] List of keywords.
 	 */
 	private $keywords;
 
@@ -42,8 +42,8 @@ class Wp_Internal_Linking_Text_Processor {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param Wp_Internal_Linking_Settings        $settings Plugin settings.
-	 * @param Wp_Internal_Linking_Keyword_Model[] $keywords List of keywords.
+	 * @param iFocus_Link_Nest_Settings        $settings Plugin settings.
+	 * @param iFocus_Link_Nest_Keyword_Model[] $keywords List of keywords.
 	 */
 	public function __construct( $settings, $keywords ) {
 		$this->settings = $settings;
@@ -62,7 +62,7 @@ class Wp_Internal_Linking_Text_Processor {
 	}
 
 	/**
-	 * @param Wp_Internal_Linking_Keyword_Model $keyword
+	 * @param iFocus_Link_Nest_Keyword_Model $keyword
 	 */
 	private function apply_keyword( $keyword ) {
 		$hyperlink_markup = sprintf(
@@ -74,9 +74,9 @@ class Wp_Internal_Linking_Text_Processor {
 		);
 
 		$allow_titles = '';
-		$lookaround = '(?=[^>]*(<|$))';
-		$pattern    = '/\b' . $keyword->keyword . '\b' . $lookaround . '/';
-		$this->text = preg_replace( $pattern, $hyperlink_markup, $this->text );
+		$lookaround   = '(?=[^>]*(<|$))';
+		$pattern      = '/\b' . $keyword->keyword . '\b' . $lookaround . '/';
+		$this->text   = preg_replace( $pattern, $hyperlink_markup, $this->text );
 
 		return $this->text;
 	}

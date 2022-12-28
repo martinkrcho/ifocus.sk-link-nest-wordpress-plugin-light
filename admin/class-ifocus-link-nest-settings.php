@@ -6,19 +6,19 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/admin
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/admin
  */
 
 /**
  * The plugin settings class.
  *
  * @since      1.0.0
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Settings {
+class iFocus_Link_Nest_Settings {
 
 	public const IGNORED_POSTS = 'ignored_posts';
 

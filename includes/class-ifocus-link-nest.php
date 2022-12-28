@@ -9,8 +9,8 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking {
+class iFocus_Link_Nest {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Wp_Internal_Linking {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Wp_Internal_Linking_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      iFocus_Link_Nest_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -72,7 +72,7 @@ class Wp_Internal_Linking {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'wp-internal-linking';
+		$this->plugin_name = 'ifocus-link-nest';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -85,10 +85,10 @@ class Wp_Internal_Linking {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Wp_Internal_Linking_Loader. Orchestrates the hooks of the plugin.
-	 * - Wp_Internal_Linking_i18n. Defines internationalization functionality.
-	 * - Wp_Internal_Linking_Admin. Defines all hooks for the admin area.
-	 * - Wp_Internal_Linking_Public. Defines all hooks for the public side of the site.
+	 * - iFocus_Link_Nest_Loader. Orchestrates the hooks of the plugin.
+	 * - iFocus_Link_Nest_i18n. Defines internationalization functionality.
+	 * - iFocus_Link_Nest_Admin. Defines all hooks for the admin area.
+	 * - iFocus_Link_Nest_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -97,51 +97,51 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function load_dependencies() {
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-csv-import.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-keyword-model.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-text-processor.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ifocus-link-nest-csv-import.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ifocus-link-nest-keyword-model.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ifocus-link-nest-text-processor.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ifocus-link-nest-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wp-internal-linking-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ifocus-link-nest-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ifocus-link-nest-admin.php';
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-database.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-internal-linking-settings-manager.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ifocus-link-nest-database.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ifocus-link-nest-settings.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ifocus-link-nest-settings-manager.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-internal-linking-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ifocus-link-nest-public.php';
 
-		$this->loader = new Wp_Internal_Linking_Loader();
+		$this->loader = new iFocus_Link_Nest_Loader();
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Wp_Internal_Linking_i18n class in order to set the domain and to register the hook
+	 * Uses the iFocus_Link_Nest_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
 	private function set_locale() {
-		$plugin_i18n = new Wp_Internal_Linking_i18n();
+		$plugin_i18n = new iFocus_Link_Nest_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
@@ -154,7 +154,7 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-		$plugin_admin = new Wp_Internal_Linking_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new iFocus_Link_Nest_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -168,10 +168,7 @@ class Wp_Internal_Linking {
 	 * @access   private
 	 */
 	private function define_public_hooks() {
-		$plugin_public = new Wp_Internal_Linking_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$plugin_public = new iFocus_Link_Nest_Public( $this->get_plugin_name(), $this->get_version() );
 	}
 
 	/**
@@ -198,7 +195,7 @@ class Wp_Internal_Linking {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Wp_Internal_Linking_Loader    Orchestrates the hooks of the plugin.
+	 * @return    iFocus_Link_Nest_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

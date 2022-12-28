@@ -6,8 +6,8 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/admin
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/admin
  */
 
 /**
@@ -16,23 +16,23 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/admin
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/admin
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Admin {
+class iFocus_Link_Nest_Admin {
 
-	const AJAX_ACTION_UPDATE = 'wp-internal-linking-update';
+	const AJAX_ACTION_UPDATE = 'ifocus-link-nest-update';
 
-	const AJAX_ACTION_DELETE = 'wp-internal-linking-delete';
+	const AJAX_ACTION_DELETE = 'ifocus-link-nest-delete';
 
 	/**
-	 * @var Wp_Internal_Linking_Settings_Manager $settings
+	 * @var iFocus_Link_Nest_Settings_Manager $settings
 	 */
 	public $settings;
 
 	/**
-	 * @var Wp_Internal_Linking_Database $database
+	 * @var iFocus_Link_Nest_Database $database
 	 */
 	public $database;
 
@@ -66,8 +66,8 @@ class Wp_Internal_Linking_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->settings = new Wp_Internal_Linking_Settings_Manager();
-		$this->database = new Wp_Internal_Linking_Database();
+		$this->settings = new iFocus_Link_Nest_Settings_Manager();
+		$this->database = new iFocus_Link_Nest_Database();
 
 		add_action( 'wp_ajax_' . self::AJAX_ACTION_UPDATE, array( $this, 'update_keyword_entry' ) );
 		add_action( 'wp_ajax_' . self::AJAX_ACTION_DELETE, array( $this, 'delete_keyword_entry' ) );
@@ -79,7 +79,7 @@ class Wp_Internal_Linking_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		if ( Wp_Internal_Linking_Settings_Manager::is_settings_screen() ) {
+		if ( iFocus_Link_Nest_Settings_Manager::is_settings_screen() ) {
 			wp_enqueue_style( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'css/tabulator_semanticui.min.css', array(), '5.4.3', 'all' );
 		}
 	}
@@ -90,7 +90,7 @@ class Wp_Internal_Linking_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-		if ( Wp_Internal_Linking_Settings_Manager::is_settings_screen() ) {
+		if ( iFocus_Link_Nest_Settings_Manager::is_settings_screen() ) {
 			wp_enqueue_script( $this->plugin_name . '-tabulator', plugin_dir_url( __FILE__ ) . 'js/tabulator.min.js', array(), '5.4.3', true );
 		}
 	}
@@ -102,7 +102,7 @@ class Wp_Internal_Linking_Admin {
 			wp_send_json_error();
 		}
 
-		$model          = new Wp_Internal_Linking_Keyword_Model();
+		$model          = new iFocus_Link_Nest_Keyword_Model();
 		$model->id      = $data['id'];
 		$model->keyword = $data['keyword'];
 		$model->title   = $data['title'];
@@ -123,7 +123,7 @@ class Wp_Internal_Linking_Admin {
 			wp_send_json_error();
 		}
 
-		$model     = new Wp_Internal_Linking_Keyword_Model();
+		$model     = new iFocus_Link_Nest_Keyword_Model();
 		$model->id = $data['id'];
 
 		$model->delete();

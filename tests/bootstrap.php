@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package Wp_Internal_Linking
+ * @package iFocus_Link_Nest
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
@@ -29,7 +29,7 @@ require_once "{$_tests_dir}/includes/functions.php";
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/wp-internal-linking.php';
+	require dirname( dirname( __FILE__ ) ) . '/ifocus-link-nest.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
@@ -37,6 +37,6 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 // Start up the WP testing environment.
 require "{$_tests_dir}/includes/bootstrap.php";
 
-// require 'admin/class-wp-internal-linking-settings.php';
-// require 'includes/class-wp-internal-linking-keyword-model.php';
-// require 'includes/class-wp-internal-linking-text-processor.php';
+// require 'admin/class-ifocus-link-nest-settings.php';
+// require 'includes/class-ifocus-link-nest-keyword-model.php';
+// require 'includes/class-ifocus-link-nest-text-processor.php';

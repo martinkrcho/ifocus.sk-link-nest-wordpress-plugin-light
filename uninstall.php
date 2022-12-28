@@ -22,7 +22,7 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
+ * @package    iFocus_Link_Nest
  */
 
 // If uninstall not called from WordPress, then exit.

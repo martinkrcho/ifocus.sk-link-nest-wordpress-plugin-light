@@ -2,14 +2,14 @@
 /**
  * Class TextReplacementTest
  *
- * @package Wp_Internal_Linking
+ * @package iFocus_Link_Nest
  */
 
 class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 	protected function getKeywords() {
 		return array(
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'non',
 					'online marketing',
@@ -17,7 +17,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/services/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'et',
 					'seo audit',
@@ -25,7 +25,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/services/seo-audit/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'amet',
 					'about linking',
@@ -33,7 +33,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/credits/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'sed',
 					'online marketing agency',
@@ -41,7 +41,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'maximus',
 					'ifocus agency',
@@ -49,7 +49,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/about/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'nulla',
 					'ifocus kontakt',
@@ -57,7 +57,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/about/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'ipsum',
 					'social media service',
@@ -65,7 +65,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'dictum',
 					'ppc campaigns',
@@ -73,7 +73,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 					'https://linking.objav.digital/services/ppc-audit/',
 				)
 			),
-			Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 				array(
 					'services',
 					'exclude hyperlinks',
@@ -82,24 +82,23 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				)
 			),
 		);
-
 	}
 
 	/**
 	 * @dataProvider dataReplacements
 	 */
-	public function test_replacements_with_default_settings($keywords, $originalText, $expectedResult) {
-		$settings = new Wp_Internal_Linking_Settings();
-		$processor = new Wp_Internal_Linking_Text_Processor( $settings, $keywords );
+	public function test_replacements_with_default_settings( $keywords, $originalText, $expectedResult ) {
+		$settings  = new iFocus_Link_Nest_Settings();
+		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
 		$this->assertEquals( $expectedResult, $processor->process( $originalText ) );
 	}
 
 	public function dataReplacements() {
 		return array(
-			'basic scenario with default settings' => [
+			'basic scenario with default settings' => array(
 				// keywords
 				array(
-					Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 						array(
 							'non',
 							'online marketing',
@@ -107,7 +106,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 							'https://linking.objav.digital/services/',
 						)
 					),
-					Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 						array(
 							'maximus',
 							'ifocus agency',
@@ -126,13 +125,13 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				. 'Vestibulum sem neque, vehicula in dolor '
 				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help">non</a>, '
 				. 'hendrerit <a href="https://linking.objav.digital/about/" title="ifocus agency" rel="help">maximus</a> '
-				. 'tellus.'
-			],
+				. 'tellus.',
+			),
 
-			'skipping HTML attributes with default settings' => [
+			'skipping HTML attributes with default settings' => array(
 				// keywords
 				array(
-					Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 						array(
 							'non',
 							'online marketing',
@@ -140,7 +139,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 							'https://linking.objav.digital/services/',
 						)
 					),
-					Wp_Internal_Linking_Keyword_Model::build_from_generic_array(
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
 						array(
 							'online marketing',
 							'ifocus agency',
@@ -158,8 +157,8 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat. '
 				. 'Vestibulum sem neque, vehicula in dolor '
 				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help">non</a>, '
-				. 'hendrerit maximus tellus.'
-			]
+				. 'hendrerit maximus tellus.',
+			),
 		);
 	}
 }

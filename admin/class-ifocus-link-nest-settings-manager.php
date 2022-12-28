@@ -6,24 +6,24 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/admin
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/admin
  */
 
 /**
  * The plugin settings class.
  *
  * @since      1.0.0
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Settings_Manager {
+class iFocus_Link_Nest_Settings_Manager {
 
 	/**
 	 * @var string Name of the option storing the plugin settings.
 	 */
-	private static $option_name = 'wp_internal_linking_settings';
+	private static $option_name = 'ifocus_link_nest_settings';
 
 	/**
 	 * @var string Suffix of the option storing the timestamp of last plugin settings update.
@@ -33,7 +33,7 @@ class Wp_Internal_Linking_Settings_Manager {
 	/**
 	 * @var string Name of the post meta storing the cached post content containing keyword links.
 	 */
-	private static $content_cache_meta_name = 'wp_internal_linking_cache';
+	private static $content_cache_meta_name = 'focus_link_nest_cache';
 
 	/**
 	 * Define the plugin settings functionality.
@@ -61,7 +61,7 @@ class Wp_Internal_Linking_Settings_Manager {
 	 * @param mixed  $old_value The old option value.
 	 */
 	public function handle_file_upload( $value, $option, $old_value ) {
-		if ( ! is_array( $value ) || ! array_key_exists( Wp_Internal_Linking_Settings::CSV_FILE, $value ) ) {
+		if ( ! is_array( $value ) || ! array_key_exists( iFocus_Link_Nest_Settings::CSV_FILE, $value ) ) {
 			return $value;
 		}
 
@@ -69,14 +69,14 @@ class Wp_Internal_Linking_Settings_Manager {
 			return $value;
 		}
 
-		if ( ! array_key_exists( Wp_Internal_Linking_Settings::CSV_FILE, $_FILES[ self::$option_name ]['error'] ) || $_FILES[ self::$option_name ]['error'][ Wp_Internal_Linking_Settings::CSV_FILE ] > 0 ) {
+		if ( ! array_key_exists( iFocus_Link_Nest_Settings::CSV_FILE, $_FILES[ self::$option_name ]['error'] ) || $_FILES[ self::$option_name ]['error'][ iFocus_Link_Nest_Settings::CSV_FILE ] > 0 ) {
 			return $value;
 		}
 
 		// Parse and import CSV file.
-		Wp_Internal_Linking_Csv_Import::import( $_FILES[ self::$option_name ]['tmp_name'][ Wp_Internal_Linking_Settings::CSV_FILE ] );
+		iFocus_Link_Nest_Csv_Import::import( $_FILES[ self::$option_name ]['tmp_name'][ iFocus_Link_Nest_Settings::CSV_FILE ] );
 
-		$value[ Wp_Internal_Linking_Settings::CSV_FILE ] = time();
+		$value[ iFocus_Link_Nest_Settings::CSV_FILE ] = time();
 
 		return $value;
 	}
@@ -110,121 +110,121 @@ class Wp_Internal_Linking_Settings_Manager {
 		return wp_parse_args(
 			get_option( self::$option_name, array() ),
 			array(
-				Wp_Internal_Linking_Settings::CSV_FILE     => '',
-				Wp_Internal_Linking_Settings::PREVENT_DUPLICATES => 'yes',
-				Wp_Internal_Linking_Settings::PROCESS_POSTS => 'yes',
-				Wp_Internal_Linking_Settings::PROCESS_PAGES => 'yes',
-				Wp_Internal_Linking_Settings::MAX_LINKS    => 3,
-				Wp_Internal_Linking_Settings::MAX_KEYWORDS_LINKS => 1,
-				Wp_Internal_Linking_Settings::MAX_SAME_URL => 1,
-				Wp_Internal_Linking_Settings::CASE_SENSITIVE => 'yes',
-				Wp_Internal_Linking_Settings::OPEN_IN_NEW_WINDOW => 'yes',
-				Wp_Internal_Linking_Settings::EXCLUDE_HEADINGS => 'yes',
-				Wp_Internal_Linking_Settings::IGNORED_POSTS => array(),
-				Wp_Internal_Linking_Settings::IGNORED_WORDS => array(),
+				iFocus_Link_Nest_Settings::CSV_FILE       => '',
+				iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => 'yes',
+				iFocus_Link_Nest_Settings::PROCESS_POSTS  => 'yes',
+				iFocus_Link_Nest_Settings::PROCESS_PAGES  => 'yes',
+				iFocus_Link_Nest_Settings::MAX_LINKS      => 3,
+				iFocus_Link_Nest_Settings::MAX_KEYWORDS_LINKS => 1,
+				iFocus_Link_Nest_Settings::MAX_SAME_URL   => 1,
+				iFocus_Link_Nest_Settings::CASE_SENSITIVE => 'yes',
+				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'yes',
+				iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => 'yes',
+				iFocus_Link_Nest_Settings::IGNORED_POSTS  => array(),
+				iFocus_Link_Nest_Settings::IGNORED_WORDS  => array(),
 			)
 		);
 	}
 
 	private function init_settings() {
 		$intro_html  = '<p>';
-		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'wp-internal-linking' );
+		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'ifocus-link-nest' );
 		$intro_html .= '</p>';
 		$intro_html .= '<p>';
-		$intro_html .= esc_html__( 'If you find any bugs or you have ideas for the plugin, let us know at:', 'wp-internal-linking' );
+		$intro_html .= esc_html__( 'If you find any bugs or you have ideas for the plugin, let us know at:', 'ifocus-link-nest' );
 		$intro_html .= '<br />';
 		$intro_html .= '<a href="http://wordpress.org/support/plugin/ifocus-link-nest" target="_blank">http://wordpress.org/support/plugin/ifocus-link-nest</a>';
 		$intro_html .= '</p>';
 
 		$pages = array(
 			self::$option_name => array(
-				'menu_title'  => esc_html__( 'Internal linking', 'wp-internal-linking' ),
-				'menu_slug'   => 'wp-internal-linking',
+				'menu_title'  => esc_html__( 'Internal linking', 'ifocus-link-nest' ),
+				'menu_slug'   => 'ifocus-link-nest',
 				'parent_slug' => 'options-general.php',
-				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'wp-internal-linking' ),
+				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'ifocus-link-nest' ),
 				'text'        => $intro_html,
 				'sections'    => array(
 					'custom-keywords' => array(
-						'title'    => esc_html__( 'Custom Keywords', 'wp-internal-linking' ),
+						'title'    => esc_html__( 'Custom Keywords', 'ifocus-link-nest' ),
 						'callback' => array( $this, 'custom_keyword_intro' ),
 						'fields'   => array(
-							Wp_Internal_Linking_Settings::CSV_FILE           => array(
-								'id'          => Wp_Internal_Linking_Settings::CSV_FILE,
-								'title'       => esc_html__( 'Import from CSV', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::CSV_FILE           => array(
+								'id'          => iFocus_Link_Nest_Settings::CSV_FILE,
+								'title'       => esc_html__( 'Import from CSV', 'ifocus-link-nest' ),
 								'type'        => 'file',
-								'placeholder' => esc_html__( 'select CSV file', 'wp-internal-linking' ),
-								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'wp-internal-linking' ),
+								'placeholder' => esc_html__( 'select CSV file', 'ifocus-link-nest' ),
+								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::PREVENT_DUPLICATES => array(
-								'title' => esc_html__( 'Grouped keywords', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => array(
+								'title' => esc_html__( 'Grouped keywords', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'ifocus-link-nest' ),
 							),
 						),
 
 					),
 					'targeting'       => array(
-						'title'    => esc_html__( 'Internal links / Targeting', 'wp-internal-linking' ),
+						'title'    => esc_html__( 'Internal links / Targeting', 'ifocus-link-nest' ),
 						'callback' => array( $this, 'targeting_intro' ),
 						'fields'   => array(
-							Wp_Internal_Linking_Settings::PROCESS_POSTS      => array(
-								'title' => esc_html__( 'Posts', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::PROCESS_POSTS      => array(
+								'title' => esc_html__( 'Posts', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Search and process posts', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Enable. Search and process posts', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::PROCESS_PAGES      => array(
-								'title' => esc_html__( 'Pages', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::PROCESS_PAGES      => array(
+								'title' => esc_html__( 'Pages', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Search and process pages', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Enable. Search and process pages', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::MAX_LINKS          => array(
-								'title' => esc_html__( 'Max links', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::MAX_LINKS          => array(
+								'title' => esc_html__( 'Max links', 'ifocus-link-nest' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::MAX_KEYWORDS_LINKS => array(
-								'title' => esc_html__( 'Max keywords links', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::MAX_KEYWORDS_LINKS => array(
+								'title' => esc_html__( 'Max keywords links', 'ifocus-link-nest' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'You can limit the maximum number of links created with the same keyword. Set to 0 for no limit.', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'You can limit the maximum number of links created with the same keyword. Set to 0 for no limit.', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::MAX_SAME_URL       => array(
-								'title' => esc_html__( 'Max same URLs', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::MAX_SAME_URL       => array(
+								'title' => esc_html__( 'Max same URLs', 'ifocus-link-nest' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'Limit number of same URLs the plugin will link to. Works only when Max Keyword Links above is set to 1. Set to 0 for no limit.', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Limit number of same URLs the plugin will link to. Works only when Max Keyword Links above is set to 1. Set to 0 for no limit.', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::CASE_SENSITIVE     => array(
-								'title' => esc_html__( 'Case sensitive', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::CASE_SENSITIVE     => array(
+								'title' => esc_html__( 'Case sensitive', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Enable', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::OPEN_IN_NEW_WINDOW => array(
-								'title' => esc_html__( 'Open in new window', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => array(
+								'title' => esc_html__( 'Open in new window', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'ifocus-link-nest' ),
 							),
 						),
 
 					),
 					'excluding'       => array(
-						'title'    => esc_html__( 'Excluding', 'wp-internal-linking' ),
+						'title'    => esc_html__( 'Excluding', 'ifocus-link-nest' ),
 						'callback' => array( $this, 'excluding_intro' ),
 						'fields'   => array(
-							Wp_Internal_Linking_Settings::EXCLUDE_HEADINGS => array(
-								'title' => esc_html__( 'Headings', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => array(
+								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'wp-internal-linking' ),
+								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
 							),
-							Wp_Internal_Linking_Settings::IGNORED_POSTS    => array(
-								'title'    => esc_html__( 'Ignore post/pages', 'wp-internal-linking' ),
-								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::IGNORED_POSTS    => array(
+								'title'    => esc_html__( 'Ignore post/pages', 'ifocus-link-nest' ),
+								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'ifocus-link-nest' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
 								'callback' => array( $this, 'render_post_select_field' ),
 							),
-							Wp_Internal_Linking_Settings::IGNORED_WORDS    => array(
-								'title'    => esc_html__( 'Ignore words', 'wp-internal-linking' ),
-								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'wp-internal-linking' ),
+							iFocus_Link_Nest_Settings::IGNORED_WORDS    => array(
+								'title'    => esc_html__( 'Ignore words', 'ifocus-link-nest' ),
+								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'ifocus-link-nest' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
@@ -247,19 +247,16 @@ class Wp_Internal_Linking_Settings_Manager {
 		echo '</p>';
 		echo '<div id="keywords-editor">';
 		echo '</div>';
-		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'wp-internal-linking' ) . '</a>';
+		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'ifocus-link-nest' ) . '</a>';
 
-		$keywords = Wp_Internal_Linking_Keyword_Model::get_all();
-		foreach ( $keywords as $keyword ) {
-			echo 'Wp_Internal_Linking_Keyword_Model::build_from_generic_array(array( "' . $keyword->keyword . '", "' . $keyword->title . '", "' . $keyword->rel . '", "' . $keyword->href . '" ));';
-		}
+		$keywords = iFocus_Link_Nest_Keyword_Model::get_all();
 
 		echo '<script type="application/javascript">';
 		// @formatter:off
 		?>
 		var nonces = {
-			update: '<?php echo wp_create_nonce( Wp_Internal_Linking_Admin::AJAX_ACTION_UPDATE ); ?>',
-			delete: '<?php echo wp_create_nonce( Wp_Internal_Linking_Admin::AJAX_ACTION_DELETE ); ?>'
+			update: '<?php echo wp_create_nonce( iFocus_Link_Nest_Admin::AJAX_ACTION_UPDATE ); ?>',
+			delete: '<?php echo wp_create_nonce( iFocus_Link_Nest_Admin::AJAX_ACTION_DELETE ); ?>'
 		};
 
 		var tableData = [
@@ -275,7 +272,7 @@ class Wp_Internal_Linking_Settings_Manager {
 		];
 
 		var triggerModelChange = function( data, action, callback ) {
-			data.action = 'wp-internal-linking-' + action;
+			data.action = 'ifocus-link-nest-' + action;
 			data.nonce = nonces[action];
 
 			jQuery.post( ajaxurl, data, function( response ) {
@@ -346,13 +343,13 @@ class Wp_Internal_Linking_Settings_Manager {
 
 	public function targeting_intro( $section ) {
 		echo '<p>';
-		esc_html_e( 'iFOCUS.sk Link nest plugin can search and process your posts, pages for keywords to automatically interlink from <div>, <p>, <ul>, <li> and other html tags.', 'wp-internal-linking' );
+		esc_html_e( 'iFOCUS.sk Link nest plugin can search and process your posts, pages for keywords to automatically interlink from <div>, <p>, <ul>, <li> and other html tags.', 'ifocus-link-nest' );
 		echo '</p>';
 	}
 
 	public function excluding_intro( $section ) {
 		echo '<p>';
-		esc_html_e( 'Setup what and how it can be excluded from internal linking.', 'wp-internal-linking' );
+		esc_html_e( 'Setup what and how it can be excluded from internal linking.', 'ifocus-link-nest' );
 		echo '</p>';
 	}
 
@@ -375,7 +372,7 @@ class Wp_Internal_Linking_Settings_Manager {
 		$options = $option_pages->get_options();
 		\S24WP::insert(
 			array(
-				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'wp-internal-linking' ),
+				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'ifocus-link-nest' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'data-type'   => 'post',
@@ -406,7 +403,7 @@ class Wp_Internal_Linking_Settings_Manager {
 		$options = $option_pages->get_options();
 		\S24WP::insert(
 			array(
-				'placeholder' => esc_html__( 'type word(s)', 'wp-internal-linking' ),
+				'placeholder' => esc_html__( 'type word(s)', 'ifocus-link-nest' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'tags'        => true,
@@ -419,6 +416,6 @@ class Wp_Internal_Linking_Settings_Manager {
 	}
 
 	public static function is_settings_screen() {
-		return is_admin() && array_key_exists( 'page', $_GET ) && 'wp-internal-linking' === $_GET['page'];
+		return is_admin() && array_key_exists( 'page', $_GET ) && 'ifocus-link-nest' === $_GET['page'];
 	}
 }

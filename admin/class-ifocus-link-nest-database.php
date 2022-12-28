@@ -6,19 +6,19 @@
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
  *
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/admin
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/admin
  */
 
 /**
  * Class handles custom database tables and default data
  *
  * @since      1.0.0
- * @package    Wp_Internal_Linking
- * @subpackage Wp_Internal_Linking/includes
+ * @package    iFocus_Link_Nest
+ * @subpackage iFocus_Link_Nest/includes
  * @author     Martin Krcho <martin.krcho@devstudio.sk>
  */
-class Wp_Internal_Linking_Database {
+class iFocus_Link_Nest_Database {
 
 	/**
 	 * Database version.
@@ -32,7 +32,7 @@ class Wp_Internal_Linking_Database {
 	 *
 	 * @var string
 	 */
-	const DB_VERSION_OPTION_NAME = 'wp_intlink_db_version';
+	const DB_VERSION_OPTION_NAME = 'ifocus_link_nest_db_version';
 
 	/**
 	 * Hook into WordPress lifecycle to be able to create and update the custom database tables.
@@ -78,7 +78,7 @@ class Wp_Internal_Linking_Database {
 
 			$installed_ver = intval( $installed_ver );
 			if ( 0 === $installed_ver ) {
-				$tableName = self::get_table_name( Wp_Internal_Linking_Keyword_Model::TABLE_NAME );
+				$tableName = self::get_table_name( iFocus_Link_Nest_Keyword_Model::TABLE_NAME );
 				$sql       = "CREATE TABLE {$tableName} ("
 							 . ' keyword_id INT(11) NOT NULL AUTO_INCREMENT, '
 							 . ' keyword VARCHAR(127) NULL DEFAULT NULL, '
