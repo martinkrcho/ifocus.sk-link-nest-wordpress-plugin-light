@@ -13,7 +13,7 @@
  * @package           Wp_Internal_Linking
  *
  * @wordpress-plugin
- * Plugin Name:       iFOCUS.sk Link Nest WordPress plugin - LIGHT
+ * Plugin Name:       iFOCUS.sk Link Nest Lite
  * Plugin URI:        https://www.ifocus.sk/
  * Description:       Plugin allows the site owner to automate linking selected keywords in the site content.
  * Version:           1.0.0
