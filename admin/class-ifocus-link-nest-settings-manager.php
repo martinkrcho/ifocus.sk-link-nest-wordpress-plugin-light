@@ -126,6 +126,12 @@ class iFocus_Link_Nest_Settings_Manager {
 		delete_post_meta( $post_id, self::get_post_content_cache_key() );
 	}
 
+	public static function insert_default_settings() {
+		add_option( self::$option_name, self::get_settings_data(), '', false );
+		$last_updated_option_name = self::$option_name . self::$last_updated_option_suffix;
+		add_option( $last_updated_option_name, time() );
+	}
+
 	/**
 	 * Retrieve plugin settings.
 	 *
