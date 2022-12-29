@@ -42,7 +42,7 @@ class iFocus_Link_Nest_Text_Processor {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param iFocus_Link_Nest_Settings $settings Plugin settings.
+	 * @param iFocus_Link_Nest_Settings        $settings Plugin settings.
 	 * @param iFocus_Link_Nest_Keyword_Model[] $keywords List of keywords.
 	 */
 	public function __construct( $settings, $keywords ) {

@@ -79,14 +79,14 @@ class iFocus_Link_Nest {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
-		add_filter( 'the_content', [ $this, 'replace_keywords' ] );
-		add_action( 'post_updated', [ $this, 'on_post_updated' ], 10, 3 );
+		add_filter( 'the_content', array( $this, 'replace_keywords' ) );
+		add_action( 'post_updated', array( $this, 'on_post_updated' ), 10, 3 );
 	}
 
 	/**
 	 * Purges the post content cache when a post is updated.
 	 *
-	 * @param int $post_ID Post ID.
+	 * @param int     $post_ID Post ID.
 	 * @param WP_Post $post_after Post object following the update.
 	 * @param WP_Post $post_before Post object before the update.
 	 */
@@ -96,7 +96,7 @@ class iFocus_Link_Nest {
 
 	public function replace_keywords( $content ) {
 
-		if ( ! is_singular( [ 'post', 'page' ] ) ) {
+		if ( ! is_singular( array( 'post', 'page' ) ) ) {
 			return $content;
 		}
 

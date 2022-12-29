@@ -47,8 +47,8 @@ class iFocus_Link_Nest_Settings_Manager {
 
 		$this->init_settings();
 
-		add_filter( 'pre_update_option_' . self::$option_name, [ $this, 'handle_file_upload' ], 10, 3 );
-		add_action( 'update_option_' . self::$option_name, [ $this, 'on_settings_updated' ], 10, 3 );
+		add_filter( 'pre_update_option_' . self::$option_name, array( $this, 'handle_file_upload' ), 10, 3 );
+		add_action( 'update_option_' . self::$option_name, array( $this, 'on_settings_updated' ), 10, 3 );
 	}
 
 	public static function build_settings() {
@@ -58,9 +58,9 @@ class iFocus_Link_Nest_Settings_Manager {
 	/**
 	 * Handles file upload and data import before the settings are updated.
 	 *
-	 * @param mixed $value The new, unserialized option value.
+	 * @param mixed  $value The new, unserialized option value.
 	 * @param string $option Name of the option.
-	 * @param mixed $old_value The old option value.
+	 * @param mixed  $old_value The old option value.
 	 */
 	public function handle_file_upload( $value, $option, $old_value ) {
 		if ( ! is_array( $value ) || ! array_key_exists( iFocus_Link_Nest_Settings::CSV_FILE, $value ) ) {
@@ -88,8 +88,8 @@ class iFocus_Link_Nest_Settings_Manager {
 	 *
 	 * It stores the timestamp of the last update in a separate option.
 	 *
-	 * @param mixed $old_value The old option value.
-	 * @param mixed $value The new option value.
+	 * @param mixed  $old_value The old option value.
+	 * @param mixed  $value The new option value.
 	 * @param string $option Option name.
 	 */
 	public function on_settings_updated( $old_value, $value, $option ) {
@@ -133,8 +133,8 @@ class iFocus_Link_Nest_Settings_Manager {
 	 */
 	public static function get_settings_data() {
 		return wp_parse_args(
-			get_option( self::$option_name, [] ),
-			[
+			get_option( self::$option_name, array() ),
+			array(
 				iFocus_Link_Nest_Settings::CSV_FILE           => '',
 				iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => 'on',
 				iFocus_Link_Nest_Settings::PROCESS_POSTS      => 'on',
@@ -143,14 +143,14 @@ class iFocus_Link_Nest_Settings_Manager {
 				iFocus_Link_Nest_Settings::CASE_SENSITIVE     => 'on',
 				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'on',
 				iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS   => 'on',
-				iFocus_Link_Nest_Settings::IGNORED_POSTS      => [],
-				iFocus_Link_Nest_Settings::IGNORED_WORDS      => [],
-			]
+				iFocus_Link_Nest_Settings::IGNORED_POSTS      => array(),
+				iFocus_Link_Nest_Settings::IGNORED_WORDS      => array(),
+			)
 		);
 	}
 
 	private function init_settings() {
-		$intro_html = '<p>';
+		$intro_html  = '<p>';
 		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'ifocus-link-nest' );
 		$intro_html .= '</p>';
 		$intro_html .= '<p>';
@@ -159,104 +159,104 @@ class iFocus_Link_Nest_Settings_Manager {
 		$intro_html .= '<a href="http://wordpress.org/support/plugin/ifocus-link-nest" target="_blank">http://wordpress.org/support/plugin/ifocus-link-nest</a>';
 		$intro_html .= '</p>';
 
-		$pages = [
-			self::$option_name => [
+		$pages = array(
+			self::$option_name => array(
 				'menu_title'  => esc_html__( 'Internal linking', 'ifocus-link-nest' ),
 				'menu_slug'   => 'ifocus-link-nest',
 				'parent_slug' => 'options-general.php',
 				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'ifocus-link-nest' ),
 				'text'        => $intro_html,
-				'sections'    => [
-					'custom-keywords' => [
+				'sections'    => array(
+					'custom-keywords' => array(
 						'title'    => esc_html__( 'Custom Keywords', 'ifocus-link-nest' ),
-						'callback' => [ $this, 'custom_keyword_intro' ],
-						'fields'   => [
-							iFocus_Link_Nest_Settings::CSV_FILE           => [
+						'callback' => array( $this, 'custom_keyword_intro' ),
+						'fields'   => array(
+							iFocus_Link_Nest_Settings::CSV_FILE           => array(
 								'id'          => iFocus_Link_Nest_Settings::CSV_FILE,
 								'title'       => esc_html__( 'Import from CSV', 'ifocus-link-nest' ),
 								'type'        => 'file',
 								'placeholder' => esc_html__( 'select CSV file', 'ifocus-link-nest' ),
 								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => [
+							),
+							iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => array(
 								'id'    => iFocus_Link_Nest_Settings::PREVENT_DUPLICATES,
 								'title' => esc_html__( 'Grouped keywords', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'ifocus-link-nest' ),
-							],
-						],
+							),
+						),
 
-					],
-					'targeting'       => [
+					),
+					'targeting'       => array(
 						'title'    => esc_html__( 'Internal links / Targeting', 'ifocus-link-nest' ),
-						'callback' => [ $this, 'targeting_intro' ],
-						'fields'   => [
-							iFocus_Link_Nest_Settings::PROCESS_POSTS      => [
+						'callback' => array( $this, 'targeting_intro' ),
+						'fields'   => array(
+							iFocus_Link_Nest_Settings::PROCESS_POSTS      => array(
 								'id'    => iFocus_Link_Nest_Settings::PROCESS_POSTS,
 								'title' => esc_html__( 'Posts', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Search and process posts', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::PROCESS_PAGES      => [
+							),
+							iFocus_Link_Nest_Settings::PROCESS_PAGES      => array(
 								'id'    => iFocus_Link_Nest_Settings::PROCESS_PAGES,
 								'title' => esc_html__( 'Pages', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Search and process pages', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::MAX_LINKS          => [
+							),
+							iFocus_Link_Nest_Settings::MAX_LINKS          => array(
 								'id'    => iFocus_Link_Nest_Settings::MAX_LINKS,
 								'title' => esc_html__( 'Max links', 'ifocus-link-nest' ),
 								'type'  => 'number',
 								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::CASE_SENSITIVE     => [
+							),
+							iFocus_Link_Nest_Settings::CASE_SENSITIVE     => array(
 								'id'    => iFocus_Link_Nest_Settings::CASE_SENSITIVE,
 								'title' => esc_html__( 'Case sensitive', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => [
+							),
+							iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => array(
 								'id'    => iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW,
 								'title' => esc_html__( 'Open in new window', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'ifocus-link-nest' ),
-							],
-						],
-					],
-					'excluding'       => [
+							),
+						),
+					),
+					'excluding'       => array(
 						'title'    => esc_html__( 'Excluding', 'ifocus-link-nest' ),
-						'callback' => [ $this, 'excluding_intro' ],
-						'fields'   => [
-							iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => [
+						'callback' => array( $this, 'excluding_intro' ),
+						'fields'   => array(
+							iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => array(
 								'id'    => iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS,
 								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::IGNORED_POSTS    => [
+							),
+							iFocus_Link_Nest_Settings::IGNORED_POSTS    => array(
 								'id'       => iFocus_Link_Nest_Settings::IGNORED_POSTS,
 								'title'    => esc_html__( 'Ignore post/pages', 'ifocus-link-nest' ),
 								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'ifocus-link-nest' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
-								'callback' => [ $this, 'render_post_select_field' ],
-							],
-							iFocus_Link_Nest_Settings::IGNORED_WORDS    => [
+								'callback' => array( $this, 'render_post_select_field' ),
+							),
+							iFocus_Link_Nest_Settings::IGNORED_WORDS    => array(
 								'id'       => iFocus_Link_Nest_Settings::IGNORED_WORDS,
 								'title'    => esc_html__( 'Ignore words', 'ifocus-link-nest' ),
 								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'ifocus-link-nest' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
-								'callback' => [ $this, 'render_word_select_field' ],
-							],
-						],
+								'callback' => array( $this, 'render_word_select_field' ),
+							),
+						),
 
-					],
-				],
-			],
-		];
+					),
+				),
+			),
+		);
 
 		new \RationalOptionPages( $pages );
 	}
@@ -376,10 +376,10 @@ class iFocus_Link_Nest_Settings_Manager {
 	/**
 	 * Renders custom post selection field(s).
 	 *
-	 * @param array $field Field data.
-	 * @param string $page_key Settings page key.
-	 * @param string $section_key Settings section key.
-	 * @param string $field_key Field key.
+	 * @param array                $field Field data.
+	 * @param string               $page_key Settings page key.
+	 * @param string               $section_key Settings section key.
+	 * @param string               $field_key Field key.
 	 * @param \RationalOptionPages $option_pages Rational option pages object.
 	 */
 	public function render_post_select_field( $field, $page_key, $section_key, $field_key, $option_pages ) {
@@ -391,14 +391,14 @@ class iFocus_Link_Nest_Settings_Manager {
 
 		$options = $option_pages->get_options();
 		\S24WP::insert(
-			[
+			array(
 				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'ifocus-link-nest' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'data-type'   => 'post',
 				'multiple'    => true,
-				'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
-			]
+				'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : array(),
+			)
 		);
 
 		echo '</fieldset>';
@@ -407,10 +407,10 @@ class iFocus_Link_Nest_Settings_Manager {
 	/**
 	 * Renders custom post selection field(s).
 	 *
-	 * @param array $field Field data.
-	 * @param string $page_key Settings page key.
-	 * @param string $section_key Settings section key.
-	 * @param string $field_key Field key.
+	 * @param array                $field Field data.
+	 * @param string               $page_key Settings page key.
+	 * @param string               $section_key Settings section key.
+	 * @param string               $field_key Field key.
 	 * @param \RationalOptionPages $option_pages Rational option pages object.
 	 */
 	public function render_word_select_field( $field, $page_key, $section_key, $field_key, $option_pages ) {
@@ -422,14 +422,14 @@ class iFocus_Link_Nest_Settings_Manager {
 
 		$options = $option_pages->get_options();
 		\S24WP::insert(
-			[
+			array(
 				'placeholder' => esc_html__( 'type word(s)', 'ifocus-link-nest' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'tags'        => true,
 				'multiple'    => true,
-				'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : [],
-			]
+				'selected'    => isset( $options[ $field['id'] ] ) ? $options[ $field['id'] ] : array(),
+			)
 		);
 
 		echo '</fieldset>';
