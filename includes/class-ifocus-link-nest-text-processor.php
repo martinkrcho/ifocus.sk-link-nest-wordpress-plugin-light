@@ -42,7 +42,7 @@ class iFocus_Link_Nest_Text_Processor {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param iFocus_Link_Nest_Settings        $settings Plugin settings.
+	 * @param iFocus_Link_Nest_Settings $settings Plugin settings.
 	 * @param iFocus_Link_Nest_Keyword_Model[] $keywords List of keywords.
 	 */
 	public function __construct( $settings, $keywords ) {
@@ -55,6 +55,10 @@ class iFocus_Link_Nest_Text_Processor {
 
 		// Run the actual processing and replacements.
 		foreach ( $this->keywords as $keyword ) {
+			if ( $this->settings->is_keyword_excluded( $keyword ) ) {
+				continue;
+			}
+
 			$this->apply_keyword( $keyword );
 		}
 
@@ -66,17 +70,23 @@ class iFocus_Link_Nest_Text_Processor {
 	 */
 	private function apply_keyword( $keyword ) {
 		$hyperlink_markup = sprintf(
-			'<a href="%1$s" title="%2$s" rel="%3$s">%4$s</a>',
+			'<a href="%1$s" title="%2$s" rel="%3$s"%4$s>%5$s</a>',
 			esc_attr( $keyword->href ),
 			esc_attr( $keyword->title ),
 			esc_attr( $keyword->rel ),
+			$this->settings->should_open_in_new_window() ? ' target="_blank"' : '',
 			esc_html( $keyword->keyword )
 		);
 
 		$allow_titles = '';
 		$lookaround   = '(?=[^>]*(<|$))';
 		$pattern      = '/\b' . $keyword->keyword . '\b' . $lookaround . '/';
-		$this->text   = preg_replace( $pattern, $hyperlink_markup, $this->text );
+		if ( ! $this->settings->is_case_sensitive() ) {
+			$pattern .= 'i';
+		}
+
+		// TODO use $limit and $count args to respect plugin settings
+		$this->text = preg_replace( $pattern, $hyperlink_markup, $this->text );
 
 		return $this->text;
 	}

@@ -30,13 +30,9 @@ class iFocus_Link_Nest_Settings {
 
 	public const PROCESS_POSTS = 'process_posts';
 
-	public const MAX_SAME_URL = 'max_same_url';
-
 	public const PROCESS_PAGES = 'process_pages';
 
 	public const MAX_LINKS = 'max_links';
-
-	public const MAX_KEYWORDS_LINKS = 'max_keywords_links';
 
 	public const IGNORED_WORDS = 'ignored_words';
 
@@ -44,29 +40,31 @@ class iFocus_Link_Nest_Settings {
 
 	public const EXCLUDE_HEADINGS = 'exclude_headings';
 
-	private $prevent_duplicates = 'yes';
+	private $prevent_duplicates = 'on';
 
-	private $process_posts = 'yes';
+	private $process_posts = 'on';
 
-	private $process_pages = 'yes';
+	private $process_pages = 'on';
 
 	private $max_links = 3;
 
-	private $max_keywords_links = 1;
+	private $case_sensitive = 'on';
 
-	private $max_same_url = 1;
+	private $open_in_new_window = 'on';
 
-	private $case_sensitive = 'yes';
-
-	private $open_in_new_window = 'yes';
-
-	private $exclude_headings = 'yes';
+	private $exclude_headings = 'on';
 
 	private $ignored_posts = [];
 
 	private $ignored_words = [];
 
-	public function __construct() {
+	public function __construct( $seed ) {
+		foreach ( $seed as $key => $value ) {
+			$prop = strtolower( $key );
+			if ( property_exists( $this, $prop ) ) {
+				$this->$prop = $value;
+			}
+		}
 	}
 
 	public function to_array() {
@@ -75,8 +73,6 @@ class iFocus_Link_Nest_Settings {
 			self::PROCESS_POSTS      => $this->process_posts,
 			self::PROCESS_PAGES      => $this->process_pages,
 			self::MAX_LINKS          => $this->max_links,
-			self::MAX_KEYWORDS_LINKS => $this->max_keywords_links,
-			self::MAX_SAME_URL       => $this->max_same_url,
 			self::CASE_SENSITIVE     => $this->case_sensitive,
 			self::OPEN_IN_NEW_WINDOW => $this->open_in_new_window,
 			self::EXCLUDE_HEADINGS   => $this->exclude_headings,
@@ -85,12 +81,50 @@ class iFocus_Link_Nest_Settings {
 		];
 	}
 
-	public function canProcessPages() {
-		return 'yes' === $this->process_pages;
+	/**
+	 * @return bool
+	 */
+	public function can_process_pages() {
+		return 'on' === $this->process_pages;
 	}
 
-	public function canProcessPosts() {
-		return 'yes' === $this->process_posts;
+	/**
+	 * @return bool
+	 */
+	public function can_process_posts() {
+		return 'on' === $this->process_posts;
+	}
+
+	/**
+	 * @param int $post_id
+	 *
+	 * @return bool
+	 */
+	public function is_post_excluded( $post_id ) {
+		return in_array( $post_id, $this->ignored_posts );
+	}
+
+	/**
+	 * @param iFocus_Link_Nest_Keyword_Model $keyword
+	 *
+	 * @return bool
+	 */
+	public function is_keyword_excluded( $keyword ) {
+		return in_array( $keyword->keyword, $this->ignored_words );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function should_open_in_new_window() {
+		return 'on' === $this->open_in_new_window;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function is_case_sensitive() {
+		return 'on' === $this->case_sensitive;
 	}
 }
 

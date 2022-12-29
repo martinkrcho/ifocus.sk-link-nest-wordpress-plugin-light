@@ -30,6 +30,7 @@ class iFocus_Link_Nest_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		// TODO insert default plugin settings
 	}
 
 }

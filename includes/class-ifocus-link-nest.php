@@ -80,6 +80,18 @@ class iFocus_Link_Nest {
 		$this->define_public_hooks();
 
 		add_filter( 'the_content', [ $this, 'replace_keywords' ] );
+		add_action( 'post_updated', [ $this, 'on_post_updated' ], 10, 3 );
+	}
+
+	/**
+	 * Purges the post content cache when a post is updated.
+	 *
+	 * @param int $post_ID Post ID.
+	 * @param WP_Post $post_after Post object following the update.
+	 * @param WP_Post $post_before Post object before the update.
+	 */
+	public function on_post_updated( $post_ID, $post_after, $post_before ) {
+		iFocus_Link_Nest_Settings_Manager::purge_post_content_cache( $post_ID );
 	}
 
 	public function replace_keywords( $content ) {
@@ -88,18 +100,23 @@ class iFocus_Link_Nest {
 			return $content;
 		}
 
-		$settings = new iFocus_Link_Nest_Settings();
-		if ( is_page() && ! $settings->canProcessPages() ) {
+		$settings = iFocus_Link_Nest_Settings_Manager::build_settings();
+		if ( is_page() && ! $settings->can_process_pages() ) {
 			return $content;
 		}
 
-		if ( is_single() && ! $settings->canProcessPosts() ) {
+		if ( is_single() && ! $settings->can_process_posts() ) {
+			return $content;
+		}
+
+		$post_id = get_the_ID();
+		if ( $settings->is_post_excluded( $post_id ) ) {
 			return $content;
 		}
 
 		$last_settings_update = iFocus_Link_Nest_Settings_Manager::get_last_updated_time();
 		$cache_key            = iFocus_Link_Nest_Settings_Manager::get_post_content_cache_key( $last_settings_update );
-		$cached_content       = get_post_meta( get_the_ID(), $cache_key, true );
+		$cached_content       = get_post_meta( $post_id, $cache_key, true );
 		if ( is_string( $cached_content ) && strlen( $cached_content ) > 0 ) {
 			return $cached_content;
 		}
@@ -107,7 +124,7 @@ class iFocus_Link_Nest {
 		$keywords  = iFocus_Link_Nest_Keyword_Model::get_all();
 		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
 		$content   = $processor->process( $content );
-		add_post_meta( get_the_ID(), $cache_key, $content, true );
+		add_post_meta( $post_id, $cache_key, $content, true );
 
 		return $content;
 	}

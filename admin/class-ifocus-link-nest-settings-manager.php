@@ -41,8 +41,6 @@ class iFocus_Link_Nest_Settings_Manager {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		$options = self::get_settings();
-
 		if ( ! class_exists( 'RationalOptionPages' ) ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'jeremyHixon' . DIRECTORY_SEPARATOR . 'RationalOptionPages' . DIRECTORY_SEPARATOR . 'RationalOptionPages.php';
 		}
@@ -51,6 +49,10 @@ class iFocus_Link_Nest_Settings_Manager {
 
 		add_filter( 'pre_update_option_' . self::$option_name, [ $this, 'handle_file_upload' ], 10, 3 );
 		add_action( 'update_option_' . self::$option_name, [ $this, 'on_settings_updated' ], 10, 3 );
+	}
+
+	public static function build_settings() {
+		return new iFocus_Link_Nest_Settings( self::get_settings_data() );
 	}
 
 	/**
@@ -112,8 +114,16 @@ class iFocus_Link_Nest_Settings_Manager {
 		return get_option( $last_updated_option_name );
 	}
 
-	public static function get_post_content_cache_key( $last_updated ) {
+	public static function get_post_content_cache_key( $last_updated = null ) {
+		if ( is_null( $last_updated ) ) {
+			$last_updated = self::get_last_updated_time();
+		}
+
 		return self::$content_cache_meta_name . '_' . $last_updated;
+	}
+
+	public static function purge_post_content_cache( $post_id ) {
+		delete_post_meta( $post_id, self::get_post_content_cache_key() );
 	}
 
 	/**
@@ -121,20 +131,18 @@ class iFocus_Link_Nest_Settings_Manager {
 	 *
 	 * @return array
 	 */
-	public static function get_settings() {
+	public static function get_settings_data() {
 		return wp_parse_args(
 			get_option( self::$option_name, [] ),
 			[
 				iFocus_Link_Nest_Settings::CSV_FILE           => '',
-				iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => 'yes',
-				iFocus_Link_Nest_Settings::PROCESS_POSTS      => 'yes',
-				iFocus_Link_Nest_Settings::PROCESS_PAGES      => 'yes',
+				iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => 'on',
+				iFocus_Link_Nest_Settings::PROCESS_POSTS      => 'on',
+				iFocus_Link_Nest_Settings::PROCESS_PAGES      => 'on',
 				iFocus_Link_Nest_Settings::MAX_LINKS          => 3,
-				iFocus_Link_Nest_Settings::MAX_KEYWORDS_LINKS => 1,
-				iFocus_Link_Nest_Settings::MAX_SAME_URL       => 1,
-				iFocus_Link_Nest_Settings::CASE_SENSITIVE     => 'yes',
-				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'yes',
-				iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS   => 'yes',
+				iFocus_Link_Nest_Settings::CASE_SENSITIVE     => 'on',
+				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'on',
+				iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS   => 'on',
 				iFocus_Link_Nest_Settings::IGNORED_POSTS      => [],
 				iFocus_Link_Nest_Settings::IGNORED_WORDS      => [],
 			]
@@ -171,6 +179,7 @@ class iFocus_Link_Nest_Settings_Manager {
 								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'ifocus-link-nest' ),
 							],
 							iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => [
+								'id'    => iFocus_Link_Nest_Settings::PREVENT_DUPLICATES,
 								'title' => esc_html__( 'Grouped keywords', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'ifocus-link-nest' ),
@@ -183,53 +192,49 @@ class iFocus_Link_Nest_Settings_Manager {
 						'callback' => [ $this, 'targeting_intro' ],
 						'fields'   => [
 							iFocus_Link_Nest_Settings::PROCESS_POSTS      => [
+								'id'    => iFocus_Link_Nest_Settings::PROCESS_POSTS,
 								'title' => esc_html__( 'Posts', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Search and process posts', 'ifocus-link-nest' ),
 							],
 							iFocus_Link_Nest_Settings::PROCESS_PAGES      => [
+								'id'    => iFocus_Link_Nest_Settings::PROCESS_PAGES,
 								'title' => esc_html__( 'Pages', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Search and process pages', 'ifocus-link-nest' ),
 							],
 							iFocus_Link_Nest_Settings::MAX_LINKS          => [
+								'id'    => iFocus_Link_Nest_Settings::MAX_LINKS,
 								'title' => esc_html__( 'Max links', 'ifocus-link-nest' ),
 								'type'  => 'number',
 								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'ifocus-link-nest' ),
 							],
-							iFocus_Link_Nest_Settings::MAX_KEYWORDS_LINKS => [
-								'title' => esc_html__( 'Max keywords links', 'ifocus-link-nest' ),
-								'type'  => 'number',
-								'text'  => esc_html__( 'You can limit the maximum number of links created with the same keyword. Set to 0 for no limit.', 'ifocus-link-nest' ),
-							],
-							iFocus_Link_Nest_Settings::MAX_SAME_URL       => [
-								'title' => esc_html__( 'Max same URLs', 'ifocus-link-nest' ),
-								'type'  => 'number',
-								'text'  => esc_html__( 'Limit number of same URLs the plugin will link to. Works only when Max Keyword Links above is set to 1. Set to 0 for no limit.', 'ifocus-link-nest' ),
-							],
 							iFocus_Link_Nest_Settings::CASE_SENSITIVE     => [
+								'id'    => iFocus_Link_Nest_Settings::CASE_SENSITIVE,
 								'title' => esc_html__( 'Case sensitive', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable', 'ifocus-link-nest' ),
 							],
 							iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => [
+								'id'    => iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW,
 								'title' => esc_html__( 'Open in new window', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'ifocus-link-nest' ),
 							],
 						],
-
 					],
 					'excluding'       => [
 						'title'    => esc_html__( 'Excluding', 'ifocus-link-nest' ),
 						'callback' => [ $this, 'excluding_intro' ],
 						'fields'   => [
 							iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => [
+								'id'    => iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS,
 								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
 								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
 							],
 							iFocus_Link_Nest_Settings::IGNORED_POSTS    => [
+								'id'       => iFocus_Link_Nest_Settings::IGNORED_POSTS,
 								'title'    => esc_html__( 'Ignore post/pages', 'ifocus-link-nest' ),
 								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'ifocus-link-nest' ),
 								'custom'   => true,
@@ -238,6 +243,7 @@ class iFocus_Link_Nest_Settings_Manager {
 								'callback' => [ $this, 'render_post_select_field' ],
 							],
 							iFocus_Link_Nest_Settings::IGNORED_WORDS    => [
+								'id'       => iFocus_Link_Nest_Settings::IGNORED_WORDS,
 								'title'    => esc_html__( 'Ignore words', 'ifocus-link-nest' ),
 								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'ifocus-link-nest' ),
 								'custom'   => true,
@@ -248,7 +254,6 @@ class iFocus_Link_Nest_Settings_Manager {
 						],
 
 					],
-
 				],
 			],
 		];
