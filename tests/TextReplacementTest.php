@@ -123,8 +123,8 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat. '
 				. 'Vestibulum sem neque, vehicula in dolor '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help">non</a>, '
-				. 'hendrerit <a href="https://linking.objav.digital/about/" title="ifocus agency" rel="help">maximus</a> '
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help" target="_blank">non</a>, '
+				. 'hendrerit <a href="https://linking.objav.digital/about/" title="ifocus agency" rel="help" target="_blank">maximus</a> '
 				. 'tellus.',
 			),
 
@@ -156,7 +156,55 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat. '
 				. 'Vestibulum sem neque, vehicula in dolor '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help">non</a>, '
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help" target="_blank">non</a>, '
+				. 'hendrerit maximus tellus.',
+			),
+
+			'skipping existing hyperlinks with default settings' => array(
+				// keywords
+				array(
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+						array(
+							'non',
+							'online marketing',
+							'help',
+							'https://linking.objav.digital/services/',
+						)
+					),
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+						array(
+							'online marketing',
+							'ifocus agency',
+							'help',
+							'https://linking.objav.digital/about/',
+						)
+					),
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+						array(
+							'services',
+							'exclude dynamic hyperlinks',
+							'help',
+							'https://linking.objav.digital/services/ppc-audit/',
+						)
+					),
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+						array(
+							'ultrices',
+							'exclude static hyperlinks',
+							'help',
+							'https://regex101.com/',
+						)
+					),
+				),
+
+				// original text
+				'Curabitur tempus quam nec purus luctus, a <a href="https://www.strava.com/" class="primary">pulvinar ex ultrices</a>. Aenean varius nisl id tempor feugiat. '
+				. 'Vestibulum sem neque, vehicula in dolor non, hendrerit maximus tellus.',
+
+				// expected result
+				'Curabitur tempus quam nec purus luctus, a <a href="https://www.strava.com/" class="primary">pulvinar ex ultrices</a>. Aenean varius nisl id tempor feugiat. '
+				. 'Vestibulum sem neque, vehicula in dolor '
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" rel="help" target="_blank">non</a>, '
 				. 'hendrerit maximus tellus.',
 			),
 		);

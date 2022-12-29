@@ -78,9 +78,18 @@ class iFocus_Link_Nest_Text_Processor {
 			esc_html( $keyword->keyword )
 		);
 
-		$allow_titles = '';
-		$lookaround   = '(?=[^>]*(<|$))';
-		$pattern      = '/\b' . $keyword->keyword . '\b' . $lookaround . '/';
+		$tags_to_exclude = array( 'a' );
+		if ( $this->settings->should_exclude_headings() ) {
+			for ( $i = 1; $i <= 6; $i ++ ) {
+				$tags_to_exclude[] = 'h' . $i;
+			}
+		}
+
+		$lookaround_exclude_tags       = '(?!.*<\/(' . implode( '|', $tags_to_exclude ) . ')>)';
+		$lookaround_exclude_attributes = '(?=[^>]*(<|$))';
+
+		$lookaround = $lookaround_exclude_tags . $lookaround_exclude_attributes;
+		$pattern    = '/\b' . $keyword->keyword . '\b' . $lookaround . '/m';
 		if ( ! $this->settings->is_case_sensitive() ) {
 			$pattern .= 'i';
 		}

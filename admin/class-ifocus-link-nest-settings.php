@@ -58,7 +58,7 @@ class iFocus_Link_Nest_Settings {
 
 	private $ignored_words = array();
 
-	public function __construct( $seed ) {
+	public function __construct( $seed = array() ) {
 		foreach ( $seed as $key => $value ) {
 			$prop = strtolower( $key );
 			if ( property_exists( $this, $prop ) ) {
@@ -125,6 +125,13 @@ class iFocus_Link_Nest_Settings {
 	 */
 	public function is_case_sensitive() {
 		return 'on' === $this->case_sensitive;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function should_exclude_headings() {
+		return 'on' === $this->exclude_headings;
 	}
 }
 
