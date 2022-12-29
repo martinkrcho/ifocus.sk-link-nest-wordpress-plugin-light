@@ -70,7 +70,7 @@ class iFocus_Link_Nest_Text_Processor {
 	 */
 	private function apply_keyword( $keyword ) {
 		$hyperlink_markup = sprintf(
-			'<a href="%1$s" title="%2$s" rel="%3$s"%4$s>$1</a>',
+			'<a href="%1$s" title="%2$s" class="ifocus-link-nest" rel="%3$s"%4$s>$1</a>',
 			esc_attr( $keyword->href ),
 			esc_attr( $keyword->title ),
 			esc_attr( $keyword->rel ),
