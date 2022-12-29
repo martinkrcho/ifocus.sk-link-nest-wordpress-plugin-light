@@ -35,7 +35,7 @@ class iFocus_Link_Nest {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      iFocus_Link_Nest_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      iFocus_Link_Nest_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,7 +44,7 @@ class iFocus_Link_Nest {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -53,7 +53,7 @@ class iFocus_Link_Nest {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -78,6 +78,38 @@ class iFocus_Link_Nest {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+
+		add_filter( 'the_content', [ $this, 'replace_keywords' ] );
+	}
+
+	public function replace_keywords( $content ) {
+
+		if ( ! is_singular( [ 'post', 'page' ] ) ) {
+			return $content;
+		}
+
+		$settings = new iFocus_Link_Nest_Settings();
+		if ( is_page() && ! $settings->canProcessPages() ) {
+			return $content;
+		}
+
+		if ( is_single() && ! $settings->canProcessPosts() ) {
+			return $content;
+		}
+
+		$last_settings_update = iFocus_Link_Nest_Settings_Manager::get_last_updated_time();
+		$cache_key            = iFocus_Link_Nest_Settings_Manager::get_post_content_cache_key( $last_settings_update );
+		$cached_content       = get_post_meta( get_the_ID(), $cache_key, true );
+		if ( is_string( $cached_content ) && strlen( $cached_content ) > 0 ) {
+			return $cached_content;
+		}
+
+		$keywords  = iFocus_Link_Nest_Keyword_Model::get_all();
+		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
+		$content   = $processor->process( $content );
+		add_post_meta( get_the_ID(), $cache_key, $content, true );
+
+		return $content;
 	}
 
 	/**

@@ -53,7 +53,7 @@ class iFocus_Link_Nest_Text_Processor {
 	public function process( $text ) {
 		$this->text = $text;
 
-		// TODO run the actual processing and replacements
+		// Run the actual processing and replacements.
 		foreach ( $this->keywords as $keyword ) {
 			$this->apply_keyword( $keyword );
 		}

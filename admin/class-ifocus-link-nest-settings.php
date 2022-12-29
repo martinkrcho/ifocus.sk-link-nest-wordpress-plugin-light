@@ -62,15 +62,15 @@ class iFocus_Link_Nest_Settings {
 
 	private $exclude_headings = 'yes';
 
-	private $ignored_posts = array();
+	private $ignored_posts = [];
 
-	private $ignored_words = array();
+	private $ignored_words = [];
 
 	public function __construct() {
 	}
 
 	public function to_array() {
-		return array(
+		return [
 			self::PREVENT_DUPLICATES => $this->prevent_duplicates,
 			self::PROCESS_POSTS      => $this->process_posts,
 			self::PROCESS_PAGES      => $this->process_pages,
@@ -82,6 +82,16 @@ class iFocus_Link_Nest_Settings {
 			self::EXCLUDE_HEADINGS   => $this->exclude_headings,
 			self::IGNORED_POSTS      => $this->ignored_posts,
 			self::IGNORED_WORDS      => $this->ignored_words,
-		);
+		];
+	}
+
+	public function canProcessPages() {
+		return 'yes' === $this->process_pages;
+	}
+
+	public function canProcessPosts() {
+		return 'yes' === $this->process_posts;
 	}
 }
+
+
