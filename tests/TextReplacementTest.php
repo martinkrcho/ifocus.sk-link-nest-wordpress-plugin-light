@@ -240,7 +240,6 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				.' Proin eget felis consectetur, ullamcorper lacus id, convallis nibh.',
 
 			),
-
 		);
 	}
 }
