@@ -133,6 +133,13 @@ class iFocus_Link_Nest_Settings {
 	public function should_exclude_headings() {
 		return 'on' === $this->exclude_headings;
 	}
+
+	/**
+	 * @return int
+	 */
+	public function get_max_links_count() {
+		return intval( $this->max_links );
+	}
 }
 
 

@@ -23,6 +23,11 @@
 class iFocus_Link_Nest_Text_Processor {
 
 	/**
+	 * @var string Lookaround expression cache for the regular expression.
+	 */
+	private $lookaround_expression;
+
+	/**
 	 * @var string Text being processed.
 	 */
 	private $text;
@@ -36,6 +41,11 @@ class iFocus_Link_Nest_Text_Processor {
 	 * @var iFocus_Link_Nest_Keyword_Model[] List of keywords.
 	 */
 	private $keywords;
+
+	/**
+	 * @var int Total number of replacements done so far.
+	 */
+	private $replacements_performed = 0;
 
 	/**
 	 * Feeds the class with settings and keywords.
@@ -60,6 +70,9 @@ class iFocus_Link_Nest_Text_Processor {
 			}
 
 			$this->apply_keyword( $keyword );
+			if ( $this->replacements_performed >= $this->settings->get_max_links_count() ) {
+				break;
+			}
 		}
 
 		return $this->text;
@@ -77,24 +90,30 @@ class iFocus_Link_Nest_Text_Processor {
 			$this->settings->should_open_in_new_window() ? ' target="_blank"' : ''
 		);
 
-		$tags_to_exclude = array( 'a' );
-		if ( $this->settings->should_exclude_headings() ) {
-			for ( $i = 1; $i <= 6; $i ++ ) {
-				$tags_to_exclude[] = 'h' . $i;
+		if ( is_null( $this->lookaround_expression ) ) {
+			$tags_to_exclude = array( 'a' );
+			if ( $this->settings->should_exclude_headings() ) {
+				for ( $i = 1; $i <= 6; $i ++ ) {
+					$tags_to_exclude[] = 'h' . $i;
+				}
 			}
+
+			$lookaround_exclude_tags       = '(?![^<]*<\/(' . implode( '|', $tags_to_exclude ) . ')>)';
+			$lookaround_exclude_attributes = '(?=[^>]*(<|$))';
+
+			$this->lookaround_expression = $lookaround_exclude_tags . $lookaround_exclude_attributes;
 		}
 
-		$lookaround_exclude_tags       = '(?!.*<\/(' . implode( '|', $tags_to_exclude ) . ')>)';
-		$lookaround_exclude_attributes = '(?=[^>]*(<|$))';
-
-		$lookaround = $lookaround_exclude_tags . $lookaround_exclude_attributes;
-		$pattern    = '/\b(' . $keyword->keyword . ')\b' . $lookaround . '/m';
+		$pattern = '/\b(' . $keyword->keyword . ')\b' . $this->lookaround_expression . '/m';
 		if ( ! $this->settings->is_case_sensitive() ) {
 			$pattern .= 'i';
 		}
 
-		// TODO use $limit and $count args to respect plugin settings
-		$this->text = preg_replace( $pattern, $hyperlink_markup, $this->text );
+		// Use $limit and $count args to respect plugin settings (we could
+		$replacements_done = 0;
+		$this->text        = preg_replace( $pattern, $hyperlink_markup, $this->text, 1, $replacements_done );
+
+		$this->replacements_performed += $replacements_done;
 
 		return $this->text;
 	}
