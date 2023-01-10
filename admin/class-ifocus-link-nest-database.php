@@ -38,15 +38,11 @@ class iFocus_Link_Nest_Database {
 	 * Hook into WordPress lifecycle to be able to create and update the custom database tables.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param iFocus_Link_Nest_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
-	public function __construct() {
-		add_action(
-			'plugins_loaded',
-			array(
-				$this,
-				'update_db_check',
-			)
-		);
+	public function __construct( $loader ) {
+		$loader->add_action( 'plugins_loaded', $this, 'update_db_check' );
 	}
 
 	public function update_db_check() {

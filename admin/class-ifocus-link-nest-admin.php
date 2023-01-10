@@ -59,18 +59,19 @@ class iFocus_Link_Nest_Admin {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param string $plugin_name The name of this plugin.
-	 * @param string $version The version of this plugin.
+	 * @param string                  $plugin_name The name of this plugin.
+	 * @param string                  $version The version of this plugin.
+	 * @param iFocus_Link_Nest_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $loader ) {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 
-		$this->settings = new iFocus_Link_Nest_Settings_Manager();
-		$this->database = new iFocus_Link_Nest_Database();
+		$this->settings = new iFocus_Link_Nest_Settings_Manager( $loader );
+		$this->database = new iFocus_Link_Nest_Database( $loader );
 
-		add_action( 'wp_ajax_' . self::AJAX_ACTION_UPDATE, array( $this, 'update_keyword_entry' ) );
-		add_action( 'wp_ajax_' . self::AJAX_ACTION_DELETE, array( $this, 'delete_keyword_entry' ) );
+		$loader->add_action( 'wp_ajax_' . self::AJAX_ACTION_UPDATE, $this, 'update_keyword_entry' );
+		$loader->add_action( 'wp_ajax_' . self::AJAX_ACTION_DELETE, $this, 'delete_keyword_entry' );
 	}
 
 	/**

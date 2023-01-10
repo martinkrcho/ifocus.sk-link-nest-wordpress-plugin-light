@@ -39,16 +39,17 @@ class iFocus_Link_Nest_Settings_Manager {
 	 * Define the plugin settings functionality.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param iFocus_Link_Nest_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
-	public function __construct() {
+	public function __construct( $loader ) {
 		if ( ! class_exists( 'RationalOptionPages' ) ) {
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes' . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'jeremyHixon' . DIRECTORY_SEPARATOR . 'RationalOptionPages' . DIRECTORY_SEPARATOR . 'RationalOptionPages.php';
 		}
 
-		$this->init_settings();
-
-		add_filter( 'pre_update_option_' . self::$option_name, array( $this, 'handle_file_upload' ), 10, 3 );
-		add_action( 'update_option_' . self::$option_name, array( $this, 'on_settings_updated' ), 10, 3 );
+		$loader->add_action( 'plugins_loaded', $this, 'init_settings', 20 );
+		$loader->add_filter( 'pre_update_option_' . self::$option_name, $this, 'handle_file_upload', 10, 3 );
+		$loader->add_action( 'update_option_' . self::$option_name, $this, 'on_settings_updated', 10, 3 );
 	}
 
 	public static function build_settings() {
@@ -154,7 +155,7 @@ class iFocus_Link_Nest_Settings_Manager {
 		);
 	}
 
-	private function init_settings() {
+	public function init_settings() {
 		$intro_html  = '<p>';
 		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'ifocus-link-nest' );
 		$intro_html .= '</p>';
@@ -176,7 +177,7 @@ class iFocus_Link_Nest_Settings_Manager {
 						'title'    => esc_html__( 'Custom Keywords', 'ifocus-link-nest' ),
 						'callback' => array( $this, 'custom_keyword_intro' ),
 						'fields'   => array(
-							iFocus_Link_Nest_Settings::CSV_FILE           => array(
+							iFocus_Link_Nest_Settings::CSV_FILE => array(
 								'id'          => iFocus_Link_Nest_Settings::CSV_FILE,
 								'title'       => esc_html__( 'Import from CSV', 'ifocus-link-nest' ),
 								'type'        => 'file',

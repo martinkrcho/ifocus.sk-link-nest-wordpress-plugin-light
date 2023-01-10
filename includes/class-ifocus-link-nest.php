@@ -79,8 +79,8 @@ class iFocus_Link_Nest {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
-		add_filter( 'the_content', array( $this, 'replace_keywords' ) );
-		add_action( 'post_updated', array( $this, 'on_post_updated' ), 10, 3 );
+		$this->loader->add_filter( 'the_content', $this, 'replace_keywords' );
+		$this->loader->add_action( 'post_updated', $this, 'on_post_updated', 10, 3 );
 	}
 
 	/**
@@ -192,7 +192,7 @@ class iFocus_Link_Nest {
 	private function set_locale() {
 		$plugin_i18n = new iFocus_Link_Nest_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain', 5 );
 	}
 
 	/**
@@ -203,7 +203,7 @@ class iFocus_Link_Nest {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-		$plugin_admin = new iFocus_Link_Nest_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new iFocus_Link_Nest_Admin( $this->get_plugin_name(), $this->get_version(), $this->loader );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

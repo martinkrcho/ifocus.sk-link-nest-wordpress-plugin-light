@@ -39,6 +39,4 @@ class iFocus_Link_Nest_i18n {
 		);
 	}
 
-
-
 }

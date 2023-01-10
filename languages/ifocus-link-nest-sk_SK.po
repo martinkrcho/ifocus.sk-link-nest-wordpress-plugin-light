@@ -1,23 +1,23 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: iFOCUS.sk Link Nest Lite\n"
-"POT-Creation-Date: 2023-01-10 20:13+0100\n"
-"PO-Revision-Date: 2022-12-28 10:30+0100\n"
+"POT-Creation-Date: 2023-01-10 20:19+0100\n"
+"PO-Revision-Date: 2023-01-10 20:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: ifocus-link-nest.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: bin\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
@@ -46,15 +46,15 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:176
 msgid "Custom Keywords"
-msgstr ""
+msgstr "Vlastné kľúčové slová"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:181
 msgid "Import from CSV"
-msgstr ""
+msgstr "Importovať z CSV súboru"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:183
 msgid "select CSV file"
-msgstr ""
+msgstr "vyberte súbor CSV"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:184
 msgid "Load custom keywords and urls from a CSV file."
@@ -66,7 +66,7 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:195
 msgid "Posts"
-msgstr ""
+msgstr "Príspevky"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:197
 msgid "Enable. Search and process posts"
@@ -74,7 +74,7 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:201
 msgid "Pages"
-msgstr ""
+msgstr "Stránky"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:203
 msgid "Enable. Search and process pages"
@@ -92,15 +92,15 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:213
 msgid "Case sensitive"
-msgstr ""
+msgstr "Rozlišovať malé/veľké"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:215
 msgid "Enable"
-msgstr ""
+msgstr "Povoliť"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:219
 msgid "Open in new window"
-msgstr ""
+msgstr "Otvoriť v novom okne"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:221
 msgid "Enable. Open the external links in a new window. "
@@ -112,7 +112,7 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:231
 msgid "Headings"
-msgstr ""
+msgstr "Nadpisy"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:233
 msgid "Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)"
@@ -120,7 +120,7 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:237
 msgid "Ignore post/pages"
-msgstr ""
+msgstr "Ignorovať príspevky/stránky"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:238
 msgid ""
@@ -129,7 +129,7 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:246
 msgid "Ignore words"
-msgstr ""
+msgstr "Ignorovať slová"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:247
 msgid ""
@@ -147,7 +147,7 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:269
 msgid "Add new line"
-msgstr ""
+msgstr "Pridať nový riadok"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:365
 msgid ""
@@ -162,11 +162,11 @@ msgstr ""
 
 #: admin/class-ifocus-link-nest-settings-manager.php:394
 msgid "select post(s) and/or page(s)"
-msgstr ""
+msgstr "vyberte príspevky a/alebo stránky"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:425
 msgid "type word(s)"
-msgstr ""
+msgstr "zadajte slovo (slová)"
 
 #. Plugin Name of the plugin/theme
 msgid "iFOCUS.sk Link Nest Lite"
@@ -174,7 +174,7 @@ msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ifocus.sk/"
-msgstr ""
+msgstr "https://www.ifocus.sk/"
 
 #. Description of the plugin/theme
 msgid ""
