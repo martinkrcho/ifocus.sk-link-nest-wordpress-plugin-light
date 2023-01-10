@@ -36,11 +36,7 @@ class iFocus_Link_Nest_Settings {
 
 	public const IGNORED_WORDS = 'ignored_words';
 
-	public const PREVENT_DUPLICATES = 'prevent_duplicates';
-
 	public const EXCLUDE_HEADINGS = 'exclude_headings';
-
-	private $prevent_duplicates = 'on';
 
 	private $process_posts = 'on';
 
@@ -69,7 +65,6 @@ class iFocus_Link_Nest_Settings {
 
 	public function to_array() {
 		return array(
-			self::PREVENT_DUPLICATES => $this->prevent_duplicates,
 			self::PROCESS_POSTS      => $this->process_posts,
 			self::PROCESS_PAGES      => $this->process_pages,
 			self::MAX_LINKS          => $this->max_links,

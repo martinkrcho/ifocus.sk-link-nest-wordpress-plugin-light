@@ -142,7 +142,6 @@ class iFocus_Link_Nest_Settings_Manager {
 			get_option( self::$option_name, array() ),
 			array(
 				iFocus_Link_Nest_Settings::CSV_FILE       => '',
-				iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => 'on',
 				iFocus_Link_Nest_Settings::PROCESS_POSTS  => 'on',
 				iFocus_Link_Nest_Settings::PROCESS_PAGES  => 'on',
 				iFocus_Link_Nest_Settings::MAX_LINKS      => 3,
@@ -183,12 +182,6 @@ class iFocus_Link_Nest_Settings_Manager {
 								'type'        => 'file',
 								'placeholder' => esc_html__( 'select CSV file', 'ifocus-link-nest' ),
 								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'ifocus-link-nest' ),
-							),
-							iFocus_Link_Nest_Settings::PREVENT_DUPLICATES => array(
-								'id'    => iFocus_Link_Nest_Settings::PREVENT_DUPLICATES,
-								'title' => esc_html__( 'Grouped keywords', 'ifocus-link-nest' ),
-								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Prevent duplicates in text. Will link only first of the keywords found in text.', 'ifocus-link-nest' ),
 							),
 						),
 
