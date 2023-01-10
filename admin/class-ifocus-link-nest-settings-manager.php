@@ -334,10 +334,10 @@ class iFocus_Link_Nest_Settings_Manager {
 				index: "id",
 				columns:[
 					{ title:"id", field:"id", visible:false, download:true, headerSort: false },
-					buildFieldDefinition( "Keyword", "keyword" ),
-					buildFieldDefinition( "Attribute title", "title" ),
-					buildFieldDefinition( "Attribute rel", "rel" ),
-					buildFieldDefinition( "Link (href)", "href", ),
+					buildFieldDefinition( "<?php echo esc_js( __('Keyword', 'ifocus-link-nest')); ?>", "keyword" ),
+					buildFieldDefinition( "<?php echo esc_js( __('Title', 'ifocus-link-nest')); ?>", "title" ),
+					buildFieldDefinition( "<?php echo esc_js( __('Rel', 'ifocus-link-nest')); ?>", "rel" ),
+					buildFieldDefinition( "<?php echo esc_js( __('Link', 'ifocus-link-nest')); ?>", "href", ),
 					{ formatter:"buttonCross", headerSort: false, width:40, align:"center", cellClick:function(e, cell){
 						cell.getRow().delete();
 					}},
