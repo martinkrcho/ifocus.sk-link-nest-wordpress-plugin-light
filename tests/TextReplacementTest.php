@@ -274,7 +274,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Amet luctus '
 				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
-				. ' venenatis lectus magna vene fringilla urna malesuada porttitor.'
+				. ' venenatis lectus magna vene fringilla urna malesuada porttitor.',
 			],
 
 			'only 1 replacement, 2nd in order' => [
@@ -287,7 +287,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Amet luctus '
 				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">vene</a>'
-				. ' venenatis lectus magna maximus fringilla urna malesuada porttitor.'
+				. ' venenatis lectus maximus vene fringilla urna malesuada porttitor.',
 			],
 
 			'only 1 replacement, 3rd in order' => [
@@ -295,12 +295,12 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				1,
 
 				// original text
-				'Amet luctus malesuada venenatis lectus maximus fringilla urna vene porttitor.',
+				'Amet luctus malesuada venenatis lectus magna maximus fringilla urna vene porttitor.',
 
 				// expected result
 				'Amet luctus '
 				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
-				. ' venenatis lectus magna maximus fringilla urna vene porttitor.'
+				. ' venenatis lectus magna maximus fringilla urna vene porttitor.',
 			],
 
 			// '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
