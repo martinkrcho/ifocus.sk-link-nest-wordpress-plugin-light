@@ -1,10 +1,8 @@
 <?php
 
 /**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
+ * The file that defines the post content handler class
+
  *
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
@@ -14,13 +12,7 @@
  */
 
 /**
- * The core plugin class.
- *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
- *
- * Also maintains the unique identifier of this plugin as well as the current
- * version of the plugin.
+ * The post content handler class.
  *
  * @since      1.0.0
  * @package    iFocus_Link_Nest
@@ -60,12 +52,8 @@ class iFocus_Link_Nest_Post_Content_Handler {
 	private $replace_keywords = false;
 
 	/**
-	 * Define the core functionality of the plugin.
-	 *
-	 * Set the plugin name and the plugin version that can be used throughout the plugin.
-	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
-	 *
+	 * @param int $post_id
+	 * @param string $content
 	 * @since    1.0.0
 	 */
 	public function __construct( $post_id, $content ) {
