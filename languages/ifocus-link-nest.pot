@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: iFOCUS.sk Link Nest Lite\n"
-"POT-Creation-Date: 2023-01-10 20:39+0100\n"
+"POT-Creation-Date: 2023-01-12 12:01+0100\n"
 "PO-Revision-Date: 2022-12-28 10:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-2: tests\n"
 "X-Poedit-SearchPathExcluded-3: includes/vendor\n"
 
-#: admin/class-ifocus-link-nest-settings-manager.php:160
+#: admin/class-ifocus-link-nest-settings-manager.php:143
 msgid ""
 "With iFOCUS.sk Link Nest plugin you can easily and automatically link from "
 "keywords and phrases in posts and pages to corresponding posts and pages or "
@@ -32,112 +32,112 @@ msgid ""
 "sk Link Nest plugin do the work for you."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:163
+#: admin/class-ifocus-link-nest-settings-manager.php:146
 msgid "If you find any bugs or you have ideas for the plugin, let us know at:"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:170
+#: admin/class-ifocus-link-nest-settings-manager.php:153
 msgid "Internal linking"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:173
+#: admin/class-ifocus-link-nest-settings-manager.php:156
 msgid "iFOCUS.sk Link Nest plugin - Internal linking"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:177
+#: admin/class-ifocus-link-nest-settings-manager.php:160
 msgid "Custom Keywords"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:182
+#: admin/class-ifocus-link-nest-settings-manager.php:165
 msgid "Import from CSV"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:184
+#: admin/class-ifocus-link-nest-settings-manager.php:167
 msgid "select CSV file"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:185
+#: admin/class-ifocus-link-nest-settings-manager.php:168
 msgid "Load custom keywords and urls from a CSV file."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:191
+#: admin/class-ifocus-link-nest-settings-manager.php:174
 msgid "Internal links / Targeting"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:196
+#: admin/class-ifocus-link-nest-settings-manager.php:179
 msgid "Posts"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:198
+#: admin/class-ifocus-link-nest-settings-manager.php:181
 msgid "Enable. Search and process posts"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:202
+#: admin/class-ifocus-link-nest-settings-manager.php:185
 msgid "Pages"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:204
+#: admin/class-ifocus-link-nest-settings-manager.php:187
 msgid "Enable. Search and process pages"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:208
+#: admin/class-ifocus-link-nest-settings-manager.php:191
 msgid "Max links"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:210
+#: admin/class-ifocus-link-nest-settings-manager.php:193
 msgid ""
 "You can limit the maximum number of different links that will be generated "
 "per post or page. Set to 0 for no limit."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:214
+#: admin/class-ifocus-link-nest-settings-manager.php:197
 msgid "Case sensitive"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:216
+#: admin/class-ifocus-link-nest-settings-manager.php:199
 msgid "Enable"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:220
+#: admin/class-ifocus-link-nest-settings-manager.php:203
 msgid "Open in new window"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:222
+#: admin/class-ifocus-link-nest-settings-manager.php:205
 msgid "Enable. Open the external links in a new window. "
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:227
+#: admin/class-ifocus-link-nest-settings-manager.php:210
 msgid "Excluding"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:232
+#: admin/class-ifocus-link-nest-settings-manager.php:215
 msgid "Headings"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:234
+#: admin/class-ifocus-link-nest-settings-manager.php:217
 msgid "Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:238
+#: admin/class-ifocus-link-nest-settings-manager.php:221
 msgid "Ignore post/pages"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:239
+#: admin/class-ifocus-link-nest-settings-manager.php:222
 msgid ""
 "Exclude certain posts or pages. Separate them by comma (ID, slug or name)."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:247
+#: admin/class-ifocus-link-nest-settings-manager.php:230
 msgid "Ignore words"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:248
+#: admin/class-ifocus-link-nest-settings-manager.php:231
 msgid ""
 "Exclude certain words or phrases from automatic linking. Separate them by "
 "comma."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:266
+#: admin/class-ifocus-link-nest-settings-manager.php:249
 msgid ""
 "Here you can manually enter the extra keywords you want to automatically "
 "link. Use comma to separate keywords and add target url at the end. Use a "
@@ -145,42 +145,42 @@ msgid ""
 "your site."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:270
+#: admin/class-ifocus-link-nest-settings-manager.php:253
 msgid "Add new line"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:337
+#: admin/class-ifocus-link-nest-settings-manager.php:320
 msgid "Keyword"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:338
+#: admin/class-ifocus-link-nest-settings-manager.php:321
 msgid "Title"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:339
+#: admin/class-ifocus-link-nest-settings-manager.php:322
 msgid "Rel"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:340
+#: admin/class-ifocus-link-nest-settings-manager.php:323
 msgid "Link"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:366
+#: admin/class-ifocus-link-nest-settings-manager.php:349
 msgid ""
 "iFOCUS.sk Link nest plugin can search and process your posts, pages for "
 "keywords to automatically interlink from <div>, <p>, <ul>, <li> and other "
 "html tags."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:372
+#: admin/class-ifocus-link-nest-settings-manager.php:355
 msgid "Setup what and how it can be excluded from internal linking."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:395
+#: admin/class-ifocus-link-nest-settings-manager.php:378
 msgid "select post(s) and/or page(s)"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:426
+#: admin/class-ifocus-link-nest-settings-manager.php:409
 msgid "type word(s)"
 msgstr ""
 
