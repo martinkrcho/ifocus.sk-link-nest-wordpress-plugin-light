@@ -80,6 +80,18 @@ class iFocus_Link_Nest {
 		$this->define_public_hooks();
 
 		$this->loader->add_filter( 'the_content', $this, 'process_post_content', 0, 1 );
+		$this->loader->add_action( 'post_updated', $this, 'on_post_updated', 10, 3 );
+	}
+
+	/**
+	 * Purges the post settings fingerprint when a post is updated.
+	 *
+	 * @param int     $post_ID Post ID.
+	 * @param WP_Post $post_after Post object following the update.
+	 * @param WP_Post $post_before Post object before the update.
+	 */
+	public function on_post_updated( $post_ID, $post_after, $post_before ) {
+		delete_post_meta( $post_ID, iFocus_Link_Nest_Post_Content_Handler::$fingerprint_meta_name );
 	}
 
 	public function process_post_content( $content ) {
