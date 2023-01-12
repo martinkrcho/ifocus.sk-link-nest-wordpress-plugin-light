@@ -2,7 +2,6 @@
 
 /**
  * The file that defines the post content handler class
-
  *
  * @link       https://www.linkedin.com/in/martinkrcho/
  * @since      1.0.0
@@ -52,7 +51,7 @@ class iFocus_Link_Nest_Post_Content_Handler {
 	private $replace_keywords = false;
 
 	/**
-	 * @param int $post_id
+	 * @param int    $post_id
 	 * @param string $content
 	 * @since    1.0.0
 	 */
