@@ -31,11 +31,6 @@ class iFocus_Link_Nest_Settings_Manager {
 	private static $last_updated_option_suffix = '_last_updated';
 
 	/**
-	 * @var string Name of the post meta storing the cached post content containing keyword links.
-	 */
-	private static $content_cache_meta_name = 'focus_link_nest_cache';
-
-	/**
 	 * Define the plugin settings functionality.
 	 *
 	 * @since    1.0.0
@@ -97,8 +92,8 @@ class iFocus_Link_Nest_Settings_Manager {
 		$last_updated_option_name = $option . self::$last_updated_option_suffix;
 		$current_last_updated     = self::get_last_updated_time();
 		if ( false !== $current_last_updated ) {
-			// Purge the cached content from all posts.
-			delete_post_meta_by_key( self::get_post_content_cache_key( $current_last_updated ) );
+			// Purge the content fingerprint from all posts.
+			delete_post_meta_by_key( iFocus_Link_Nest_Post_Content_Handler::$fingerprint_meta_name );
 		}
 
 		update_option( $last_updated_option_name, time() );
@@ -113,18 +108,6 @@ class iFocus_Link_Nest_Settings_Manager {
 		$last_updated_option_name = self::$option_name . self::$last_updated_option_suffix;
 
 		return get_option( $last_updated_option_name );
-	}
-
-	public static function get_post_content_cache_key( $last_updated = null ) {
-		if ( is_null( $last_updated ) ) {
-			$last_updated = self::get_last_updated_time();
-		}
-
-		return self::$content_cache_meta_name . '_' . $last_updated;
-	}
-
-	public static function purge_post_content_cache( $post_id ) {
-		delete_post_meta( $post_id, self::get_post_content_cache_key() );
 	}
 
 	public static function insert_default_settings() {
@@ -334,10 +317,10 @@ class iFocus_Link_Nest_Settings_Manager {
 				index: "id",
 				columns:[
 					{ title:"id", field:"id", visible:false, download:true, headerSort: false },
-					buildFieldDefinition( "<?php echo esc_js( __('Keyword', 'ifocus-link-nest')); ?>", "keyword" ),
-					buildFieldDefinition( "<?php echo esc_js( __('Title', 'ifocus-link-nest')); ?>", "title" ),
-					buildFieldDefinition( "<?php echo esc_js( __('Rel', 'ifocus-link-nest')); ?>", "rel" ),
-					buildFieldDefinition( "<?php echo esc_js( __('Link', 'ifocus-link-nest')); ?>", "href", ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Keyword', 'ifocus-link-nest' ) ); ?>", "keyword" ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Title', 'ifocus-link-nest' ) ); ?>", "title" ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Rel', 'ifocus-link-nest' ) ); ?>", "rel" ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Link', 'ifocus-link-nest' ) ); ?>", "href", ),
 					{ formatter:"buttonCross", headerSort: false, width:40, align:"center", cellClick:function(e, cell){
 						cell.getRow().delete();
 					}},

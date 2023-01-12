@@ -36,7 +36,3 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
 // Start up the WP testing environment.
 require "{$_tests_dir}/includes/bootstrap.php";
-
-// require 'admin/class-ifocus-link-nest-settings.php';
-// require 'includes/class-ifocus-link-nest-keyword-model.php';
-// require 'includes/class-ifocus-link-nest-text-processor.php';

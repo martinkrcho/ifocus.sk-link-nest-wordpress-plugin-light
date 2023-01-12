@@ -8,12 +8,24 @@
 class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 	/**
+	 * @dataProvider dataForNoReplacementsNeeded
+	 */
+	public function test_no_replacements_needed( $keywords, $text ) {
+		$settings = new iFocus_Link_Nest_Settings();
+
+		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
+		$this->assertEquals( $text, $processor->process( $text ) );
+		$this->assertFalse( $processor->has_text_changed() );
+	}
+
+	/**
 	 * @dataProvider dataForDefaultSettings
 	 */
 	public function test_replacements_with_default_settings( $keywords, $originalText, $expectedResult ) {
 		$settings  = new iFocus_Link_Nest_Settings();
 		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
 		$this->assertEquals( $expectedResult, $processor->process( $originalText ) );
+		$this->assertTrue( $processor->has_text_changed() );
 	}
 
 	/**
@@ -55,6 +67,36 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
 		$this->assertEquals( $expected_result, $processor->process( $text ) );
+		$this->assertTrue( $processor->has_text_changed() );
+	}
+
+	public function dataForNoReplacementsNeeded() {
+
+		return [
+			'no keywords defined' => [
+				// keywords
+				[],
+
+				// text
+				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat.',
+			],
+			'keyword not present' => [
+				// keywords
+				[
+					iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+						[
+							'testík',
+							'ifocus agency',
+							'help',
+							'https://linking.objav.digital/about/',
+						]
+					),
+				],
+
+				// text
+				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat.',
+			],
+		];
 	}
 
 	public function dataForDefaultSettings() {

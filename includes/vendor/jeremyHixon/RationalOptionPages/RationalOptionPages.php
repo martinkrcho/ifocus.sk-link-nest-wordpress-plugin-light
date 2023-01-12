@@ -382,6 +382,10 @@ class RationalOptionPages {
 			$field['value'] = ! empty( $this->options[ $field['id'] ] ) ? $this->options[ $field['id'] ] : $field['value'];
 		}
 
+		if ( $field['type'] === 'number' && empty( $field['value'] )) {
+            $field['value'] = 0;
+		}
+
 		// Additional attributes
 		if ( ! empty( $field['attributes'] ) ) {
 			$attributes = [];

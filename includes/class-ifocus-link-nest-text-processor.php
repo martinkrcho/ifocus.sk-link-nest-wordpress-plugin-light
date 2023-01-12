@@ -22,6 +22,8 @@
  */
 class iFocus_Link_Nest_Text_Processor {
 
+	const CSS_CLASS = 'ifocus-link-nest';
+
 	/**
 	 * @var string Lookaround expression cache for the regular expression.
 	 */
@@ -104,9 +106,10 @@ class iFocus_Link_Nest_Text_Processor {
 		ksort( $this->positions, SORT_NUMERIC );
 
 		// Run the actual processing and replacements.
+		$max_links_count = $this->settings->get_max_links_count();
 		foreach ( $this->positions as $position => $keyword ) {
 			$this->apply_keyword( $keyword, $position + $this->offset );
-			if ( $this->replacements_performed >= $this->settings->get_max_links_count() ) {
+			if ( $max_links_count > 0 && $this->replacements_performed >= $max_links_count ) {
 				break;
 			}
 		}
@@ -120,9 +123,10 @@ class iFocus_Link_Nest_Text_Processor {
 	 */
 	private function apply_keyword( $keyword, $start_position ) {
 		$hyperlink_markup = sprintf(
-			'<a href="%1$s" title="%2$s" class="ifocus-link-nest" rel="%3$s"%4$s>$1</a>',
+			'<a href="%1$s" title="%2$s" class="%3$s" rel="%4$s"%5$s>$1</a>',
 			esc_attr( $keyword->href ),
 			esc_attr( $keyword->title ),
+			self::CSS_CLASS,
 			esc_attr( $keyword->rel ),
 			$this->settings->should_open_in_new_window() ? ' target="_blank"' : ''
 		);
@@ -178,5 +182,24 @@ class iFocus_Link_Nest_Text_Processor {
 		}
 
 		return $this->lookaround_expression;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function has_text_changed() {
+		return $this->replacements_performed > 0;
+	}
+
+	/**
+	 * @param string $text
+	 *
+	 * @return string
+	 */
+	public static function strip_links( $text ) {
+
+		$pattern = '/<a ([^>]+)?class="' . preg_quote( self::CSS_CLASS ) . '"([^>]+)?>([^>]+)<\/a>/i';
+
+		return preg_replace( $pattern, '$3', $text );
 	}
 }
