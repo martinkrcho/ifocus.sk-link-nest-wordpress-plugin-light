@@ -47,7 +47,7 @@ class iFocus_Link_Nest_Text_Processor {
 	/**
 	 * @var array List of found keywords along with their positions.
 	 */
-	private $positions = array();
+	private $positions = [];
 
 	/**
 	 * @var int Offset to be added to the original keyword positions as the replacements are performed.
@@ -64,7 +64,7 @@ class iFocus_Link_Nest_Text_Processor {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param iFocus_Link_Nest_Settings        $settings Plugin settings.
+	 * @param iFocus_Link_Nest_Settings $settings Plugin settings.
 	 * @param iFocus_Link_Nest_Keyword_Model[] $keywords List of keywords.
 	 */
 	public function __construct( $settings, $keywords ) {
@@ -89,9 +89,10 @@ class iFocus_Link_Nest_Text_Processor {
 			$pattern = $this->get_regex_pattern( $keyword->keyword );
 			preg_match_all( $pattern, $this->text, $matches, PREG_OFFSET_CAPTURE );
 			if ( ! empty( $matches ) ) {
+				$comparison_function = $this->settings->is_case_sensitive() ? 'strcmp' : 'strcasecmp';
 				foreach ( $matches as $match_group ) {
 					foreach ( $match_group as $match ) {
-						if ( 2 === count( $match ) && $keyword->keyword === $match[0] ) {
+						if ( 2 === count( $match ) && 0 === $comparison_function( $keyword->keyword, $match[0] ) ) {
 							$this->positions[ $match[1] ] = $keyword;
 						}
 					}
@@ -119,7 +120,7 @@ class iFocus_Link_Nest_Text_Processor {
 
 	/**
 	 * @param iFocus_Link_Nest_Keyword_Model $keyword
-	 * @param int                            $start_position
+	 * @param int $start_position
 	 */
 	private function apply_keyword( $keyword, $start_position ) {
 		$hyperlink_markup = sprintf(
@@ -143,7 +144,7 @@ class iFocus_Link_Nest_Text_Processor {
 		$this->replacements_performed += $replacements_done;
 		if ( $replacements_done > 0 ) {
 			$this->offset += strlen( $hyperlink_markup ) - strlen( $keyword->keyword );
-			$this->text    = $first_part . $second_part;
+			$this->text   = $first_part . $second_part;
 		}
 	}
 
@@ -155,12 +156,13 @@ class iFocus_Link_Nest_Text_Processor {
 	public function get_regex_pattern( $keyword ) {
 		$lookaround_expression = $this->get_lookaround_expression();
 
-		$result = '/\b(' . $keyword . ')\b' . $lookaround_expression . '/m';
+		$flags = 'm';
 		if ( ! $this->settings->is_case_sensitive() ) {
-			$result .= 'i';
+			$flags   .= 'i';
+			$keyword = strtolower( $keyword );
 		}
 
-		return $result;
+		return '/\b(' . $keyword . ')\b' . $lookaround_expression . '/' . $flags;
 	}
 
 	/**

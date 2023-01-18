@@ -70,6 +70,37 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $processor->has_text_changed() );
 	}
 
+	/**
+	 * @dataProvider dataForCaseSensitivityVariations
+	 */
+	public function test_case_sensitivity_variations( $is_case_sensitive, $expected_result ) {
+
+		$keywords = [
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+				[
+					'Quisquam',
+					'wind turbines',
+					'windy',
+					'https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system',
+				]
+			),
+		];
+
+		$settings = new iFocus_Link_Nest_Settings( [
+			iFocus_Link_Nest_Settings::CASE_SENSITIVE => $is_case_sensitive,
+		] );
+
+		$text = '<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+		        . 'Sed quia corporis esse ut. Accusantium perferendis Quisquam vasdasoluptatem neque. '
+		        . 'Ad repellendus id repellat. Nemo et tempore quisquam porro eligendi. Et similique et rerum dolorem sunt. '
+		        . 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+		        . 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>';
+
+		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
+		$this->assertEquals( $expected_result, $processor->process( $text ) );
+		$this->assertTrue( $processor->has_text_changed() );
+	}
+
 	public function dataForNoReplacementsNeeded() {
 
 		return [
@@ -348,6 +379,33 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 			// '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
 			// '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
 			// '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">vene</a>'
+		];
+	}
+
+	public function dataForCaseSensitivityVariations() {
+		return [
+			'case sensitivity enabled'  => [
+				'on',
+				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+				. 'Sed quia corporis esse ut. Accusantium perferendis '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">Quisquam</a> '
+				. 'vasdasoluptatem neque. '
+				. 'Ad repellendus id repellat. Nemo et tempore quisquam porro eligendi. Et similique et rerum dolorem sunt. '
+				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>',
+			],
+			'case sensitivity disabled' => [
+				'off',
+				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+				. 'Sed quia corporis esse ut. Accusantium perferendis '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">Quisquam</a> '
+				. 'vasdasoluptatem neque. '
+				. 'Ad repellendus id repellat. Nemo et tempore '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a> '
+				. 'porro eligendi. Et similique et rerum dolorem sunt. '
+				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>',
+			],
 		];
 	}
 }
