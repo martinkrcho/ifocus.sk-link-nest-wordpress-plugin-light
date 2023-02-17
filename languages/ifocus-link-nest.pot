@@ -34,7 +34,7 @@ msgstr ""
 "S pluginom iFOCUS.sk Link Nest Lite môžete jednoducho a automaticky odkazovať "
 "z kľúčových slov a fráz v príspevkoch a stránkach na zodpovedajúce príspevky a stránky resp. "
 "akúkoľvek inú adresu URL. Nastavte si nasledujúce možnosti podľa vlastných potrieb a nechajte iFOCUS."
-"sk Link Nest plugin robiť prácu za vás.
+"sk Link Nest plugin robiť prácu za vás."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:146
 msgid "If you find any bugs or you have ideas for the plugin, let us know at:"
