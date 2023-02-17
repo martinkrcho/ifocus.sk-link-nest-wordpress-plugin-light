@@ -31,6 +31,10 @@ msgid ""
 "any other URL. Set the following settings to your own needs and let iFOCUS."
 "sk Link Nest plugin do the work for you."
 msgstr ""
+"S pluginom iFOCUS.sk Link Nest Lite môžete jednoducho a automaticky odkazovať "
+"z kľúčových slov a fráz v príspevkoch a stránkach na zodpovedajúce príspevky a stránky resp. "
+"akúkoľvek inú adresu URL. Nastavte si nasledujúce možnosti podľa vlastných potrieb a nechajte iFOCUS."
+"sk Link Nest plugin robiť prácu za vás.
 
 #: admin/class-ifocus-link-nest-settings-manager.php:146
 msgid "If you find any bugs or you have ideas for the plugin, let us know at:"
@@ -53,8 +57,8 @@ msgid "Import from CSV"
 msgstr "Importovať zo súboru CSV"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:167
-msgid "select CSV file"
-msgstr "vyberte súbor CSV"
+msgid "Select CSV file"
+msgstr "Vyberte súbor CSV"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:168
 msgid "Load custom keywords and urls from a CSV file."
@@ -110,34 +114,37 @@ msgstr "Povoliť. Otvorte externé odkazy v novom okne. "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:210
 msgid "Excluding"
-msgstr ""
+msgstr "Vylúčenie"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:215
 msgid "Headings"
-msgstr ""
+msgstr "Nadpisy"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:217
 msgid "Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)"
-msgstr ""
+msgstr "Povoliť. Zabrániť umiestneniu odkazov v značkách nadpisov (h1, h2, h3, h4, h5 a h6)"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:221
 msgid "Ignore post/pages"
-msgstr ""
+msgstr "Ignorovať príspevok/stránky"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:222
 msgid ""
 "Exclude certain posts or pages. Separate them by comma (ID, slug or name)."
 msgstr ""
+"Vylúčte určité príspevky alebo stránky. Oddeľte ich čiarkou (ID, slug alebo názov)."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:230
 msgid "Ignore words"
-msgstr ""
+msgstr "Ignorovať slová"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:231
 msgid ""
 "Exclude certain words or phrases from automatic linking. Separate them by "
 "comma."
 msgstr ""
+"Vylúčte určité slová alebo frázy z automatického linkovania. Oddeľte ich pomocou "
+"čiarky."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:249
 msgid ""
@@ -146,26 +153,30 @@ msgid ""
 "new line for new url and set of keywords. You can link to any url, not only "
 "your site."
 msgstr ""
+"Tu môžete manuálne zadať ďalšie kľúčové slová, ktoré chcete automaticky prepojiť. "
+"Na oddelenie kľúčových slov použite čiarku a na koniec pridajte cieľovú adresu URL. Použite "
+"nový riadok pre novú adresu URL a skupinu kľúčových slov. Môžete odkazovať na akúkoľvek adresu URL, nielen "
+"vašu stránku."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:253
 msgid "Add new line"
-msgstr ""
+msgstr "Pridať nový riadok"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:320
 msgid "Keyword"
-msgstr ""
+msgstr "Kľúčové slovo"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:321
 msgid "Title"
-msgstr ""
+msgstr "Názov"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:322
 msgid "Rel"
-msgstr ""
+msgstr "Rel atribút"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:323
 msgid "Link"
-msgstr ""
+msgstr "Odkaz"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:349
 msgid ""
@@ -173,22 +184,25 @@ msgid ""
 "keywords to automatically interlink from <div>, <p>, <ul>, <li> and other "
 "html tags."
 msgstr ""
+"iFOCUS.sk Link nest plugin môže vyhľadávať a spracovávať vaše príspevky, stránky "
+"pre kľúčové slová a automaticky vytvárať prepojenia z <div>, <p>, <ul>, <li> a ďalších "
+"html značiek."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:355
 msgid "Setup what and how it can be excluded from internal linking."
-msgstr ""
+msgstr "Nastavte, čo a ako možno vylúčiť z interného prepojenia."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:378
-msgid "select post(s) and/or page(s)"
-msgstr ""
+msgid "Select post(s) and/or page(s)"
+msgstr "Vyberte príspevok (príspevky) a/alebo stránku (stránky)"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:409
-msgid "type word(s)"
-msgstr ""
+msgid "Type word(s)"
+msgstr "Zadajte slová"
 
 #. Plugin Name of the plugin/theme
 msgid "iFOCUS.sk Link Nest Lite"
-msgstr ""
+msgstr "iFOCUS.sk Link Nest Lite"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ifocus.sk/"
@@ -199,6 +213,8 @@ msgid ""
 "Plugin allows the site owner to automate linking selected keywords in the "
 "site content."
 msgstr ""
+"Plugin umožňuje vlastníkovi stránky automatizovať prepojenie vybraných kľúčových slov "
+"v obsahu stránky."
 
 #. Author of the plugin/theme
 msgid "Martin Krcho"
