@@ -37,7 +37,7 @@ msgstr ""
 "sk Link Nest plugin robiť prácu za vás.
 
 #: admin/class-ifocus-link-nest-settings-manager.php:146
-msgid "If you find any bugs or you have ideas for the plugin, let us know at:"
+msgid "If you find any bugs or you have ideas for the plugin, let us know at: "
 msgstr "Ak nájdete nejaké chyby alebo máte nápady na doplnok, dajte nám vedieť na adrese:"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:153
