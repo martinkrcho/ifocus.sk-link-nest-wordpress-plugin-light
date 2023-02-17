@@ -28,17 +28,17 @@ msgstr ""
 msgid ""
 "With iFOCUS.sk Link Nest plugin you can easily and automatically link from "
 "keywords and phrases in posts and pages to corresponding posts and pages or "
-"any other URL. Set the following settings to your own needs and let iFOCUS."
+"any other URL. Set the following settings to your own needs and let iFOCUS. "
 "sk Link Nest plugin do the work for you."
 msgstr ""
 "S pluginom iFOCUS.sk Link Nest Lite môžete jednoducho a automaticky odkazovať "
 "z kľúčových slov a fráz v príspevkoch a stránkach na zodpovedajúce príspevky a stránky resp. "
-"akúkoľvek inú adresu URL. Nastavte si nasledujúce možnosti podľa vlastných potrieb a nechajte iFOCUS."
-"sk Link Nest plugin robiť prácu za vás."
+"akúkoľvek inú adresu URL. Nastavte si nasledujúce možnosti podľa vlastných potrieb a nechajte iFOCUS. "
+"sk Link Nest plugin robiť prácu za vás. "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:146
-msgid "If you find any bugs or you have ideas for the plugin, let us know at:"
-msgstr "Ak nájdete nejaké chyby alebo máte nápady na doplnok, dajte nám vedieť na adrese:"
+msgid "If you find any bugs or you have ideas for the plugin, let us know at: "
+msgstr "Ak nájdete nejaké chyby alebo máte nápady na doplnok, dajte nám vedieť na adrese: "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:153
 msgid "Internal linking"
@@ -61,8 +61,8 @@ msgid "Select CSV file"
 msgstr "Vyberte súbor CSV"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:168
-msgid "Load custom keywords and urls from a CSV file."
-msgstr "Načítajte vlastné kľúčové slová a adresy URL zo súboru CSV."
+msgid "Load custom keywords and urls from a CSV file. "
+msgstr "Načítajte vlastné kľúčové slová a adresy URL zo súboru CSV. "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:174
 msgid "Internal links / Targeting"
@@ -91,10 +91,10 @@ msgstr "Maximálny počet odkazov"
 #: admin/class-ifocus-link-nest-settings-manager.php:193
 msgid ""
 "You can limit the maximum number of different links that will be generated "
-"per post or page. Set to 0 for no limit."
+"per post or page. Set to 0 for no limit. "
 msgstr ""
 "Môžete obmedziť maximálny počet rôznych odkazov, ktoré sa vygenerujú "
-"za príspevok alebo stránku. Nastavenie na 0 znamená bez obmedzenia."
+"za príspevok alebo stránku. Nastavenie na 0 znamená bez obmedzenia. "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:197
 msgid "Case sensitive"
@@ -121,8 +121,8 @@ msgid "Headings"
 msgstr "Nadpisy"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:217
-msgid "Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)"
-msgstr "Povoliť. Zabrániť umiestneniu odkazov v značkách nadpisov (h1, h2, h3, h4, h5 a h6)"
+msgid "Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6) "
+msgstr "Povoliť. Zabrániť umiestneniu odkazov v značkách nadpisov (h1, h2, h3, h4, h5 a h6) "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:221
 msgid "Ignore post/pages"
@@ -130,9 +130,9 @@ msgstr "Ignorovať príspevok/stránky"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:222
 msgid ""
-"Exclude certain posts or pages. Separate them by comma (ID, slug or name)."
+"Exclude certain posts or pages. Separate them by comma (ID, slug or name). "
 msgstr ""
-"Vylúčte určité príspevky alebo stránky. Oddeľte ich čiarkou (ID, slug alebo názov)."
+"Vylúčte určité príspevky alebo stránky. Oddeľte ich čiarkou (ID, slug alebo názov). "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:230
 msgid "Ignore words"
@@ -189,12 +189,12 @@ msgstr ""
 "html značiek."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:355
-msgid "Setup what and how it can be excluded from internal linking."
-msgstr "Nastavte, čo a ako možno vylúčiť z interného prepojenia."
+msgid "Setup what and how it can be excluded from internal linking. "
+msgstr "Nastavte, čo a ako možno vylúčiť z interného prepojenia. "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:378
 msgid "Select post(s) and/or page(s)"
-msgstr "Vyberte príspevok (príspevky) a/alebo stránku (stránky)"
+msgstr "Vyberte príspevok (príspevky) a/alebo stránku (stránky) "
 
 #: admin/class-ifocus-link-nest-settings-manager.php:409
 msgid "Type word(s)"
