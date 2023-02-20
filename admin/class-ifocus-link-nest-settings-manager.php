@@ -250,7 +250,7 @@ class iFocus_Link_Nest_Settings_Manager {
 		echo '</p>';
 		echo '<div id="keywords-editor">';
 		echo '</div>';
-		echo '<a class="button button-primary" id="add-row">' . __( 'Add new line', 'ifocus-link-nest' ) . '</a>';
+		echo '<a class="button button-primary" id="add-row">' . esc_html__( 'Add new line', 'ifocus-link-nest' ) . '</a>';
 
 		$keywords = iFocus_Link_Nest_Keyword_Model::get_all();
 
@@ -342,6 +342,18 @@ class iFocus_Link_Nest_Settings_Manager {
 		<?php
 		// @formatter:on
 		echo '</script>';
+
+		echo '<table class="form-table" role="presentation">';
+		echo '<tbody>';
+		echo '<tr>';
+        echo '<th scope="row"><label for="sample_csv_file">' . esc_html__( 'Create sample CSV', 'ifocus-link-nest' ) . '</label></th>';
+		echo '<td>';
+        echo '<a class="button button-primary" href="https://sitemap-urls-to-csv.streamlit.app/" target="_blank">' . esc_html__( 'Open', 'ifocus-link-nest' ) . '</a>';
+		echo '<p class="help">' . esc_html__( 'Create a plugin\'s sample CSV file from your website to import hereunder.', 'ifocus-link-nest' ) . '</p>';
+		echo '</td>';
+        echo '</tr>';
+        echo '</tbody>';
+        echo '</table>';
 	}
 
 	public function targeting_intro( $section ) {
