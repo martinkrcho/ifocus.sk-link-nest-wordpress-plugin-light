@@ -122,18 +122,18 @@ class iFocus_Link_Nest_Settings_Manager {
 	 */
 	public static function get_settings_data() {
 		return wp_parse_args(
-			get_option( self::$option_name, array() ),
-			array(
-				iFocus_Link_Nest_Settings::CSV_FILE       => '',
-				iFocus_Link_Nest_Settings::PROCESS_POSTS  => 'on',
-				iFocus_Link_Nest_Settings::PROCESS_PAGES  => 'on',
-				iFocus_Link_Nest_Settings::MAX_LINKS      => 3,
-				iFocus_Link_Nest_Settings::CASE_SENSITIVE => 'on',
-				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'on',
-				iFocus_Link_Nest_Settings::PROCESS_HEADINGS => 'off',
-				iFocus_Link_Nest_Settings::IGNORED_POSTS  => array(),
-				iFocus_Link_Nest_Settings::IGNORED_WORDS  => array(),
-			)
+			get_option( self::$option_name, [] ),
+			[
+				iFocus_Link_Nest_Settings::CSV_FILE           => '',
+				iFocus_Link_Nest_Settings::PROCESS_POSTS      => 'on',
+				iFocus_Link_Nest_Settings::PROCESS_PAGES      => 'on',
+				iFocus_Link_Nest_Settings::MAX_LINKS          => 3,
+				iFocus_Link_Nest_Settings::CASE_SENSITIVE     => 'off',
+				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'off',
+				iFocus_Link_Nest_Settings::PROCESS_HEADINGS   => 'off',
+				iFocus_Link_Nest_Settings::IGNORED_POSTS      => [],
+				iFocus_Link_Nest_Settings::IGNORED_WORDS      => [],
+			]
 		);
 	}
 

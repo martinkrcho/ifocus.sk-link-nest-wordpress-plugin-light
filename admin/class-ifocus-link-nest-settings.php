@@ -44,9 +44,9 @@ class iFocus_Link_Nest_Settings {
 
 	private $max_links = 3;
 
-	private $case_sensitive = 'on';
+	private $case_sensitive = 'off';
 
-	private $open_in_new_window = 'on';
+	private $open_in_new_window = 'off';
 
 	private $process_headings = 'off';
 

@@ -132,6 +132,37 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $processor->has_text_changed() );
 	}
 
+	/**
+	 * @dataProvider dataForNewWindowOpeningVariations
+	 */
+	public function test_case_new_window_opening_variations( $opening_in_new_window_allowed, $expected_result ) {
+
+		$keywords = [
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+				[
+					'quisquam',
+					'wind turbines',
+					'windy',
+					'https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system',
+				]
+			),
+		];
+
+		$settings = new iFocus_Link_Nest_Settings( [
+			iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => $opening_in_new_window_allowed,
+		] );
+
+		$text = '<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+		        . 'Sed quia corporis esse ut. Accusantium perferendis quisquam vasdasoluptatem neque. '
+		        . 'Ad repellendus id repellat. Nemo et tempore quisquam porro eligendi. Et similique et rerum dolorem sunt. '
+		        . 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+		        . 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>';
+
+		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
+		$this->assertEquals( $expected_result, $processor->process( $text ) );
+		$this->assertTrue( $processor->has_text_changed() );
+	}
+
 	public function dataForNoReplacementsNeeded() {
 
 		return [
@@ -191,8 +222,8 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat. '
 				. 'Vestibulum sem neque, vehicula in dolor '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">non</a>, '
-				. 'hendrerit <a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a> '
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">non</a>, '
+				. 'hendrerit <a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help">maximus</a> '
 				. 'tellus.',
 			],
 
@@ -224,7 +255,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Curabitur tempus quam nec purus luctus, a pulvinar ex ultrices. Aenean varius nisl id tempor feugiat. '
 				. 'Vestibulum sem neque, vehicula in dolor '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">non</a>, '
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">non</a>, '
 				. 'hendrerit maximus tellus.',
 			],
 
@@ -272,7 +303,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				// expected result
 				'Curabitur tempus quam nec purus luctus, a <a href="https://www.strava.com/" class="primary">pulvinar ex ultrices</a>. Aenean varius nisl id tempor feugiat. '
 				. 'Vestibulum sem neque, vehicula in dolor '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">non</a>, '
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">non</a>, '
 				. 'hendrerit maximus tellus.',
 			],
 
@@ -301,7 +332,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				'Etiam eu posuere ex, quis pretium est. Nulla venenatis, ligula in sollicitudin molestie, nibh arcu vehicula velit, sed facilisis urna justo vel turpis. '
 				. 'Etiam tempus elit eu pharetra pretium. Sed in ullamcorper nibh, vitae imperdiet turpis. Suspendisse vestibulum interdum purus, a interdum justo elementum ut. '
 				. 'Integer hendrerit fringilla bibendum. Maecenas '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">efficitur lacus at libero</a>'
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">efficitur lacus at libero</a>'
 				. ' vestibulum tempor. Nunc tincidunt elementum turpis, vel venenatis nulla hendrerit ut.'
 				. ' Mauris porta, ante in tempus dictum, lacus quam convallis nisi, sit amet faucibus metus felis tempor ipsum. Praesent ac blandit felis, eget faucibus ex. '
 				. 'Praesent aliquet elit et vulputate ullamcorper. Nam egestas sodales urna, in tincidunt ante elementum vitae. Fusce in arcu et dolor gravida rutrum vitae vel mi.'
@@ -328,15 +359,15 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 				// expected result
 				'Amet luctus '
-				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
+				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help">maximus</a>'
 				. ' venenatis lectus magna fringilla urna porttitor. Amet est placerat in egestas erat imperdiet sed euismod.'
 				. ' Tempor nec feugiat nisl pretium fusce. Aenean sed adipiscing diam donec adipiscing tristique. '
 				. 'Faucibus nisl tincidunt eget nullam non nisi est sit amet. Maecenas volutpat blandit aliquam etiam. '
 				. 'Adipiscing elit duis tristique sollicitudin nibh sit '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">vene</a>'
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">vene</a>'
 				. ' amet commodo. Venenatis tellus in metus vulputate eu scelerisque. '
 				. 'Enim nunc faucibus a pellentesque sit amet. Et '
-				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
+				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener">malesuada</a>'
 				. ' fames ac turpis egestas sed tempus urna. '
 				. 'A pellentesque sit amet porttitor eget dolor morbi non.',
 			],
@@ -355,11 +386,11 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 				// expected result
 				'Amet luctus '
-				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
+				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help">maximus</a>'
 				. ' venenatis lectus magna '
-				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
+				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener">malesuada</a>'
 				. ' fringilla urna porttitor. Amet est placerat '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">vene</a>'
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">vene</a>'
 				. ' in egestas erat imperdiet sed euismod.'
 				. ' Tempor nec feugiat nisl pretium fusce. Aenean sed adipiscing diam donec adipiscing tristique. '
 				. 'Faucibus nisl tincidunt eget nullam non nisi est sit amet. Maecenas volutpat blandit aliquam etiam. '
@@ -377,7 +408,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 				// expected result
 				'Amet luctus '
-				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
+				. '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help">maximus</a>'
 				. ' venenatis lectus magna vene fringilla urna malesuada porttitor.',
 			],
 
@@ -390,7 +421,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 				// expected result
 				'Amet luctus '
-				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">vene</a>'
+				. '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help">vene</a>'
 				. ' venenatis lectus maximus vene fringilla urna malesuada porttitor.',
 			],
 
@@ -403,7 +434,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 
 				// expected result
 				'Amet luctus '
-				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
+				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener">malesuada</a>'
 				. ' venenatis lectus magna maximus fringilla urna vene porttitor.',
 			],
 		];
@@ -415,7 +446,7 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				'on',
 				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
 				. 'Sed quia corporis esse ut. Accusantium perferendis '
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">Quisquam</a> '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">Quisquam</a> '
 				. 'vasdasoluptatem neque. '
 				. 'Ad repellendus id repellat. Nemo et tempore quisquam porro eligendi. Et similique et rerum dolorem sunt. '
 				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
@@ -425,10 +456,10 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				'off',
 				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
 				. 'Sed quia corporis esse ut. Accusantium perferendis '
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">Quisquam</a> '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">Quisquam</a> '
 				. 'vasdasoluptatem neque. '
 				. 'Ad repellendus id repellat. Nemo et tempore '
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a> '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a> '
 				. 'porro eligendi. Et similique et rerum dolorem sunt. '
 				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
 				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>',
@@ -445,22 +476,51 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				. 'Ad repellendus id repellat. Nemo et tempore <h6>quisquam</h6> porro eligendi. Et similique et rerum dolorem sunt. '
 				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
 				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut '
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a>'
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a>'
 				.' velit amet. Voluptatem est est placeat iure.</p>',
 			],
 			'headings replacements enabled' => [
 				'on',
 				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
 				. 'Sed quia corporis esse ut. Accusantium <h1>perferendis '
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a> '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a> '
 				. 'vasdasoluptatem</h1> neque. '
 				. 'Ad repellendus id repellat. Nemo et tempore <h6>'
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a>'
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a>'
 				. '</h6> porro eligendi. Et similique et rerum dolorem sunt. '
 				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
 				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut '
-				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a>'
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a>'
 				.' velit amet. Voluptatem est est placeat iure.</p>',
+			],
+		];
+	}
+
+	public function dataForNewWindowOpeningVariations() {
+		return [
+			'opening in new window enabled'  => [
+				'on',
+				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+				. 'Sed quia corporis esse ut. Accusantium perferendis '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a> '
+				. 'vasdasoluptatem neque. '
+				. 'Ad repellendus id repellat. Nemo et tempore '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a> '
+				. 'porro eligendi. Et similique et rerum dolorem sunt. '
+				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>',
+			],
+			'opening in new window disabled' => [
+				'off',
+				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+				. 'Sed quia corporis esse ut. Accusantium perferendis '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a> '
+				. 'vasdasoluptatem neque. '
+				. 'Ad repellendus id repellat. Nemo et tempore '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy">quisquam</a> '
+				. 'porro eligendi. Et similique et rerum dolorem sunt. '
+				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>',
 			],
 		];
 	}
