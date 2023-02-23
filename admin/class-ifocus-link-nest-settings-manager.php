@@ -191,6 +191,12 @@ class iFocus_Link_Nest_Settings_Manager {
 								'type'  => 'number',
 								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'ifocus-link-nest' ),
 							),
+							iFocus_Link_Nest_Settings::PROCESS_HEADINGS => array(
+								'id'    => iFocus_Link_Nest_Settings::PROCESS_HEADINGS,
+								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
+								'type'  => 'checkbox',
+								'text'  => esc_html__( 'Enable. Allow linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
+							),
 							iFocus_Link_Nest_Settings::CASE_SENSITIVE     => array(
 								'id'    => iFocus_Link_Nest_Settings::CASE_SENSITIVE,
 								'title' => esc_html__( 'Case sensitive', 'ifocus-link-nest' ),
@@ -209,12 +215,6 @@ class iFocus_Link_Nest_Settings_Manager {
 						'title'    => esc_html__( 'Excluding', 'ifocus-link-nest' ),
 						'callback' => array( $this, 'excluding_intro' ),
 						'fields'   => array(
-							iFocus_Link_Nest_Settings::PROCESS_HEADINGS => array(
-								'id'    => iFocus_Link_Nest_Settings::PROCESS_HEADINGS,
-								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
-								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Allow linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
-							),
 							iFocus_Link_Nest_Settings::IGNORED_POSTS    => array(
 								'id'       => iFocus_Link_Nest_Settings::IGNORED_POSTS,
 								'title'    => esc_html__( 'Ignore post/pages', 'ifocus-link-nest' ),
