@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the plugin settings class.
  *
@@ -131,7 +130,7 @@ class iFocus_Link_Nest_Settings_Manager {
 				iFocus_Link_Nest_Settings::MAX_LINKS      => 3,
 				iFocus_Link_Nest_Settings::CASE_SENSITIVE => 'on',
 				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'on',
-				iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => 'on',
+				iFocus_Link_Nest_Settings::PROCESS_HEADINGS => 'off',
 				iFocus_Link_Nest_Settings::IGNORED_POSTS  => array(),
 				iFocus_Link_Nest_Settings::IGNORED_WORDS  => array(),
 			)
@@ -210,11 +209,11 @@ class iFocus_Link_Nest_Settings_Manager {
 						'title'    => esc_html__( 'Excluding', 'ifocus-link-nest' ),
 						'callback' => array( $this, 'excluding_intro' ),
 						'fields'   => array(
-							iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS => array(
-								'id'    => iFocus_Link_Nest_Settings::EXCLUDE_HEADINGS,
+							iFocus_Link_Nest_Settings::PROCESS_HEADINGS => array(
+								'id'    => iFocus_Link_Nest_Settings::PROCESS_HEADINGS,
 								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'Enable. Allow linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
 							),
 							iFocus_Link_Nest_Settings::IGNORED_POSTS    => array(
 								'id'       => iFocus_Link_Nest_Settings::IGNORED_POSTS,
@@ -246,7 +245,7 @@ class iFocus_Link_Nest_Settings_Manager {
 
 	public function custom_keyword_intro( $section ) {
 		echo '<p>';
-		esc_html_e( 'Here you can manually enter the extra keywords you want to automatically link. Use comma to separate keywords and add target url at the end. Use a new line for new url and set of keywords. You can link to any url, not only your site.' );
+		esc_html_e( 'Here you can manually enter the extra keywords you want to automatically link. Use comma to separate keywords and add target url at the end. Use a new line for new url and set of keywords. You can link to any url, not only your site.', 'ifocus-link-nest' );
 		echo '</p>';
 		echo '<div id="keywords-editor">';
 		echo '</div>';
@@ -346,14 +345,14 @@ class iFocus_Link_Nest_Settings_Manager {
 		echo '<table class="form-table" role="presentation">';
 		echo '<tbody>';
 		echo '<tr>';
-        echo '<th scope="row"><label for="sample_csv_file">' . esc_html__( 'Create sample CSV', 'ifocus-link-nest' ) . '</label></th>';
+		echo '<th scope="row"><label for="sample_csv_file">' . esc_html__( 'Create sample CSV', 'ifocus-link-nest' ) . '</label></th>';
 		echo '<td>';
-        echo '<a class="button button-primary" href="https://sitemap-urls-to-csv.streamlit.app/" target="_blank">' . esc_html__( 'Open', 'ifocus-link-nest' ) . '</a>';
+		echo '<a class="button button-primary" href="https://sitemap-urls-to-csv.streamlit.app/" target="_blank">' . esc_html__( 'Open', 'ifocus-link-nest' ) . '</a>';
 		echo '<p class="help">' . esc_html__( 'Create a plugin\'s sample CSV file from your website to import hereunder.', 'ifocus-link-nest' ) . '</p>';
 		echo '</td>';
-        echo '</tr>';
-        echo '</tbody>';
-        echo '</table>';
+		echo '</tr>';
+		echo '</tbody>';
+		echo '</table>';
 	}
 
 	public function targeting_intro( $section ) {

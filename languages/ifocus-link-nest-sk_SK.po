@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: iFOCUS.sk Link Nest Lite\n"
-"POT-Creation-Date: 2023-02-20 15:16+0100\n"
-"PO-Revision-Date: 2023-02-20 15:16+0100\n"
+"POT-Creation-Date: 2023-02-23 14:43+0100\n"
+"PO-Revision-Date: 2023-02-23 14:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -34,13 +34,13 @@ msgstr ""
 "S pluginom iFOCUS.sk Link Nest Lite môžete jednoducho a automaticky "
 "odkazovať z kľúčových slov a fráz v príspevkoch a stránkach na zodpovedajúce "
 "príspevky a stránky resp. akúkoľvek inú adresu URL. Nastavte si nasledujúce "
-"možnosti podľa vlastných potrieb a nechajte iFOCUS. sk Link Nest plugin "
+"možnosti podľa vlastných potrieb a nechajte iFOCUS. sk Link Nest Lite plugin "
 "robiť prácu za vás."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:146
 msgid "If you find any bugs or you have ideas for the plugin, let us know at:"
 msgstr ""
-"Ak nájdete nejaké chyby alebo máte nápady na doplnok, dajte nám vedieť na "
+"Ak nájdete nejaké chyby alebo máte nápady na doplnenie, dajte nám vedieť na "
 "adrese:"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:153
@@ -124,10 +124,9 @@ msgid "Headings"
 msgstr "Nadpisy"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:217
-msgid "Enable. Prevent linking in heading tags (h1, h2, h3, h4, h5 and h6)"
+msgid "Enable. Allow linking in heading tags (h1, h2, h3, h4, h5 and h6)"
 msgstr ""
-"Povoliť. Zabrániť umiestneniu odkazov v značkách nadpisov (h1, h2, h3, h4, "
-"h5 a h6)"
+"Povoliť. Umiestniť odkazy v značkách nadpisov (h1, h2, h3, h4, h5 a h6)"
 
 #: admin/class-ifocus-link-nest-settings-manager.php:221
 msgid "Ignore post/pages"
@@ -160,10 +159,8 @@ msgid ""
 "your site."
 msgstr ""
 "Tu môžete manuálne zadať ďalšie kľúčové slová, ktoré chcete automaticky "
-"prepojiť. Na oddelenie kľúčových slov použite čiarku a na koniec pridajte "
-"cieľovú adresu URL. Použite nový riadok pre novú adresu URL a skupinu "
-"kľúčových slov. Môžete odkazovať na akúkoľvek adresu URL, nielen vašu "
-"stránku."
+"prepojiť. Použite Pridať nový riadok pre novú sériu nastavení. Môžete "
+"odkazovať na akúkoľvek adresu URL, nielen vašu stránku."
 
 #: admin/class-ifocus-link-nest-settings-manager.php:253
 msgid "Add new line"
@@ -228,7 +225,7 @@ msgstr "iFOCUS.sk Link Nest Lite"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ifocus.sk/"
-msgstr "https://www.ifocus.sk/"
+msgstr ""
 
 #. Description of the plugin/theme
 msgid ""

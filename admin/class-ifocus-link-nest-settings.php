@@ -36,7 +36,7 @@ class iFocus_Link_Nest_Settings {
 
 	public const IGNORED_WORDS = 'ignored_words';
 
-	public const EXCLUDE_HEADINGS = 'exclude_headings';
+	public const PROCESS_HEADINGS = 'process_headings';
 
 	private $process_posts = 'on';
 
@@ -48,7 +48,7 @@ class iFocus_Link_Nest_Settings {
 
 	private $open_in_new_window = 'on';
 
-	private $exclude_headings = 'on';
+	private $process_headings = 'off';
 
 	private $ignored_posts = array();
 
@@ -70,7 +70,7 @@ class iFocus_Link_Nest_Settings {
 			self::MAX_LINKS          => $this->max_links,
 			self::CASE_SENSITIVE     => $this->case_sensitive,
 			self::OPEN_IN_NEW_WINDOW => $this->open_in_new_window,
-			self::EXCLUDE_HEADINGS   => $this->exclude_headings,
+			self::PROCESS_HEADINGS   => $this->process_headings,
 			self::IGNORED_POSTS      => $this->ignored_posts,
 			self::IGNORED_WORDS      => $this->ignored_words,
 		);
@@ -126,7 +126,7 @@ class iFocus_Link_Nest_Settings {
 	 * @return bool
 	 */
 	public function should_exclude_headings() {
-		return 'on' === $this->exclude_headings;
+		return 'off' === $this->process_headings;
 	}
 
 	/**

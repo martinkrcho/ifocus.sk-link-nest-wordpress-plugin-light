@@ -47,7 +47,7 @@ class iFocus_Link_Nest_Text_Processor {
 	/**
 	 * @var array List of found keywords along with their positions.
 	 */
-	private $positions = [];
+	private $positions = array();
 
 	/**
 	 * @var int Offset to be added to the original keyword positions as the replacements are performed.
@@ -64,7 +64,7 @@ class iFocus_Link_Nest_Text_Processor {
 	 *
 	 * @since    1.0.0
 	 *
-	 * @param iFocus_Link_Nest_Settings $settings Plugin settings.
+	 * @param iFocus_Link_Nest_Settings        $settings Plugin settings.
 	 * @param iFocus_Link_Nest_Keyword_Model[] $keywords List of keywords.
 	 */
 	public function __construct( $settings, $keywords ) {
@@ -120,7 +120,7 @@ class iFocus_Link_Nest_Text_Processor {
 
 	/**
 	 * @param iFocus_Link_Nest_Keyword_Model $keyword
-	 * @param int $start_position
+	 * @param int                            $start_position
 	 */
 	private function apply_keyword( $keyword, $start_position ) {
 		$hyperlink_markup = sprintf(
@@ -144,7 +144,7 @@ class iFocus_Link_Nest_Text_Processor {
 		$this->replacements_performed += $replacements_done;
 		if ( $replacements_done > 0 ) {
 			$this->offset += strlen( $hyperlink_markup ) - strlen( $keyword->keyword );
-			$this->text   = $first_part . $second_part;
+			$this->text    = $first_part . $second_part;
 		}
 	}
 
@@ -158,7 +158,7 @@ class iFocus_Link_Nest_Text_Processor {
 
 		$flags = 'm';
 		if ( ! $this->settings->is_case_sensitive() ) {
-			$flags   .= 'i';
+			$flags  .= 'i';
 			$keyword = strtolower( $keyword );
 		}
 

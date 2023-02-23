@@ -101,6 +101,37 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 		$this->assertTrue( $processor->has_text_changed() );
 	}
 
+	/**
+	 * @dataProvider dataForHeadingsVariations
+	 */
+	public function test_case_heading_setting_variations( $headings_processing_allowed, $expected_result ) {
+
+		$keywords = [
+			iFocus_Link_Nest_Keyword_Model::build_from_generic_array(
+				[
+					'quisquam',
+					'wind turbines',
+					'windy',
+					'https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system',
+				]
+			),
+		];
+
+		$settings = new iFocus_Link_Nest_Settings( [
+			iFocus_Link_Nest_Settings::PROCESS_HEADINGS => $headings_processing_allowed,
+		] );
+
+		$text = '<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+		        . 'Sed quia corporis esse ut. Accusantium <h1>perferendis quisquam vasdasoluptatem</h1> neque. '
+		        . 'Ad repellendus id repellat. Nemo et tempore <h6>quisquam</h6> porro eligendi. Et similique et rerum dolorem sunt. '
+		        . 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+		        . 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut quisquam velit amet. Voluptatem est est placeat iure.</p>';
+
+		$processor = new iFocus_Link_Nest_Text_Processor( $settings, $keywords );
+		$this->assertEquals( $expected_result, $processor->process( $text ) );
+		$this->assertTrue( $processor->has_text_changed() );
+	}
+
 	public function dataForNoReplacementsNeeded() {
 
 		return [
@@ -375,10 +406,6 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				. '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
 				. ' venenatis lectus magna maximus fringilla urna vene porttitor.',
 			],
-
-			// '<a href="https://linking.objav.digital/about/" title="ifocus agency" class="ifocus-link-nest" rel="help" target="_blank">maximus</a>'
-			// '<a href="https://linking.objav.digital/hiring/" title="latin blurb" class="ifocus-link-nest" rel="noopener" target="_blank">malesuada</a>'
-			// '<a href="https://linking.objav.digital/services/" title="online marketing" class="ifocus-link-nest" rel="help" target="_blank">vene</a>'
 		];
 	}
 
@@ -405,6 +432,35 @@ class TextReplacementTest extends \PHPUnit\Framework\TestCase {
 				. 'porro eligendi. Et similique et rerum dolorem sunt. '
 				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
 				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut velit amet. Voluptatem est est placeat iure.</p>',
+			],
+		];
+	}
+
+	public function dataForHeadingsVariations() {
+		return [
+			'headings replacements disabled'  => [
+				'off',
+				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+				. 'Sed quia corporis esse ut. Accusantium <h1>perferendis quisquam vasdasoluptatem</h1> neque. '
+				. 'Ad repellendus id repellat. Nemo et tempore <h6>quisquam</h6> porro eligendi. Et similique et rerum dolorem sunt. '
+				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a>'
+				.' velit amet. Voluptatem est est placeat iure.</p>',
+			],
+			'headings replacements enabled' => [
+				'on',
+				'<p>Atque debitis eaque nihil veritatis et officiis. Voluptatem quo quia conseaas sdquatur. '
+				. 'Sed quia corporis esse ut. Accusantium <h1>perferendis '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a> '
+				. 'vasdasoluptatem</h1> neque. '
+				. 'Ad repellendus id repellat. Nemo et tempore <h6>'
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a>'
+				. '</h6> porro eligendi. Et similique et rerum dolorem sunt. '
+				. 'Et repellendus voluptas odio quas qui dolor qui. Necessitatibus quibusdam dolor eum maxime laborum odit ipsam. '
+				. 'Testiky Molestiae ab sunt at maiores. Provident quia aut ut '
+				. '<a href="https://www.energy.gov/energysaver/installing-and-maintaining-small-wind-electric-system" title="wind turbines" class="ifocus-link-nest" rel="windy" target="_blank">quisquam</a>'
+				.' velit amet. Voluptatem est est placeat iure.</p>',
 			],
 		];
 	}
