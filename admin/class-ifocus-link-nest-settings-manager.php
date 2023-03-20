@@ -124,15 +124,15 @@ class iFocus_Link_Nest_Settings_Manager {
 		return wp_parse_args(
 			get_option( self::$option_name, array() ),
 			array(
-				iFocus_Link_Nest_Settings::CSV_FILE           => '',
-				iFocus_Link_Nest_Settings::PROCESS_POSTS      => 'on',
-				iFocus_Link_Nest_Settings::PROCESS_PAGES      => 'on',
-				iFocus_Link_Nest_Settings::MAX_LINKS          => 3,
-				iFocus_Link_Nest_Settings::CASE_SENSITIVE     => 'off',
+				iFocus_Link_Nest_Settings::CSV_FILE       => '',
+				iFocus_Link_Nest_Settings::PROCESS_POSTS  => 'on',
+				iFocus_Link_Nest_Settings::PROCESS_PAGES  => 'on',
+				iFocus_Link_Nest_Settings::MAX_LINKS      => 3,
+				iFocus_Link_Nest_Settings::CASE_SENSITIVE => 'off',
 				iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => 'off',
-				iFocus_Link_Nest_Settings::PROCESS_HEADINGS   => 'off',
-				iFocus_Link_Nest_Settings::IGNORED_POSTS      => array(),
-				iFocus_Link_Nest_Settings::IGNORED_WORDS      => array(),
+				iFocus_Link_Nest_Settings::PROCESS_HEADINGS => 'off',
+				iFocus_Link_Nest_Settings::IGNORED_POSTS  => array(),
+				iFocus_Link_Nest_Settings::IGNORED_WORDS  => array(),
 			)
 		);
 	}
@@ -264,11 +264,11 @@ class iFocus_Link_Nest_Settings_Manager {
 		var tableData = [
 		<?php foreach ( $keywords as $keyword ) : ?>
 			{
-				id: <?php echo $keyword->id; ?>,
-				keyword: "<?php echo $keyword->keyword; ?>",
-				title: "<?php echo $keyword->title; ?>",
-				href: "<?php echo $keyword->href; ?>",
-				rel: "<?php echo $keyword->rel; ?>",
+				id: <?php echo esc_js( $keyword->id ); ?>,
+				keyword: "<?php echo esc_js( $keyword->keyword ); ?>",
+				title: "<?php echo esc_js( $keyword->title ); ?>",
+				href: "<?php echo esc_url( $keyword->href ); ?>",
+				rel: "<?php echo esc_js( $keyword->rel ); ?>",
 			},
 		<?php endforeach; ?>
 		];
@@ -429,7 +429,15 @@ class iFocus_Link_Nest_Settings_Manager {
 		echo '</fieldset>';
 	}
 
+	/**
+	 * Checks if the current request is for the plugin's settings screen.
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0.0
+	 */
 	public static function is_settings_screen() {
-		return is_admin() && array_key_exists( 'page', $_GET ) && 'ifocus-link-nest' === $_GET['page'];
+		return is_admin() && array_key_exists( 'page', $_GET )
+			   && 'ifocus-link-nest' === sanitize_text_field( wp_unslash( $_GET['page'] ) );
 	}
 }

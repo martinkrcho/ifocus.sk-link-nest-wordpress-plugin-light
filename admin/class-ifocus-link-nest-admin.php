@@ -96,19 +96,24 @@ class iFocus_Link_Nest_Admin {
 		}
 	}
 
+	/**
+	 * AJAX handler for keyword entry creation and/or update.
+	 *
+	 * @return void
+	 *
+	 * @since    1.0.0
+	 */
 	public function update_keyword_entry() {
-		$data = $_POST;
-
-		if ( ! array_key_exists( 'nonce', $data ) || ! wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_UPDATE ) ) {
+		if ( ! array_key_exists( 'nonce', $_POST ) || ! wp_verify_nonce( $_POST['nonce'], self::AJAX_ACTION_UPDATE ) ) {
 			wp_send_json_error();
 		}
 
 		$model          = new iFocus_Link_Nest_Keyword_Model();
-		$model->id      = $data['id'];
-		$model->keyword = $data['keyword'];
-		$model->title   = $data['title'];
-		$model->rel     = $data['rel'];
-		$model->href    = $data['href'];
+		$model->id      = (int) sanitize_text_field( wp_unslash( $_POST['id'] ) );
+		$model->keyword = sanitize_text_field( wp_unslash( $_POST['keyword'] ) );
+		$model->title   = sanitize_text_field( wp_unslash( $_POST['title'] ) );
+		$model->rel     = sanitize_text_field( wp_unslash( $_POST['rel'] ) );
+		$model->href    = sanitize_url( wp_unslash( $_POST['href'] ) );
 
 		wp_send_json_success(
 			array(
@@ -117,15 +122,20 @@ class iFocus_Link_Nest_Admin {
 		);
 	}
 
+	/**
+	 * AJAX handler for keyword entry deletion.
+	 *
+	 * @return void
+	 *
+	 * @since    1.0.0
+	 */
 	public function delete_keyword_entry() {
-		$data = $_POST;
-
-		if ( ! array_key_exists( 'nonce', $data ) || ! wp_verify_nonce( $data['nonce'], self::AJAX_ACTION_DELETE ) ) {
+		if ( ! array_key_exists( 'nonce', $_POST ) || ! wp_verify_nonce( $_POST['nonce'], self::AJAX_ACTION_DELETE ) ) {
 			wp_send_json_error();
 		}
 
 		$model     = new iFocus_Link_Nest_Keyword_Model();
-		$model->id = $data['id'];
+		$model->id = (int) sanitize_text_field( wp_unslash( $_POST['id'] ) );
 
 		$model->delete();
 		wp_send_json_success();
