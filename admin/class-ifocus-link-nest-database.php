@@ -67,22 +67,21 @@ class iFocus_Link_Nest_Database {
 		$installed_ver = get_site_option( self::DB_VERSION_OPTION_NAME );
 
 		if ( $installed_ver != self::DB_VERSION ) {
-			global $wpdb;
 			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
 			update_site_option( self::DB_VERSION_OPTION_NAME, self::DB_VERSION );
 
 			$installed_ver = intval( $installed_ver );
 			if ( 0 === $installed_ver ) {
-				$tableName = self::get_table_name( iFocus_Link_Nest_Keyword_Model::TABLE_NAME );
-				$sql       = "CREATE TABLE {$tableName} ("
-							 . ' keyword_id INT(11) NOT NULL AUTO_INCREMENT, '
-							 . ' keyword VARCHAR(127) NULL DEFAULT NULL, '
-							 . ' title VARCHAR(127) NULL DEFAULT NULL, '
-							 . ' rel VARCHAR(15) NULL DEFAULT NULL, '
-							 . ' href VARCHAR(255) NULL DEFAULT NULL, '
-							 . ' PRIMARY KEY (keyword_id) '
-							 . ') ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;';
+				$table_name = self::get_table_name( iFocus_Link_Nest_Keyword_Model::TABLE_NAME );
+				$sql        = "CREATE TABLE {$table_name} ("
+							. ' keyword_id INT(11) NOT NULL AUTO_INCREMENT, '
+							. ' keyword VARCHAR(127) NULL DEFAULT NULL, '
+							. ' title VARCHAR(127) NULL DEFAULT NULL, '
+							. ' rel VARCHAR(15) NULL DEFAULT NULL, '
+							. ' href VARCHAR(255) NULL DEFAULT NULL, '
+							. ' PRIMARY KEY (keyword_id) '
+							. ') ENGINE=InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;';
 				dbDelta( $sql );
 
 				$installed_ver ++;
