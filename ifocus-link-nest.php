@@ -35,28 +35,30 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WP_INTERNAL_LINKING_VERSION', '1.0.0' );
+define( 'IFOCUS_LINK_NEST_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
+ *
  * This action is documented in includes/class-ifocus-link-nest-activator.php
  */
-function activate_wp_internal_linking() {
+function activate_ifocus_link_nest() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ifocus-link-nest-activator.php';
 	iFocus_Link_Nest_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
+ *
  * This action is documented in includes/class-ifocus-link-nest-deactivator.php
  */
-function deactivate_wp_internal_linking() {
+function deactivate_ifocus_link_nest() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ifocus-link-nest-deactivator.php';
 	iFocus_Link_Nest_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_wp_internal_linking' );
-register_deactivation_hook( __FILE__, 'deactivate_wp_internal_linking' );
+register_activation_hook( __FILE__, 'activate_ifocus_link_nest' );
+register_deactivation_hook( __FILE__, 'deactivate_ifocus_link_nest' );
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -83,8 +85,8 @@ if ( class_exists( '\S24WP' ) ) {
  *
  * @since    1.0.0
  */
-function run_wp_internal_linking() {
+function run_ifocus_link_nest() {
 	$plugin = new iFocus_Link_Nest();
 	$plugin->run();
 }
-run_wp_internal_linking();
+run_ifocus_link_nest();

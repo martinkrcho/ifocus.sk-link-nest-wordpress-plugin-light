@@ -67,8 +67,8 @@ class iFocus_Link_Nest {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'WP_INTERNAL_LINKING_VERSION' ) ) {
-			$this->version = WP_INTERNAL_LINKING_VERSION;
+		if ( defined( 'IFOCUS_LINK_NEST_VERSION' ) ) {
+			$this->version = IFOCUS_LINK_NEST_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
