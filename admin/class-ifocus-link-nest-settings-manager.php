@@ -376,7 +376,7 @@ class iFocus_Link_Nest_Settings_Manager {
 			return;
 		}
 
-		echo '<fieldset><legend class="screen-reader-text">' . $field['title'] . '</legend>';
+		echo '<fieldset><legend class="screen-reader-text">' . esc_html( $field['title'] ) . '</legend>';
 
 		$options = $option_pages->get_options();
 		\S24WP::insert(
@@ -407,7 +407,7 @@ class iFocus_Link_Nest_Settings_Manager {
 			return;
 		}
 
-		echo '<fieldset><legend class="screen-reader-text">' . $field['title'] . '</legend>';
+		echo '<fieldset><legend class="screen-reader-text">' . esc_html( $field['title'] ). '</legend>';
 
 		$options = $option_pages->get_options();
 		\S24WP::insert(
