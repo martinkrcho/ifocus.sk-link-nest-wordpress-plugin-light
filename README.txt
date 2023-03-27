@@ -22,7 +22,7 @@ Search for “iFOCUS.sk Link Nest Lite” under “Plugins” → “Add New” 
 
 Or install it manually:
 
-1. Download the [plugin zip file](https://downloads.wordpress.org/plugin/ifocus-link-nest-lite.zip).
+1. Download the [plugin zip file](https://downloads.wordpress.org/plugin/ifocus-sk-link-nest-lite.zip).
 1. Go to Plugins → Add New in your WordPress admin.
 1. Click on the Upload Plugin button.
 1. Select the file you downloaded.

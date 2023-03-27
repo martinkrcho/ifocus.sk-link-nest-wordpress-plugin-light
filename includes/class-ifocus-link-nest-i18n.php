@@ -33,7 +33,7 @@ class iFocus_Link_Nest_i18n {
 	 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain(
-			'ifocus-link-nest',
+			'ifocus-sk-link-nest-lite',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

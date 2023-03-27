@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: iFOCUS.sk Link Nest Lite\n"
-"POT-Creation-Date: 2023-02-23 14:55+0100\n"
-"PO-Revision-Date: 2023-02-23 14:55+0100\n"
+"POT-Creation-Date: 2023-03-27 18:17+0200\n"
+"PO-Revision-Date: 2023-03-27 18:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -225,7 +225,7 @@ msgstr "iFOCUS.sk Link Nest Lite"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ifocus.sk/"
-msgstr ""
+msgstr "https://www.ifocus.sk/"
 
 #. Description of the plugin/theme
 msgid ""
@@ -237,8 +237,8 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "Martin Krcho"
-msgstr ""
+msgstr "Martin Krcho"
 
 #. Author URI of the plugin/theme
 msgid "https://www.linkedin.com/in/martinkrcho/"
-msgstr ""
+msgstr "https://www.linkedin.com/in/martinkrcho/"

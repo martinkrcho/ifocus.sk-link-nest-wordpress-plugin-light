@@ -72,7 +72,7 @@ class iFocus_Link_Nest {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'ifocus-link-nest';
+		$this->plugin_name = 'ifocus-sk-link-nest-lite';
 
 		$this->load_dependencies();
 		$this->set_locale();

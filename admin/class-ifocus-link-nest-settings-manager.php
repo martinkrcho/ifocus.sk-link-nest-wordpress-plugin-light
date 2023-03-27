@@ -139,86 +139,86 @@ class iFocus_Link_Nest_Settings_Manager {
 
 	public function init_settings() {
 		$intro_html  = '<p>';
-		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'ifocus-link-nest' );
+		$intro_html .= esc_html__( 'With iFOCUS.sk Link Nest plugin you can easily and automatically link from keywords and phrases in posts and pages to corresponding posts and pages or any other URL. Set the following settings to your own needs and let iFOCUS.sk Link Nest plugin do the work for you.', 'ifocus-sk-link-nest-lite' );
 		$intro_html .= '</p>';
 		$intro_html .= '<p>';
-		$intro_html .= esc_html__( 'If you find any bugs or you have ideas for the plugin, let us know at:', 'ifocus-link-nest' );
+		$intro_html .= esc_html__( 'If you find any bugs or you have ideas for the plugin, let us know at:', 'ifocus-sk-link-nest-lite' );
 		$intro_html .= '<br />';
-		$intro_html .= '<a href="http://wordpress.org/support/plugin/ifocus-link-nest" target="_blank">http://wordpress.org/support/plugin/ifocus-link-nest</a>';
+		$intro_html .= '<a href="http://wordpress.org/support/plugin/ifocus-sk-link-nest-lite" target="_blank">http://wordpress.org/support/plugin/ifocus-sk-link-nest-lite</a>';
 		$intro_html .= '</p>';
 
 		$pages = array(
 			self::$option_name => array(
-				'menu_title'  => esc_html__( 'Internal linking', 'ifocus-link-nest' ),
+				'menu_title'  => esc_html__( 'Internal linking', 'ifocus-sk-link-nest-lite' ),
 				'menu_slug'   => 'ifocus-link-nest',
 				'parent_slug' => 'options-general.php',
-				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'ifocus-link-nest' ),
+				'page_title'  => esc_html__( 'iFOCUS.sk Link Nest plugin - Internal linking', 'ifocus-sk-link-nest-lite' ),
 				'text'        => $intro_html,
 				'sections'    => array(
 					'custom-keywords' => array(
-						'title'    => esc_html__( 'Custom Keywords', 'ifocus-link-nest' ),
+						'title'    => esc_html__( 'Custom Keywords', 'ifocus-sk-link-nest-lite' ),
 						'callback' => array( $this, 'custom_keyword_intro' ),
 						'fields'   => array(
 							iFocus_Link_Nest_Settings::CSV_FILE => array(
 								'id'          => iFocus_Link_Nest_Settings::CSV_FILE,
-								'title'       => esc_html__( 'Import from CSV', 'ifocus-link-nest' ),
+								'title'       => esc_html__( 'Import from CSV', 'ifocus-sk-link-nest-lite' ),
 								'type'        => 'file',
-								'placeholder' => esc_html__( 'select CSV file', 'ifocus-link-nest' ),
-								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'ifocus-link-nest' ),
+								'placeholder' => esc_html__( 'select CSV file', 'ifocus-sk-link-nest-lite' ),
+								'text'        => esc_html__( 'Load custom keywords and urls from a CSV file.', 'ifocus-sk-link-nest-lite' ),
 							),
 						),
 
 					),
 					'targeting'       => array(
-						'title'    => esc_html__( 'Internal links / Targeting', 'ifocus-link-nest' ),
+						'title'    => esc_html__( 'Internal links / Targeting', 'ifocus-sk-link-nest-lite' ),
 						'callback' => array( $this, 'targeting_intro' ),
 						'fields'   => array(
 							iFocus_Link_Nest_Settings::PROCESS_POSTS      => array(
 								'id'    => iFocus_Link_Nest_Settings::PROCESS_POSTS,
-								'title' => esc_html__( 'Posts', 'ifocus-link-nest' ),
+								'title' => esc_html__( 'Posts', 'ifocus-sk-link-nest-lite' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Search and process posts', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'Enable. Search and process posts', 'ifocus-sk-link-nest-lite' ),
 							),
 							iFocus_Link_Nest_Settings::PROCESS_PAGES      => array(
 								'id'    => iFocus_Link_Nest_Settings::PROCESS_PAGES,
-								'title' => esc_html__( 'Pages', 'ifocus-link-nest' ),
+								'title' => esc_html__( 'Pages', 'ifocus-sk-link-nest-lite' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Search and process pages', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'Enable. Search and process pages', 'ifocus-sk-link-nest-lite' ),
 							),
 							iFocus_Link_Nest_Settings::MAX_LINKS          => array(
 								'id'    => iFocus_Link_Nest_Settings::MAX_LINKS,
-								'title' => esc_html__( 'Max links', 'ifocus-link-nest' ),
+								'title' => esc_html__( 'Max links', 'ifocus-sk-link-nest-lite' ),
 								'type'  => 'number',
-								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'You can limit the maximum number of different links that will be generated per post or page. Set to 0 for no limit.', 'ifocus-sk-link-nest-lite' ),
 							),
 							iFocus_Link_Nest_Settings::PROCESS_HEADINGS => array(
 								'id'    => iFocus_Link_Nest_Settings::PROCESS_HEADINGS,
-								'title' => esc_html__( 'Headings', 'ifocus-link-nest' ),
+								'title' => esc_html__( 'Headings', 'ifocus-sk-link-nest-lite' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Allow linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'Enable. Allow linking in heading tags (h1, h2, h3, h4, h5 and h6)', 'ifocus-sk-link-nest-lite' ),
 							),
 							iFocus_Link_Nest_Settings::CASE_SENSITIVE     => array(
 								'id'    => iFocus_Link_Nest_Settings::CASE_SENSITIVE,
-								'title' => esc_html__( 'Case sensitive', 'ifocus-link-nest' ),
+								'title' => esc_html__( 'Case sensitive', 'ifocus-sk-link-nest-lite' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'Enable', 'ifocus-sk-link-nest-lite' ),
 							),
 							iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW => array(
 								'id'    => iFocus_Link_Nest_Settings::OPEN_IN_NEW_WINDOW,
-								'title' => esc_html__( 'Open in new window', 'ifocus-link-nest' ),
+								'title' => esc_html__( 'Open in new window', 'ifocus-sk-link-nest-lite' ),
 								'type'  => 'checkbox',
-								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'ifocus-link-nest' ),
+								'text'  => esc_html__( 'Enable. Open the external links in a new window. ', 'ifocus-sk-link-nest-lite' ),
 							),
 						),
 					),
 					'excluding'       => array(
-						'title'    => esc_html__( 'Excluding', 'ifocus-link-nest' ),
+						'title'    => esc_html__( 'Excluding', 'ifocus-sk-link-nest-lite' ),
 						'callback' => array( $this, 'excluding_intro' ),
 						'fields'   => array(
 							iFocus_Link_Nest_Settings::IGNORED_POSTS    => array(
 								'id'       => iFocus_Link_Nest_Settings::IGNORED_POSTS,
-								'title'    => esc_html__( 'Ignore post/pages', 'ifocus-link-nest' ),
-								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'ifocus-link-nest' ),
+								'title'    => esc_html__( 'Ignore post/pages', 'ifocus-sk-link-nest-lite' ),
+								'text'     => esc_html__( 'Exclude certain posts or pages. Separate them by comma (ID, slug or name).', 'ifocus-sk-link-nest-lite' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
@@ -226,8 +226,8 @@ class iFocus_Link_Nest_Settings_Manager {
 							),
 							iFocus_Link_Nest_Settings::IGNORED_WORDS    => array(
 								'id'       => iFocus_Link_Nest_Settings::IGNORED_WORDS,
-								'title'    => esc_html__( 'Ignore words', 'ifocus-link-nest' ),
-								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'ifocus-link-nest' ),
+								'title'    => esc_html__( 'Ignore words', 'ifocus-sk-link-nest-lite' ),
+								'text'     => esc_html__( 'Exclude certain words or phrases from automatic linking. Separate them by comma.', 'ifocus-sk-link-nest-lite' ),
 								'custom'   => true,
 								'type'     => 'select2',
 								'sanitize' => false,
@@ -245,11 +245,11 @@ class iFocus_Link_Nest_Settings_Manager {
 
 	public function custom_keyword_intro( $section ) {
 		echo '<p>';
-		esc_html_e( 'Here you can manually enter the extra keywords you want to automatically link. Use comma to separate keywords and add target url at the end. Use a new line for new url and set of keywords. You can link to any url, not only your site.', 'ifocus-link-nest' );
+		esc_html_e( 'Here you can manually enter the extra keywords you want to automatically link. Use comma to separate keywords and add target url at the end. Use a new line for new url and set of keywords. You can link to any url, not only your site.', 'ifocus-sk-link-nest-lite' );
 		echo '</p>';
 		echo '<div id="keywords-editor">';
 		echo '</div>';
-		echo '<a class="button button-primary" id="add-row">' . esc_html__( 'Add new line', 'ifocus-link-nest' ) . '</a>';
+		echo '<a class="button button-primary" id="add-row">' . esc_html__( 'Add new line', 'ifocus-sk-link-nest-lite' ) . '</a>';
 
 		$keywords = iFocus_Link_Nest_Keyword_Model::get_all();
 
@@ -316,10 +316,10 @@ class iFocus_Link_Nest_Settings_Manager {
 				index: "id",
 				columns:[
 					{ title:"id", field:"id", visible:false, download:true, headerSort: false },
-					buildFieldDefinition( "<?php echo esc_js( __( 'Keyword', 'ifocus-link-nest' ) ); ?>", "keyword" ),
-					buildFieldDefinition( "<?php echo esc_js( __( 'Title', 'ifocus-link-nest' ) ); ?>", "title" ),
-					buildFieldDefinition( "<?php echo esc_js( __( 'Rel', 'ifocus-link-nest' ) ); ?>", "rel" ),
-					buildFieldDefinition( "<?php echo esc_js( __( 'Link', 'ifocus-link-nest' ) ); ?>", "href", ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Keyword', 'ifocus-sk-link-nest-lite' ) ); ?>", "keyword" ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Title', 'ifocus-sk-link-nest-lite' ) ); ?>", "title" ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Rel', 'ifocus-sk-link-nest-lite' ) ); ?>", "rel" ),
+					buildFieldDefinition( "<?php echo esc_js( __( 'Link', 'ifocus-sk-link-nest-lite' ) ); ?>", "href", ),
 					{ formatter:"buttonCross", headerSort: false, width:40, align:"center", cellClick:function(e, cell){
 						cell.getRow().delete();
 					}},
@@ -345,10 +345,10 @@ class iFocus_Link_Nest_Settings_Manager {
 		echo '<table class="form-table" role="presentation">';
 		echo '<tbody>';
 		echo '<tr>';
-		echo '<th scope="row"><label for="sample_csv_file">' . esc_html__( 'Create sample CSV', 'ifocus-link-nest' ) . '</label></th>';
+		echo '<th scope="row"><label for="sample_csv_file">' . esc_html__( 'Create sample CSV', 'ifocus-sk-link-nest-lite' ) . '</label></th>';
 		echo '<td>';
-		echo '<a class="button button-primary" href="https://sitemap-urls-to-csv.streamlit.app/" target="_blank">' . esc_html__( 'Open', 'ifocus-link-nest' ) . '</a>';
-		echo '<p class="help">' . esc_html__( 'Create a plugin\'s sample CSV file from your website to import hereunder.', 'ifocus-link-nest' ) . '</p>';
+		echo '<a class="button button-primary" href="https://sitemap-urls-to-csv.streamlit.app/" target="_blank">' . esc_html__( 'Open', 'ifocus-sk-link-nest-lite' ) . '</a>';
+		echo '<p class="help">' . esc_html__( 'Create a plugin\'s sample CSV file from your website to import hereunder.', 'ifocus-sk-link-nest-lite' ) . '</p>';
 		echo '</td>';
 		echo '</tr>';
 		echo '</tbody>';
@@ -357,13 +357,13 @@ class iFocus_Link_Nest_Settings_Manager {
 
 	public function targeting_intro( $section ) {
 		echo '<p>';
-		esc_html_e( 'iFOCUS.sk Link nest plugin can search and process your posts, pages for keywords to automatically interlink from <div>, <p>, <ul>, <li> and other html tags.', 'ifocus-link-nest' );
+		esc_html_e( 'iFOCUS.sk Link nest plugin can search and process your posts, pages for keywords to automatically interlink from <div>, <p>, <ul>, <li> and other html tags.', 'ifocus-sk-link-nest-lite' );
 		echo '</p>';
 	}
 
 	public function excluding_intro( $section ) {
 		echo '<p>';
-		esc_html_e( 'Setup what and how it can be excluded from internal linking.', 'ifocus-link-nest' );
+		esc_html_e( 'Setup what and how it can be excluded from internal linking.', 'ifocus-sk-link-nest-lite' );
 		echo '</p>';
 	}
 
@@ -386,7 +386,7 @@ class iFocus_Link_Nest_Settings_Manager {
 		$options = $option_pages->get_options();
 		\S24WP::insert(
 			array(
-				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'ifocus-link-nest' ),
+				'placeholder' => esc_html__( 'select post(s) and/or page(s)', 'ifocus-sk-link-nest-lite' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'data-type'   => 'post',
@@ -417,7 +417,7 @@ class iFocus_Link_Nest_Settings_Manager {
 		$options = $option_pages->get_options();
 		\S24WP::insert(
 			array(
-				'placeholder' => esc_html__( 'type word(s)', 'ifocus-link-nest' ),
+				'placeholder' => esc_html__( 'type word(s)', 'ifocus-sk-link-nest-lite' ),
 				'name'        => $page_key . '[' . $field['id'] . '][]',
 				'width'       => 500,
 				'tags'        => true,
