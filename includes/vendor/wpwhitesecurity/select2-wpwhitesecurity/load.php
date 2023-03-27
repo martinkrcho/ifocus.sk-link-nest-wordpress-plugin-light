@@ -250,9 +250,9 @@ if ( ! class_exists( '\S24WP' ) ) {
 			echo '<select ' . implode( ' ', $attributes ) . '></select>';
 			echo '<script type="application/javascript">';
 			echo 'jQuery( document ).ready( function() {';
-			echo 'const s2 = jQuery( "#' . $args['id'] . '" ).select2( {';
+			echo 'const s2 = jQuery( "#' . esc_js($args['id']) . '" ).select2( {';
 			if ( array_key_exists( 'placeholder', $args ) ) {
-				echo 'placeholder: "' . $args['placeholder'] . '",';
+				echo 'placeholder: "' . esc_js($args['placeholder']) . '",';
 			}
 			echo 'containerCssClass: "s24wp-wrapper",';
 
@@ -266,7 +266,7 @@ if ( ! class_exists( '\S24WP' ) ) {
 			}
 
 			if ( array_key_exists( 'width', $args ) ) {
-				echo 'width: "' . $args['width'] . 'px",';
+				echo 'width: "' . esc_js($args['width']) . 'px",';
 			}
 			// @codingStandardsIgnoreEnd
 
@@ -310,7 +310,7 @@ if ( ! class_exists( '\S24WP' ) ) {
 			}
 
 			if ( array_key_exists( 'data', $args ) ) {
-				echo 'data: ' . json_encode( $args['data'] );
+				echo 'data: ' . wp_json_encode( $args['data'] );
 			}
 
 			$has_remote_source = array_key_exists( 'data-type', $args );
@@ -319,9 +319,9 @@ if ( ! class_exists( '\S24WP' ) ) {
 				$url = admin_url( 'admin-ajax.php' ) . '?action=' . self::$ajax_action . '&entity=' . $args['data-type'];
 
 				$min_chars = array_key_exists( 'min_chars', $args ) ? intval( $args['min_chars'] ) : 3;
-				echo 'minimumInputLength: "' . $min_chars . '",';
+				echo 'minimumInputLength: "' . esc_js($min_chars) . '",';
 				echo 'ajax: {';
-				echo 'url : "' . $url . '",';
+				echo 'url : "' . $url. '",';
 				echo 'dataType: "json"';
 				echo '}';
 			}
@@ -345,18 +345,18 @@ if ( ! class_exists( '\S24WP' ) ) {
 						if ( isset( $object ) ) {
 							$data_item = self::convert_object_to_select2_data( $object );
 							if ( ! is_null( $data_item ) ) {
-								echo 's2.append(new Option("' . $data_item['text'] . '", ' . $data_item['id'] . ', true, true)).trigger("change");';
+								echo 's2.append(new Option("' . esc_js($data_item['text']) . '", ' . esc_js($data_item['id']) . ', true, true)).trigger("change");';
 							}
 						}
 					}
 				} else if (array_key_exists( 'tags', $args )) {
 
 					foreach ( $args['selected'] as $selected_value ) {
-						echo 's2.append(new Option("' . $selected_value . '", "' . $selected_value . '", true, true)).trigger("change");';
+						echo 's2.append(new Option("' . esc_js($selected_value) . '", "' . esc_js($selected_value) . '", true, true)).trigger("change");';
 					}
 				}
 
-				echo 's2.val(' . json_encode( $args['selected'] ) . ');';
+				echo 's2.val(' . wp_json_encode( $args['selected'] ) . ');';
 				echo 's2.trigger("change");';
 			}
 

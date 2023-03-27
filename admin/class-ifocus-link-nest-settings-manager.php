@@ -332,11 +332,6 @@ class iFocus_Link_Nest_Settings_Manager {
 			document.getElementById("add-row").addEventListener("click", function(){
 				table.addRow({});
 			});
-
-			//Delete row on "Delete Row" button click
-			jQuery.on( 'click', '.delete-row' ).addEventListener("click", function(){
-				table.deleteRow( jQuery(this).data('id') );
-			});
 		});
 		<?php
 		// @formatter:on

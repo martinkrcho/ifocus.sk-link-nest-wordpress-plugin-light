@@ -273,7 +273,7 @@ class RationalOptionPages {
 								! in_array( $field_params['type'], [ 'radio' ] ) &&
 								( empty( $field_params['no_label'] ) || $field_params['no_label'] === false )
 							) {
-								$params['title'] = "<label for='{$params["id"]}'>" . __( $params['title'], 'text-domain' ) . "</label>";
+								$params['title'] = "<label for='{$params["id"]}'>" . esc_html__( $params['title'], 'text-domain' ) . "</label>";
 							}
 
 							// Finalize callback
@@ -311,6 +311,10 @@ class RationalOptionPages {
 
 	/**
 	 * Action: admin_notices. Spitting out notices when needed.
+     *
+     * The output is not escaped here intentionally. The plugin itself builds the HTML for notices and errors elsewhere.
+     *
+     * phpcs:ignore
 	 */
 	public function admin_notices() {
 		// notice-error, notice-warning, notice-success, or notice-info.
@@ -346,9 +350,9 @@ class RationalOptionPages {
 		$this->options = get_option( $page_key, [] );
 
 		echo '<div class="wrap">';
-		echo '<h1>' . __( $GLOBALS['title'], 'text-domain' ) . '</h1>';
+		echo '<h1>' . esc_html__( $GLOBALS['title'], 'text-domain' ) . '</h1>';
 		if ( ! empty( $page['text'] ) ) {
-			echo $page['text'];
+			echo $page['text']; // cannot be escaped as we expect HTML here
 		}
 
 		if ( ! empty( $page['sections'] ) ) {
@@ -429,7 +433,7 @@ class RationalOptionPages {
 					"{$page_key}[{$field['id']}]",                                                        // name
 					$field['title_attr'],                                                                // title
 					$field['value'],                                                                    // value
-					! empty( $field['text'] ) ? __( $field['text'], 'text-domain' ) : ''                                        // text
+					! empty( $field['text'] ) ? esc_html__( $field['text'], 'text-domain' ) : ''                                        // text
 				);
 				break;
 			case 'media':
@@ -441,12 +445,12 @@ class RationalOptionPages {
 					! empty( $field['class'] ) ? "class='{$field['class']}'" : '',                        // class
 					$field['id'],                                                                        // id
 					"{$page_key}[{$field['id']}]",                                                        // name
-					! empty( $field['placeholder'] ) ? 'placeholder="' . __( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
+					! empty( $field['placeholder'] ) ? 'placeholder="' . esc_html__( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
 					$field['title_attr'],                                                                // title
 					$field['value'],                                                                    // value
 					! empty( $attributes ) ? implode( ' ', $attributes ) : '',                            // additional attributes
 					$upload_button,                                                                        // upload button
-					! empty( $field['text'] ) ? '<p class="help">' . __( $field['text'], 'text-domain' ) . '</p>' : ''                // text
+					! empty( $field['text'] ) ? '<p class="help">' . esc_html__( $field['text'], 'text-domain' ) . '</p>' : ''                // text
 				);
 				break;
 			case 'file':
@@ -455,11 +459,11 @@ class RationalOptionPages {
 					! empty( $field['class'] ) ? "class='{$field['class']}'" : '',                        // class
 					$field['id'],                                                                        // id
 					"{$page_key}[{$field['id']}]",                                                        // name
-					! empty( $field['placeholder'] ) ? 'placeholder="' . __( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
+					! empty( $field['placeholder'] ) ? 'placeholder="' . esc_html__( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
 					$field['title_attr'],                                                                // title
                     time(),
 					! empty( $attributes ) ? implode( ' ', $attributes ) : '',                            // additional attributes
-					! empty( $field['text'] ) ? '<p class="help">' . __( $field['text'], 'text-domain' ) . '</p>' : ''                // text
+					! empty( $field['text'] ) ? '<p class="help">' . esc_html__( $field['text'], 'text-domain' ) . '</p>' : ''                // text
 				);
 				printf(
 					'<input name="%s" type="hidden" value="%s">',
@@ -468,7 +472,7 @@ class RationalOptionPages {
 				);
 				break;
 			case 'radio':
-				echo '<fieldset><legend class="screen-reader-text">' . __( $field['title'], 'text-domain' ) . '</legend>';
+				echo '<fieldset><legend class="screen-reader-text">' . esc_html__( $field['title'], 'text-domain' ) . '</legend>';
 				$c = 0;
 				foreach ( $field['choices'] as $value => $label ) {
 					$checked = $value === $field['value'] ? 'checked' : '';
@@ -481,9 +485,9 @@ class RationalOptionPages {
 						! empty( $field['class'] ) ? "class='{$field['class']}'" : '',                        // class
 						$field['id'],                                                                        // id
 						"{$page_key}[{$field['id']}]",                                                        // name
-						__( $label, 'text-domain' ),                                                                                // title
+						esc_html__( $label, 'text-domain' ),                                                                                // title
 						$value,                                                                                // value
-						__( $label, 'text-domain' ),                                                                                // label
+						esc_html__( $label, 'text-domain' ),                                                                                // label
 						$c < count( $field['choices'] ) - 1 ? '<br>' : ''                                    // line-break
 					);
 					$c ++;
@@ -504,7 +508,7 @@ class RationalOptionPages {
 					! empty( $attributes ) ? implode( ' ', $attributes ) : '',
 					$field['id'],                                                                        // id
 					$field_tag_name,                                                        // name
-					__( $field['title_attr'], 'text-domain' )                                                                // title
+					esc_html__( $field['title_attr'], 'text-domain' )                                                                // title
 				);
 				foreach ( $field['choices'] as $value => $text ) {
 					$selected = $value === $field['value'] ? 'selected' : '';
@@ -519,7 +523,7 @@ class RationalOptionPages {
 						'<option %s value="%s">%s</option>',
 						$selected,                                                                            // selected
 						$value,                                                                                // value
-						__( $text, 'text-domain' )                                                                                // text
+						esc_html__( $text, 'text-domain' )                                                                                // text
 					);
 				}
 				echo '</select>';
@@ -530,13 +534,13 @@ class RationalOptionPages {
 					! empty( $field['class'] ) ? "class='{$field['class']}'" : '',                        // class
 					$field['id'],                                                                        // id
 					"{$page_key}[{$field['id']}]",                                                        // name
-					! empty( $field['placeholder'] ) ? 'placeholder="' . __( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
+					! empty( $field['placeholder'] ) ? 'placeholder="' . esc_html__( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
 					! empty( $field['rows'] ) ? "rows='{$field['rows']}'" : '',                            // rows
 					! empty( $field['cols'] ) ? "cols='{$field['cols']}'" : '', // cols
 					! empty( $field['wrap'] ) ? "wrap='{$field['wrap']}'" : '', // wrap
 					$field['title_attr'],                                                                // title
 					$field['value'],                                                                    // value
-					! empty( $field['text'] ) ? '<p class="help">' . __( $field['text'], 'text-domain' ) . '</p>' : ''                // text
+					! empty( $field['text'] ) ? '<p class="help">' . esc_html__( $field['text'], 'text-domain' ) . '</p>' : ''                // text
 				);
 				break;
 			case 'wp_editor':
@@ -544,7 +548,7 @@ class RationalOptionPages {
 				wp_editor( isset( $field['value'] ) ? $field['value'] : '', $field['id'], [
 					'textarea_name' => $field['textarea_name'],
 				] );
-				echo ! empty( $field['text'] ) ? '<p class="help">' . __( $field['text'], 'text-domain' ) . '</p>' : '';
+				echo ! empty( $field['text'] ) ? '<p class="help">' . esc_html__( $field['text'], 'text-domain' ) . '</p>' : '';
 				break;
 			default:
 				printf(
@@ -552,12 +556,12 @@ class RationalOptionPages {
 					! empty( $field['class'] ) ? "class='{$field['class']}'" : '',                        // class
 					$field['id'],                                                                        // id
 					"{$page_key}[{$field['id']}]",                                                        // name
-					! empty( $field['placeholder'] ) ? 'placeholder="' . __( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
+					! empty( $field['placeholder'] ) ? 'placeholder="' . esc_html__( $field['placeholder'], 'text-domain' ) . '"' : '',        // placeholder
 					$field['title_attr'],                                                                // title
 					$field['type'],                                                                        // type
 					$field['value'],                                                                    // value
 					! empty( $attributes ) ? implode( ' ', $attributes ) : '',                            // additional attributes
-					! empty( $field['text'] ) ? '<p class="help">' . __( $field['text'], 'text-domain' ) . '</p>' : ''                // text
+					! empty( $field['text'] ) ? '<p class="help">' . esc_html__( $field['text'], 'text-domain' ) . '</p>' : ''                // text
 				);
 		}
 	}
@@ -732,7 +736,7 @@ class RationalOptionPages {
 	protected function validate_field( $field, $page_key, $section_key, $field_key, $page, $section ) {
 		// Label
 		if ( empty( $field['title'] ) ) {
-			$this->submit_error( __( 'Field parameter "title" is required', 'text-domain' ) );
+			$this->submit_error( esc_html__( 'Field parameter "title" is required', 'text-domain' ) );
 		}
 
 		// ID
@@ -757,7 +761,7 @@ class RationalOptionPages {
 		$field['type'] = empty( $field['type'] ) ? 'text' : $field['type'];
 
 		// Title attribute
-		$field['title_attr'] = empty( $field['title_attr'] ) ? __( $field['title'], 'text-domain' ) : $field['title_attr'];
+		$field['title_attr'] = empty( $field['title_attr'] ) ? esc_html__( $field['title'], 'text-domain' ) : $field['title_attr'];
 
 		// Choices
 		if ( empty( $field['choices'] ) && in_array( $field['type'], [ 'radio', 'select' ] ) ) {
@@ -823,7 +827,7 @@ class RationalOptionPages {
 	 * Validates the information submitted to the class
 	 *
 	 * @param string $page_key Array key of the page
-	 * @param array $page Array of page parameters
+	 * @param array  $page_params Array of page parameters
 	 * @param string $parent_slug Menu slug of the parent page if there is one
 	 *
 	 * @return    array                    Validated array of page parameters
@@ -831,12 +835,12 @@ class RationalOptionPages {
 	protected function validate_page( $page_key, $page_params, $parent_slug = false ) {
 		// Page title
 		if ( empty( $page_params['page_title'] ) ) {
-			$this->submit_error( __( 'Page parameter "page_title" is required', 'text-domain' ) );
+			$this->submit_error( esc_html__( 'Page parameter "page_title" is required', 'text-domain' ) );
 		}
 
 		// Menu title
 		if ( empty( $page_params['menu_title'] ) ) {
-			$page_params['menu_title'] = __( $page_params['page_title'], 'text-domain' );
+			$page_params['menu_title'] = esc_html__( $page_params['page_title'], 'text-domain' );
 		}
 
 		// Menu slug
@@ -893,7 +897,7 @@ class RationalOptionPages {
 	protected function validate_section( $section, $page_key, $section_key, $page ) {
 		// Title
 		if ( empty( $section['title'] ) ) {
-			$this->submit_error( __( 'Section parameter "title" is required', 'text-domain' ) );
+			$this->submit_error( esc_html__( 'Section parameter "title" is required', 'text-domain' ) );
 		}
 
 		// ID
