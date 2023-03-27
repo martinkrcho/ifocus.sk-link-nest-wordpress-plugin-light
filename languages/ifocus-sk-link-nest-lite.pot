@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: iFOCUS.sk Link Nest Lite\n"
-"POT-Creation-Date: 2023-03-27 18:17+0200\n"
+"POT-Creation-Date: 2023-03-27 18:42+0200\n"
 "PO-Revision-Date: 2022-12-28 10:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -166,35 +166,35 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:348
+#: admin/class-ifocus-link-nest-settings-manager.php:343
 msgid "Create sample CSV"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:350
+#: admin/class-ifocus-link-nest-settings-manager.php:345
 msgid "Open"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:351
+#: admin/class-ifocus-link-nest-settings-manager.php:346
 msgid ""
 "Create a plugin's sample CSV file from your website to import hereunder."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:360
+#: admin/class-ifocus-link-nest-settings-manager.php:355
 msgid ""
 "iFOCUS.sk Link nest plugin can search and process your posts, pages for "
 "keywords to automatically interlink from <div>, <p>, <ul>, <li> and other "
 "html tags."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:366
+#: admin/class-ifocus-link-nest-settings-manager.php:361
 msgid "Setup what and how it can be excluded from internal linking."
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:389
+#: admin/class-ifocus-link-nest-settings-manager.php:384
 msgid "select post(s) and/or page(s)"
 msgstr ""
 
-#: admin/class-ifocus-link-nest-settings-manager.php:420
+#: admin/class-ifocus-link-nest-settings-manager.php:415
 msgid "type word(s)"
 msgstr ""
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: iFOCUS.sk Link Nest Lite\n"
-"POT-Creation-Date: 2023-03-27 18:17+0200\n"
-"PO-Revision-Date: 2023-03-27 18:17+0200\n"
+"POT-Creation-Date: 2023-03-27 18:42+0200\n"
+"PO-Revision-Date: 2023-03-27 18:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sk\n"
@@ -182,22 +182,22 @@ msgstr "Rel atribút"
 msgid "Link"
 msgstr "Odkaz"
 
-#: admin/class-ifocus-link-nest-settings-manager.php:348
+#: admin/class-ifocus-link-nest-settings-manager.php:343
 msgid "Create sample CSV"
 msgstr "Vytvorte vzorový CSV súbor"
 
-#: admin/class-ifocus-link-nest-settings-manager.php:350
+#: admin/class-ifocus-link-nest-settings-manager.php:345
 msgid "Open"
 msgstr "Otvoriť"
 
-#: admin/class-ifocus-link-nest-settings-manager.php:351
+#: admin/class-ifocus-link-nest-settings-manager.php:346
 msgid ""
 "Create a plugin's sample CSV file from your website to import hereunder."
 msgstr ""
 "Vytvorte vzorový CSV súbor zo svojej webovej stránky, ktorý naimportujete "
 "nižšie."
 
-#: admin/class-ifocus-link-nest-settings-manager.php:360
+#: admin/class-ifocus-link-nest-settings-manager.php:355
 msgid ""
 "iFOCUS.sk Link nest plugin can search and process your posts, pages for "
 "keywords to automatically interlink from <div>, <p>, <ul>, <li> and other "
@@ -207,15 +207,15 @@ msgstr ""
 "stránky pre kľúčové slová a automaticky vytvárať prepojenia z <div>, <p>, "
 "<ul>, <li> a ďalších html značiek."
 
-#: admin/class-ifocus-link-nest-settings-manager.php:366
+#: admin/class-ifocus-link-nest-settings-manager.php:361
 msgid "Setup what and how it can be excluded from internal linking."
 msgstr "Nastavte, čo a ako možno vylúčiť z interného prepojenia."
 
-#: admin/class-ifocus-link-nest-settings-manager.php:389
+#: admin/class-ifocus-link-nest-settings-manager.php:384
 msgid "select post(s) and/or page(s)"
 msgstr "vyberte príspevok (príspevky) a/alebo stránku (stránky)"
 
-#: admin/class-ifocus-link-nest-settings-manager.php:420
+#: admin/class-ifocus-link-nest-settings-manager.php:415
 msgid "type word(s)"
 msgstr "zadajte slová"
 
