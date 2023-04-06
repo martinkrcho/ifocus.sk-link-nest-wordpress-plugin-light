@@ -1,9 +1,8 @@
 === Plugin Name ===
-Contributors: martinkrcho
-Donate link: https://www.linkedin.com/in/martinkrcho/
+Contributors: ifocusdigital,martinkrcho
 Tags: seo, linking
 Requires at least: 4.8
-Tested up to: 6.1
+Tested up to: 6.2
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -28,16 +27,6 @@ Or install it manually:
 1. Select the file you downloaded.
 1. Click Install Plugin.
 1. Activate.
-
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
 
 == Changelog ==
 

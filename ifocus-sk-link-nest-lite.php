@@ -17,8 +17,8 @@
  * Plugin URI:        https://www.ifocus.sk/
  * Description:       Plugin allows the site owner to automate linking selected keywords in the site content.
  * Version:           1.0.0
- * Author:            Martin Krcho
- * Author URI:        https://www.linkedin.com/in/martinkrcho/
+ * Author:            iFOCUS
+ * Author URI:        https://www.ifocus.sk/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       ifocus-sk-link-nest-lite
