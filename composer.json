@@ -1,5 +1,6 @@
 {
   "name": "ifocus-sk/ifocus.sk-link-nest-wordpress-plugin-light",
+  "version": "1.0.1",
   "description": "Plugin allows the site owner to automate linking selected keywords in the site content.",
   "license": "GPL-2.0-or-later",
   "authors": [

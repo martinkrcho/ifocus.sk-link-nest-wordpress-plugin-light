@@ -30,6 +30,13 @@
 class iFocus_Link_Nest {
 
 	/**
+	 * Prevents the the_content filter from being applied recursively.
+	 *
+	 * @var bool True if the content is already being processed.
+	 */
+	protected $already_processing_content = false;
+
+	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
@@ -95,6 +102,12 @@ class iFocus_Link_Nest {
 	}
 
 	public function process_post_content( $content ) {
+		if ( $this->already_processing_content ) {
+			return $content;
+		}
+
+		$this->already_processing_content = true;
+
 		$handler = new iFocus_Link_Nest_Post_Content_Handler( get_the_ID(), $content );
 		$handler->execute();
 
